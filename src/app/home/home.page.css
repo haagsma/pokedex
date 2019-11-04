@@ -2,3 +2,15 @@
     width: 100%;
     height: 100%;
 }
+.footer-menu {
+    position: absolute;
+    z-index: 5;
+    bottom: 0;
+    width: 95%;
+    text-align: center;
+    padding-bottom: 10px;
+}
+.item-menu {
+    width: 50px;
+    height: 50px;
+}

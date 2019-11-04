@@ -5,7 +5,7 @@ import {HomePage} from './home/home.page';
 import {CadastroUserPage} from './login/cadastro/cadastro-user.page';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
     {path: 'login', component: LoginPage},
     {path: 'home', component: HomePage},
     {path: 'login/cadastro', component: CadastroUserPage},
