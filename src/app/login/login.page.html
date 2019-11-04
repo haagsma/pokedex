@@ -1,0 +1,18 @@
+<div class="background">
+  <div class="ui-card">
+    <form #fLogin="ngForm" (ngSubmit)="login(fLogin)">
+      <div>
+        <input class="ui-inputtext" name="email" type="email" placeholder="E-mail" ngModel required />
+      </div>
+      <div>
+        <input class="ui-inputtext" name="password" type="password" placeholder="Password" ngModel required  />
+      </div>
+      <div>
+        <button pButton type="submit" class="ui-button-warning ui-button-rounded" label="Entrar" ></button>
+      </div>
+      <div>
+        <a pButton [routerLink]="['/login/cadastro']"  type="button" class="ui-button-warning ui-button-rounded" label="Cadastre-se" ></a>
+      </div>
+    </form>
+  </div>
+</div>
