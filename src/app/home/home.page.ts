@@ -34,7 +34,13 @@ export class HomePage implements OnInit {
         };
         var infowindow = new google.maps.InfoWindow();
         this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        let marker = new google.maps.Marker({id: 1,position: {lat: -23.4856363, lng: -46.7659253}, map: this.map, icon: '/assets/pokemons/004.png'});
+        let icon = {
+            url: '/assets/pokemons/004.png', // url
+            scaledSize: new google.maps.Size(50, 50), // scaled size
+            origin: new google.maps.Point(0,0), // origin
+            anchor: new google.maps.Point(0, 0) // anchor
+        };
+        let marker = new google.maps.Marker({id: 1,position: {lat: -23.4856363, lng: -46.7659253}, map: this.map, icon: icon});
         marker.set('pokemon', 1);
         // marker.addListener('click', (e, e1 = marker) => console.log(e1.get('pokemon')));
         let i;
@@ -43,7 +49,13 @@ export class HomePage implements OnInit {
                 console.log(marker.get('pokemon'))
             }
         })(marker, i));
-        marker = new google.maps.Marker({id: 2, position: {lat: -23.4846363, lng: -46.7659253}, map: this.map, icon: '/assets/pokemons/007.png'});
+        icon = {
+            url: '/assets/pokemons/007.png', // url
+            scaledSize: new google.maps.Size(50, 50), // scaled size
+            origin: new google.maps.Point(0,0), // origin
+            anchor: new google.maps.Point(0, 0) // anchor
+        };
+        marker = new google.maps.Marker({id: 2, position: {lat: -23.4846363, lng: -46.7659253}, map: this.map, icon: icon});
         marker.set('pokemon', 2);
         google.maps.event.addListener(marker, 'click', ( (marker, i = 2) => {
             return () => {
