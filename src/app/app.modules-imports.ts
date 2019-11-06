@@ -3,7 +3,7 @@ import {IonicModule} from "@ionic/angular";
 import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {CardModule, InputTextModule} from 'primeng/primeng';
+import {CardModule, InputTextModule, ProgressBarModule, ScrollPanelModule} from 'primeng/primeng';
 import {ButtonModule} from 'primeng/button';
 import {CommonModule} from '@angular/common';
 
@@ -17,5 +17,7 @@ export const APP_MODULES = [
     BrowserAnimationsModule,
     InputTextModule,
     CardModule,
-    ButtonModule
+    ButtonModule,
+    ProgressBarModule,
+    ScrollPanelModule
 ];

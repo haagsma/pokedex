@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {MapaService} from "../service/mapaService";
+import {MapaService} from "../../service/mapaService";
 
 @Component({
   selector: 'home-page',

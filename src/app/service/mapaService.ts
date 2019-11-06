@@ -30,6 +30,9 @@ export class MapaService {
             const mapOptions = {
                 zoom: 16,
                 center: {lat: this.currentPosition.coords.latitude, lng: this.currentPosition.coords.longitude},
+                zoomControl: false,
+                scaleControl: false,
+                scrollwheel: false,
                 disableDefaultUI: true,
                 styles: [
                     {
@@ -43,6 +46,11 @@ export class MapaService {
                         featureType: 'road',
                         elementType: 'geometry',
                         stylers: [{color: '#CFECEB'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'geometry',
+                        stylers: [{color: '#00ffff'}]
                     },
                 ]
             };
@@ -63,7 +71,7 @@ export class MapaService {
             url: '/assets/pokemons/004.png', // url
             scaledSize: new google.maps.Size(70, 70), // scaled size
         };
-        let marker = new google.maps.Marker({id: 1, position: {lat: (this.currentPosition.coords.latitude + 0.001), lng: this.currentPosition.coords.longitude}, map: this.map, icon: icon});
+        let marker = new google.maps.Marker({id: 1, position: {lat: (this.currentPosition.coords.latitude + 0.001), lng: (this.currentPosition.coords.longitude + 0.001)}, map: this.map, icon: icon});
         marker.set('pokemon', 1);
         let i;
         google.maps.event.addListener(marker, 'click', ( (marker, i = 1) => {
@@ -75,7 +83,7 @@ export class MapaService {
             url: '/assets/pokemons/007.png', // url
             scaledSize: new google.maps.Size(70, 70), // scaled size
         };
-        marker = new google.maps.Marker({id: 2, position: {lat: (this.currentPosition.coords.latitude-0.001), lng: this.currentPosition.coords.longitude}, map: this.map, icon: icon});
+        marker = new google.maps.Marker({id: 2, position: {lat: (this.currentPosition.coords.latitude-0.0015), lng: (this.currentPosition.coords.longitude - 0.002)}, map: this.map, icon: icon});
         marker.set('pokemon', 2);
         google.maps.event.addListener(marker, 'click', ( (marker, i = 2) => {
             return () => {

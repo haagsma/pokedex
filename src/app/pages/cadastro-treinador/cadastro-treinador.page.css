@@ -1,0 +1,36 @@
+h3, p  {
+    color: lightseagreen;
+    font-weight: bold;
+    text-shadow: black;
+}
+button {
+    margin: 10px;
+}
+input {
+    color: lightseagreen;
+    font-weight: bold;
+    text-align: center;
+}
+.laboratorio {
+    background: url("/assets/laboratorio.png");
+    background-size: 100% 100%;
+    height: 100%;
+    padding-top: 30px;
+
+}
+.carvalho {
+    height: 250px;
+}
+.informacao {
+    background: aliceblue;
+    padding: 20px;
+    border: 20px;
+    margin-bottom: 20px;
+}
+.pokemon {
+    width: 80px;
+    height: 80px;
+}
+.ui-g-4 p {
+    font-size: 0.8em;
+}

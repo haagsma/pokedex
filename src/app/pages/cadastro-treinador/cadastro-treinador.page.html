@@ -1,0 +1,17 @@
+<div class="laboratorio">
+    <div class="container">
+        <img class="carvalho" src="/assets/avatars/carvalho.png">
+        <div class="informacao">
+            <h3>Bem vindo treinador!</h3>
+            <p>Escolha qual irá ser seu nome de treinador</p>
+        </div>
+        <form #fContinuar="ngForm" (ngSubmit)="continuar()" >
+            <div>
+                <input placeholder="Nome" />
+            </div>
+            <div>
+                <button pButton class="ui-button-warning ui-button-rounded" label="Continuar"></button>
+            </div>
+        </form>
+    </div>
+</div>
