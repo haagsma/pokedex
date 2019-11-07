@@ -7,7 +7,7 @@ import {CadastroTreinadorPage} from './pages/cadastro-treinador/cadastro-treinad
 import {PokemonInicialPage} from './pages/cadastro-treinador/pokemon-inicial/pokemon-inicial.page';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'cadastro-treinador', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
     {path: 'login', component: LoginPage},
     {path: 'home', component: HomePage},
     {path: 'login/cadastro', component: CadastroUserPage},

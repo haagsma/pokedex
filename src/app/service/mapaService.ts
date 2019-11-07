@@ -1,5 +1,7 @@
-import {Injectable} from "@angular/core";
+import {Injectable, ViewChild} from '@angular/core';
 import {Geolocation} from "@ionic-native/geolocation/ngx";
+import {HttpService} from './httpService';
+import {BattleComponent} from '../components/battle/battle.component';
 
 declare const google: any;
 
@@ -9,6 +11,7 @@ export class MapaService {
 
     map: any;
     trainer: any;
+    battle;
 
     currentPosition: any;
     geolocationOptions = {
@@ -17,22 +20,20 @@ export class MapaService {
         maximumAge: 0
     };
 
-    constructor(private geolocation: Geolocation) {}
+    constructor(private geolocation: Geolocation, private http: HttpService) {}
 
+    async showMap(battle) {
+        try {
+            this.battle = battle;
 
-    async showMap() {
-        if (google) {
-            try {
-                this.currentPosition = await this.geolocation.getCurrentPosition(this.geolocationOptions);
-            } catch (e) {
-                this.currentPosition = await this.geolocation.getCurrentPosition(this.geolocationOptions);
-            }
+            this.currentPosition = await this.geolocation.getCurrentPosition(this.geolocationOptions);
+
             const mapOptions = {
                 zoom: 16,
                 center: {lat: this.currentPosition.coords.latitude, lng: this.currentPosition.coords.longitude},
-                zoomControl: false,
-                scaleControl: false,
-                scrollwheel: false,
+                // zoomControl: false,
+                // scaleControl: false,
+                // scrollwheel: false,
                 disableDefaultUI: true,
                 styles: [
                     {
@@ -60,10 +61,34 @@ export class MapaService {
                 scaledSize: new google.maps.Size(60, 70), // scaled size
             };
             this.trainer = new google.maps.Marker({id: 1, position: {lat: (this.currentPosition.coords.latitude), lng: this.currentPosition.coords.longitude}, map: this.map, icon: icon});
-            this.generatePokemonMarker();
-        } else {
+            this.getPokemonsToMap();
+        } catch (e) {
             this.showMap();
         }
+    }
+
+    getPokemonsToMap(): void {
+        this.http.get('/mapa').subscribe((res: any) => {
+           const count = res.length;
+           for (let i = 0; i < count; i++) {
+                this.generatePokemonInMap(res[i]);
+           }
+        });
+    }
+    generatePokemonInMap(pmarker: any) {
+        const icon = {
+            url: '/assets/pokemons/' + pmarker.pokemon.num + '.png', // url
+            scaledSize: new google.maps.Size(70, 70), // scaled size
+        };
+        let marker = new google.maps.Marker({id: 1, position: {lat: pmarker.lat, lng: pmarker.lng}, map: this.map, icon: icon});
+        marker.set('pokemon', pmarker.pokemon.id);
+        let i;
+        google.maps.event.addListener(marker, 'click', ( (marker, i = 1) => {
+            return () => {
+                this.battle.startBattle();
+                console.log(marker.get('pokemon'))
+            }
+        })(marker, i));
     }
 
     async generatePokemonMarker() {

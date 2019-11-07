@@ -6,7 +6,7 @@ h3, p  {
 button {
     margin: 10px;
 }
-input {
+input, input::placeholder {
     color: lightseagreen;
     font-weight: bold;
     text-align: center;

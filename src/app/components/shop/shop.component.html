@@ -1,0 +1,19 @@
+<p-sidebar [showCloseIcon]="false"  [style]="{paddingTop: '30px'}" [(visible)]="shop" [fullScreen]="true" class="pokedex">
+    <p-tabView>
+        <p-tabPanel header="TM">
+            Content 1
+        </p-tabPanel>
+        <p-tabPanel header="Pokeballs">
+            Content 2
+        </p-tabPanel>
+        <p-tabPanel header="Potions">
+            Content 3
+        </p-tabPanel>
+        <p-tabPanel header="Special">
+            Content 3
+        </p-tabPanel>
+    </p-tabView>
+    <div class="center">
+        <button (click)="shop = false" pButton class="ui-button-warning ui-button-rounded" label="Sair"></button>
+    </div>
+</p-sidebar>

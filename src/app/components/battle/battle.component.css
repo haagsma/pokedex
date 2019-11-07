@@ -1,0 +1,41 @@
+.arena {
+    background: url("/assets/arena.png") no-repeat 0 0 / 100% 100%;
+    width: 100%;
+    height: 300px;
+}
+.pokemon-in-battle {
+    width: 100px;
+    height: 100px;
+    margin: 10px 20px 10px 20px;
+}
+.life-panel {
+    padding: 5px;
+    background-color: #89a6c4;
+    border: 2px solid #263322;
+    border-radius: 10px;
+    text-align: center;
+    width: 150px;
+    margin-top: 40px;
+}
+.life-panel p {
+    color: black;
+    font-weight: bold;
+}
+.left .life-panel {
+    margin-left: 20px;
+}
+.arena .ui-g {
+    height: 100%;
+}
+.ui-button-rounded {
+    width: 80%;
+}
+.down-panel {
+    height: 100%;
+    border: 4px solid black;
+    background: #1d4261;
+    padding-top: 20px;
+}
+.down-panel .ui-g .ui-g-6{
+    max-height: 150px;
+}

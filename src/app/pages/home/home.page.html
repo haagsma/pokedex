@@ -2,15 +2,23 @@
 <panel-treinador></panel-treinador>
 <div class="footer-menu">
     <div class="ui-g">
-        <div class="ui-g-6"></div>
+        <div class="ui-g-4"></div>
         <div class="ui-g-2">
-            <a><img class="item-menu" src="/assets/icon/pokedex.png"></a>
+            <a (click)="shop.open()"><img class="item-menu" src="/assets/icon/shop.png"></a>
         </div>
         <div class="ui-g-2">
-            <a><img class="item-menu" src="/assets/icon/bag.png"></a>
+            <a (click)="pokedex.open()"><img class="item-menu" src="/assets/icon/pokedex.png"></a>
         </div>
         <div class="ui-g-2">
-            <a><img class="item-menu" src="/assets/icon/pokeball.png"></a>
+            <a (click)="bag.open()"><img class="item-menu" src="/assets/icon/bag.png"></a>
+        </div>
+        <div class="ui-g-2">
+            <a (click)="pokeball.open()" ><img class="item-menu" src="/assets/icon/pokeball.png"></a>
         </div>
     </div>
 </div>
+<pokedex-view></pokedex-view>
+<bag-component></bag-component>
+<pokeball-component></pokeball-component>
+<shop-component></shop-component>
+<battle-component></battle-component>

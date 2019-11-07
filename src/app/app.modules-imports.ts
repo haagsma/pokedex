@@ -3,9 +3,18 @@ import {IonicModule} from "@ionic/angular";
 import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {CardModule, InputTextModule, ProgressBarModule, ScrollPanelModule} from 'primeng/primeng';
+import {
+    CardModule,
+    InputTextModule,
+    ProgressBarModule,
+    ProgressSpinnerModule,
+    ScrollPanelModule,
+    SidebarModule,
+    TabViewModule
+} from 'primeng/primeng';
 import {ButtonModule} from 'primeng/button';
 import {CommonModule} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
 
 export const APP_MODULES = [
     BrowserModule,
@@ -19,5 +28,9 @@ export const APP_MODULES = [
     CardModule,
     ButtonModule,
     ProgressBarModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    SidebarModule,
+    HttpClientModule,
+    ProgressSpinnerModule,
+    TabViewModule
 ];

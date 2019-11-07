@@ -1,0 +1,13 @@
+<p-sidebar [showCloseIcon]="false" [style]="{paddingTop: '30px'}" [(visible)]="pokeball" [fullScreen]="true" class="pokedex">
+    <p-tabView>
+        <p-tabPanel header="Equipe">
+            Content 1
+        </p-tabPanel>
+        <p-tabPanel header="Pokecenter">
+            Content 2
+        </p-tabPanel>
+    </p-tabView>
+    <div class="center">
+        <button (click)="pokeball = false" pButton class="ui-button-warning ui-button-rounded" label="Sair"></button>
+    </div>
+</p-sidebar>

@@ -8,6 +8,12 @@ input {
     background-color: rgba(255,255,255,0.9) !important;
     border-radius: 20px;
 }
+p-sidebar.pokedex div.ui-sidebar-full {
+    background: url("/assets/sidebar.jpg") no-repeat 0% 0% / 100% 100%;
+}
+p-sidebar.battle-panel div.ui-sidebar-full {
+    padding: 0 0 0 0 !important;
+}
 .ui-button-warning {
     color: white !important;
 }
@@ -20,14 +26,35 @@ input {
 .customProgress .ui-progressbar .ui-progressbar-value {
     background: aqua !important;
 }
+.life-bar .ui-progressbar .ui-progressbar-value {
+    background: red !important;
+}
+.life-bar .ui-progressbar {
+    height: 7px;
+}
 .container {
     width: 80%;
     text-align: center;
     margin: auto;
 }
-
+.pokedex .ui-sidebar-full {
+    overflow: auto;
+}
 .scroll .ui-scrollpanel {
     padding: 0;
     margin: 0;
     background: aliceblue;
+}
+.center {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}
+.left {
+    text-align: left;
+}
+button.ui-button-gray.ui-button {
+    background-color: gray !important;
+    border-color: gray;
 }

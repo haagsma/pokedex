@@ -4,6 +4,8 @@ import {MapaService} from "./service/mapaService";
 import {Geolocation} from "@ionic-native/geolocation/ngx";
 import {UserService} from './service/userService';
 import {TreinadorService} from './service/treinadorService';
+import {HttpService} from './service/httpService';
+import {ShopService} from './service/shopService';
 
 
 export const APP_PROVIDERS = [
@@ -12,5 +14,7 @@ export const APP_PROVIDERS = [
     MapaService,
     Geolocation,
     UserService,
-    TreinadorService
+    TreinadorService,
+    HttpService,
+    ShopService
 ];

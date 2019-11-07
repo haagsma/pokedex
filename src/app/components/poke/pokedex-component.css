@@ -1,0 +1,24 @@
+.pokemon-pokedex {
+    width: 80px;
+    height: 80px;
+}
+.ui-g-4 p {
+    color: lightseagreen;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+.pokedex-in {
+    margin-top: 30px;
+    height: 100%;
+}
+.more {
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+}
+.more a i {
+    font-size: 3em;
+}
+div button {
+    margin: 10px;
+}

@@ -1,6 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MapaService} from "../../service/mapaService";
+import {HttpService} from '../../service/httpService';
+import {PokedexViewComponent} from '../../components/poke/pokedex-component';
+import {BagComponent} from '../../components/bag/bag.component';
+import {PokeballComponent} from '../../components/pokeball/pokeball.component';
+import {BattleComponent} from '../../components/battle/battle.component';
+import {ShopComponent} from '../../components/shop/shop.component';
+
+declare const google: any;
 
 @Component({
   selector: 'home-page',
@@ -9,12 +17,17 @@ import {MapaService} from "../../service/mapaService";
 })
 export class HomePage implements OnInit {
 
-  constructor(private router: Router, private mapaService: MapaService) {}
+  @ViewChild(PokedexViewComponent , null) pokedex: PokedexViewComponent;
+  @ViewChild(BagComponent , null) bag: BagComponent;
+  @ViewChild(PokeballComponent , null) pokeball: PokeballComponent;
+  @ViewChild(BattleComponent , null) battle: BattleComponent;
+  @ViewChild(ShopComponent , null) shop: ShopComponent;
+
+  constructor(private router: Router, private mapaService: MapaService, private http: HttpService) {}
 
   ngOnInit() {
-   this.mapaService.showMap();
+   this.mapaService.showMap(this.battle);
+
   }
-
-
 
 }
