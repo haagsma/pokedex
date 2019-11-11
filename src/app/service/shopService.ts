@@ -9,6 +9,8 @@ export class ShopService {
     pokeballs: any[];
     special: any[];
 
+    items: any[];
+
     constructor() {}
 
 }

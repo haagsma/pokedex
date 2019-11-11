@@ -6,6 +6,8 @@ import {UserService} from './service/userService';
 import {TreinadorService} from './service/treinadorService';
 import {HttpService} from './service/httpService';
 import {ShopService} from './service/shopService';
+import {ActiveGuard} from './guard/active.guard';
+import {BattleService} from './service/battleService';
 
 
 export const APP_PROVIDERS = [
@@ -16,5 +18,7 @@ export const APP_PROVIDERS = [
     UserService,
     TreinadorService,
     HttpService,
-    ShopService
+    ShopService,
+    ActiveGuard,
+    BattleService
 ];

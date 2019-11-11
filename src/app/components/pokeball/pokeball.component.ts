@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {TreinadorService} from '../../service/treinadorService';
 
 
 @Component({
@@ -9,6 +10,7 @@ import {Component} from '@angular/core';
 export class PokeballComponent {
     pokeball = false;
 
+    constructor(public treinador: TreinadorService) {}
 
     open() {
         this.pokeball = true;

@@ -4,8 +4,8 @@ import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {
-    CardModule,
-    InputTextModule,
+    CardModule, DialogModule,
+    InputTextModule, OverlayPanelModule,
     ProgressBarModule,
     ProgressSpinnerModule,
     ScrollPanelModule,
@@ -32,5 +32,7 @@ export const APP_MODULES = [
     SidebarModule,
     HttpClientModule,
     ProgressSpinnerModule,
-    TabViewModule
+    TabViewModule,
+    DialogModule,
+    OverlayPanelModule
 ];

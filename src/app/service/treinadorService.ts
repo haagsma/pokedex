@@ -8,9 +8,11 @@ export class TreinadorService {
     level;
     exp;
     status: any;
-    pokemons;
+    team: any[];
+    pokemons: any[];
     items;
     amount;
+    logged = false;
 
     constructor() {}
 

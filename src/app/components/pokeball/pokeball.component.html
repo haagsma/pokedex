@@ -1,10 +1,22 @@
 <p-sidebar [showCloseIcon]="false" [style]="{paddingTop: '30px'}" [(visible)]="pokeball" [fullScreen]="true" class="pokedex">
     <p-tabView>
         <p-tabPanel header="Equipe">
-            Content 1
+            <div class="ui-g">
+                <div *ngFor="let pokemon of treinador.team" class="ui-g-4 center">
+                    <img class="pokemon-pokedex" src="/assets/pokemons/{{pokemon.pokemon.num}}.png" />
+                    <p>{{pokemon.pokemon.name}}</p>
+                    <p>Level: {{pokemon.level}}</p>
+                    <p><small>Exp: {{pokemon.exp}}</small></p>
+                </div>
+            </div>
         </p-tabPanel>
         <p-tabPanel header="Pokecenter">
-            Content 2
+            <div *ngFor="let pokemon of treinador.pokemons" class="ui-g-4 center">
+                <img class="pokemon-pokedex" src="/assets/pokemons/{{pokemon.pokemon.num}}.png" />
+                <p>{{pokemon.pokemon.name}}</p>
+                <p>Level: {{pokemon.level}}</p>
+                <p><small>Exp: {{pokemon.exp}}</small></p>
+            </div>
         </p-tabPanel>
     </p-tabView>
     <div class="center">

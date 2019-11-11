@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {TreinadorService} from '../../service/treinadorService';
 
 
 @Component({
@@ -7,6 +8,8 @@ import {Component} from '@angular/core';
     styleUrls: ['./panel-treinador.component.css']
 })
 export class PanelTreinadorComponent {
+
+    constructor(public treinador: TreinadorService) {}
 
     styleExpBar = {
       height: '6px',

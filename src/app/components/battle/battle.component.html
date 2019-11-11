@@ -1,24 +1,24 @@
-<p-sidebar [showCloseIcon]="false"  [style]="{paddingTop: '30px'}" [(visible)]="battlePanel" [fullScreen]="true" class="battle-panel">
+<p-sidebar [showCloseIcon]="false"  [style]="{paddingTop: '30px'}" [(visible)]="battlePanel" [fullScreen]="true" class="battle-panel" [baseZIndex]="800">
     <div class="arena">
         <div class="ui-g">
             <div class="ui-g-7 right">
                 <div class="life-panel">
-                    <p>Charmander</p>
-                    <p>50 / 100</p>
-                    <p-progressBar class="life-bar" [value]="50"></p-progressBar>
+                    <p>{{oponent?.pokemon?.pokemon?.name || ''}}</p>
+                    <p>{{oponent?.pokemon?.hp}} / {{oponent?.pokemon?.maxHp}}</p>
+                    <p-progressBar class="life-bar" [value]="((100/oponent?.pokemon?.maxHp)*oponent?.pokemon?.hp)"></p-progressBar>
                 </div>
             </div>
             <div class="ui-g-5 right">
-                <img class="pokemon-in-battle" src="/assets/pokemons/123.png">
+                <img class="pokemon-in-battle" src="/assets/pokemons/{{oponent?.pokemon?.pokemon?.num || '001'}}.png">
             </div>
             <div class="ui-g-5 left">
-                <img class="pokemon-in-battle" src="/assets/pokemons/145.png">
+                <img class="pokemon-in-battle" src="/assets/pokemons/{{challenger?.pokemon?.pokemon?.num || '001'}}.png">
             </div>
             <div class="ui-g-7 left">
                 <div class="life-panel">
-                    <p>Charmander</p>
-                    <p>50 / 100</p>
-                    <p-progressBar class="life-bar" [value]="50"></p-progressBar>
+                    <p>{{challenger?.pokemon?.pokemon?.name || ''}}</p>
+                    <p>{{challenger?.pokemon?.hp}} / {{challenger?.pokemon?.maxHp}}</p>
+                    <p-progressBar class="life-bar" [value]="((100/challenger?.pokemon?.maxHp)*challenger?.pokemon?.hp)"></p-progressBar>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
     <div class="down-panel">
         <div class="ui-g">
             <div class="ui-g-6 center">
-                <button pButton class="ui-button-danger ui-button-rounded" label="Atacar"></button>
+                <button pButton (click)="attackPanels.toggle($event)" class="ui-button-danger ui-button-rounded" label="Atacar"></button>
             </div>
             <div class="ui-g-6 center">
                 <button pButton class="ui-button-rounded" label="Pokemon"></button>
@@ -35,8 +35,44 @@
                 <button pButton class="ui-button-success ui-button-rounded" label="Items"></button>
             </div>
             <div class="ui-g-6 center">
-                <button pButton class="ui-button-gray ui-button-rounded" label="Fugir"></button>
+                <button pButton (click)="battlePanel = false" class="ui-button-gray ui-button-rounded" label="Fugir"></button>
             </div>
         </div>
     </div>
 </p-sidebar>
+<p-overlayPanel #attackPanels [baseZIndex]="1000" >
+    <div class="ui-g">
+        <div *ngIf="challenger?.pokemon?.move1" class="ui-g-6 center">
+            <a (click)="attack(challenger?.pokemon?.move1);" pButton class="ui-button-danger ui-button-rounded">
+                <p>{{challenger?.pokemon?.move1?.name}}</p>
+                <small>Power: {{challenger?.pokemon?.move1?.power}}</small><br>
+                <small>Accuracy: {{challenger?.pokemon?.move1?.accuracy}}</small><br>
+                <small>Type: {{challenger?.pokemon?.move1?.type?.name}}</small>
+            </a>
+        </div>
+        <div *ngIf="challenger?.pokemon?.move2" class="ui-g-6 center">
+            <a  (click)="attack(challenger?.pokemon?.move2);" pButton class="ui-button-danger ui-button-rounded">
+                <p>{{challenger?.pokemon?.move2?.name}}</p>
+                <small>Power: {{challenger?.pokemon?.move2?.power}}</small><br>
+                <small>Accuracy: {{challenger?.pokemon?.move2?.accuracy}}</small><br>
+                <small>Type: {{challenger?.pokemon?.move2?.type?.name}}</small>
+            </a>
+        </div>
+        <div *ngIf="challenger?.pokemon?.move3" class="ui-g-6 center">
+            <a  (click)="attack(challenger?.pokemon?.move3);"  pButton class="ui-button-danger ui-button-rounded">
+                <p>{{challenger?.pokemon?.move3?.name}}</p>
+                <small>Power: {{challenger?.pokemon?.move3?.power}}</small><br>
+                <small>Accuracy: {{challenger?.pokemon?.move3?.accuracy}}</small><br>
+                <small>Type: {{challenger?.pokemon?.move3?.type?.name}}</small>
+            </a>
+        </div>
+        <div *ngIf="challenger?.pokemon?.move4" class="ui-g-6 center">
+            <a (click)="attack(challenger?.pokemon?.move4);" pButton class="ui-button-danger ui-button-rounded">
+                <p>{{challenger?.pokemon?.move4?.name}}</p>
+                <small>Power: {{challenger?.pokemon?.move4?.power}}</small><br>
+                <small>Accuracy: {{challenger?.pokemon?.move4?.accuracy}}</small><br>
+                <small>Type: {{challenger?.pokemon?.move4?.type?.name}}</small>
+            </a>
+        </div>
+    </div>
+</p-overlayPanel>
