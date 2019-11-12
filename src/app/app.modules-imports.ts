@@ -15,6 +15,7 @@ import {
 import {ButtonModule} from 'primeng/button';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
+import {ToastModule} from 'primeng/toast';
 
 export const APP_MODULES = [
     BrowserModule,
@@ -34,5 +35,6 @@ export const APP_MODULES = [
     ProgressSpinnerModule,
     TabViewModule,
     DialogModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    ToastModule
 ];

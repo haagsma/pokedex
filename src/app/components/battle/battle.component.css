@@ -39,3 +39,20 @@
 .down-panel .ui-g .ui-g-6{
     max-height: 150px;
 }
+.pokemon-pokedex {
+    width: 80px;
+    height: 80px;
+}
+.ui-g-4.choose p {
+    color: lightseagreen;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+.ui-g-4.choose small {
+    color: lightseagreen;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+.btnPower {
+    max-height: 200px;
+}

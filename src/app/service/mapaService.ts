@@ -102,12 +102,13 @@ export class MapaService {
         const marker = new google.maps.Marker({id: 1, position: this.getRandomNearLocal(), map: this.map, icon: icon});
         marker.set('pokemon', pmarker);
         this.pokemonMarkers.push(marker);
-        console.log(this.pokemonMarkers)
+        // console.log(this.pokemonMarkers)
         let i;
         google.maps.event.addListener(marker, 'click', ( (marker, i = 1) => {
             return () => {
                 this.battle.startBattle(marker.get('pokemon'));
-                console.log(marker.get('pokemon'));
+                marker.setMap(null);
+                // console.log(marker.get('pokemon'));
             }
         })(marker, i));
     }

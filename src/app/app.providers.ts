@@ -8,6 +8,8 @@ import {HttpService} from './service/httpService';
 import {ShopService} from './service/shopService';
 import {ActiveGuard} from './guard/active.guard';
 import {BattleService} from './service/battleService';
+import {MessageService} from 'primeng/api';
+import {PokemonService} from './service/pokemonService';
 
 
 export const APP_PROVIDERS = [
@@ -20,5 +22,7 @@ export const APP_PROVIDERS = [
     HttpService,
     ShopService,
     ActiveGuard,
-    BattleService
+    BattleService,
+    MessageService,
+    PokemonService
 ];
