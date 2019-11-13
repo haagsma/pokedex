@@ -20,7 +20,6 @@ export class BattleComponent {
     inBattle = [];
     exp = 0;
 
-    attackPanel = false;
     itemsPanel = false;
     pokemonPanel = false;
 
@@ -43,44 +42,51 @@ export class BattleComponent {
     }
 
     changePokemon(pokemon) {
-        this.inBattle.push(pokemon);
-        const attack = this.challenger.pokemon.hp > 0;
-        this.challenger.pokemon = pokemon;
-        this.challengerStatus();
-        this.pokemonPanel = false;
-        if (attack) {
-            setTimeout(() => {
+        if (!this.attacking) {
+            this.attacking = true;
+            const verify = this.inBattle.filter((p) => p.id === pokemon.id);
+            if (verify.length === 0) this.inBattle.push(pokemon);
+            const attack = this.challenger.pokemon.hp > 0;
+            this.challenger.pokemon = pokemon;
+            this.challengerStatus();
+            this.pokemonPanel = false;
+            if (attack) {
                 this.oponentAttack();
                 if (this.challenger.pokemon.hp <= 0) {
                     this.challengerDead();
                 }
-            }, 750);
+            }
+            setTimeout(() => this.attacking = false, 1000);
         }
     }
 
     attack(move, panel) {
-        panel.visible = false;
-        if (this.challenger.pokemon.speed > this.oponent.pokemon.speed || move.priority > 0) {
-            this.challengerAttack(move);
-            if (this.oponent.pokemon.hp > 0) {
-                setTimeout(() => {
-                    this.oponentAttack();
-                    if (this.challenger.pokemon.hp <= 0) setTimeout(() => this.challengerDead(), 1000);
+        if (!this.attacking) {
+            this.attacking = true;
+            panel.visible = false;
+            if (this.challenger.pokemon.speed > this.oponent.pokemon.speed || move.priority > 0) {
+                this.challengerAttack(move);
+                if (this.oponent.pokemon.hp > 0) {
+                    setTimeout(() => {
+                        this.oponentAttack();
+                        if (this.challenger.pokemon.hp <= 0) setTimeout(() => this.challengerDead(), 1000);
 
-                }, 1000);
+                    }, 1000);
+                } else {
+                    setTimeout(() => this.oponentDead(), 1000);
+                }
             } else {
-                setTimeout(() => this.oponentDead(), 1000);
+                this.oponentAttack();
+                if (this.challenger.pokemon.hp > 0) {
+                    setTimeout(() => {
+                        this.challengerAttack(move);
+                        if (this.oponent.pokemon.hp <= 0) setTimeout(() => this.oponentDead(), 1000);
+                    }, 1000);
+                } else {
+                    setTimeout(() => this.challengerDead(), 1000);
+                }
             }
-        } else {
-            this.oponentAttack();
-            if (this.challenger.pokemon.hp > 0) {
-                setTimeout(() => {
-                    this.challengerAttack(move);
-                    if (this.oponent.pokemon.hp <= 0) setTimeout(() => this.oponentDead(), 1000);
-                }, 1000);
-            } else {
-                setTimeout(() => this.challengerDead(), 1000);
-            }
+            setTimeout(() => this.attacking = false, 2000);
         }
     }
 
@@ -96,6 +102,7 @@ export class BattleComponent {
 
     oponentDead() {
         this.exp += this.pokemonService.receiveExp(this.inBattle, this.oponent.pokemon.level);
+        this.treinador.getMoney(50);
         this.inBattle = [this.challenger.pokemon];
         if (this.oponent.team && this.oponent.team.length > 0) {
             this.oponent.team = this.oponent.team.filter( p => p.hp > 0);
@@ -149,5 +156,49 @@ export class BattleComponent {
         this.oponent.pokemon.specialDefense = Math.floor((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.03, (level - 1)));
         this.oponent.pokemon.speed = Math.floor((Math.random() * ((20 + 2) - (20 - 2)) + (20 - 2)) * Math.pow(1.03, (level - 1)));
         this.oponent.pokemon.maxHp = this.oponent.pokemon.hp;
+    }
+    heal(item) {
+        if (!this.attacking) {
+            this.attacking = true;
+            this.treinador.useItem(item);
+            this.challenger.pokemon.hp += item.item.effect;
+            if (this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) this.challenger.pokemon.hp = this.challenger.pokemon.maxHp
+            this.oponentAttack();
+            if (this.challenger.pokemon.hp <= 0) {
+                this.challengerDead();
+            }
+            this.itemsPanel = false;
+            setTimeout(() => this.attacking = false, 1000);
+        }
+    }
+
+    catchPokemon(item) {
+        if (!this.attacking) {
+            this.attacking = true;
+            this.treinador.useItem(item);
+            const hpChance = Math.floor((100 - ((this.oponent.pokemon.hp / this.oponent.pokemon.maxHp) * 100)) / 4);
+            const levelChance = Math.floor(((100 - this.oponent.pokemon.level) / 2) * item.item.effect);
+            const chance = hpChance + levelChance;
+            const random = Math.floor(Math.random() * (100 - 1) + (1));
+            if (chance >= random) {
+                this.treinador.catched(this.oponent.pokemon);
+                this.battlePanel = false;
+                this.msg.add({severity: 'success', summary: 'Catched', detail: this.oponent.pokemon.pokemon.name + ' catched!'});
+            } else {
+                this.oponentAttack();
+                if (this.challenger.pokemon.hp <= 0) {
+                    this.challengerDead();
+                }
+            }
+            this.itemsPanel = false;
+            setTimeout(() => this.attacking = false, 1000);
+        }
+    }
+
+    getPokeballs() {
+        return this.treinador.items.filter((i) => i.amount > 0 && i.item.category.name === 'standard-balls');
+    }
+    getPotions() {
+        return this.treinador.items.filter((i) => i.amount > 0 && i.item.category.name === 'healing');
     }
 }

@@ -28,13 +28,14 @@
     <div class="down-panel">
         <div class="ui-g">
             <div class="ui-g-6 center">
-                <button pButton (click)="attackPanels.toggle($event)" class="ui-button-danger ui-button-rounded" label="Atacar"></button>
+                <button pButton *ngIf="!attacking" (click)="attackPanels.toggle($event)" class="ui-button-danger ui-button-rounded" label="Atacar"></button>
+                <button pButton *ngIf="attacking" class="ui-button-danger ui-button-rounded" label="Atacar"></button>
             </div>
             <div class="ui-g-6 center">
                 <button (click)="pokemonPanel = true" pButton class="ui-button-rounded" label="Pokemon"></button>
             </div>
             <div class="ui-g-6 center">
-                <button pButton class="ui-button-success ui-button-rounded" label="Items"></button>
+                <button (click)="itemsPanel = true" pButton class="ui-button-success ui-button-rounded" label="Items"></button>
             </div>
             <div class="ui-g-6 center">
                 <button pButton (click)="battlePanel = false" class="ui-button-gray ui-button-rounded" label="Fugir"></button>
@@ -93,4 +94,30 @@
             <small *ngIf="p.hp <= 0" style="color: red">HP: Defeat</small>
         </div>
     </div>
+</p-dialog>
+<p-dialog [(visible)]="itemsPanel" [baseZIndex]="1000">
+    <p-tabView>
+        <p-tabPanel header="Pokeballs">
+            <div class="ui-g">
+                <div *ngFor="let item of getPokeballs()" class="ui-g-4 choose center">
+                    <a (click)="catchPokemon(item)">
+                        <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />
+                    </a>
+                    <p>{{item.item.name}}</p>
+                    <p>x {{item.amount}}</p>
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Potions">
+            <div class="ui-g">
+                <div *ngFor="let item of getPotions()" class="ui-g-4 choose center">
+                    <a (click)="heal(item)">
+                        <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />
+                    </a>
+                    <p>{{item.item.name}}</p>
+                    <p>x {{item.amount}}</p>
+                </div>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
 </p-dialog>

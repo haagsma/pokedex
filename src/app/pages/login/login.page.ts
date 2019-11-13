@@ -20,6 +20,7 @@ export class LoginPage {
       console.log(res);
       const treinador = res;
       this.treinador.logged = true;
+      this.treinador.id = treinador.id;
       this.treinador.nick = treinador.nick;
       this.treinador.level = treinador.level;
       this.treinador.exp = treinador.exp;

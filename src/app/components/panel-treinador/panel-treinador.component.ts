@@ -15,5 +15,8 @@ export class PanelTreinadorComponent {
       height: '6px',
       width: '80px'
     };
+    level() {
+        return Math.floor((this.treinador.exp*100)/(100*Math.pow(1.1, this.treinador.level)));
+    }
 
 }

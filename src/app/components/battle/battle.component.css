@@ -43,6 +43,10 @@
     width: 80px;
     height: 80px;
 }
+.item-bag {
+    width: 40px;
+    height: 40px;
+}
 .ui-g-4.choose p {
     color: lightseagreen;
     font-weight: bold;

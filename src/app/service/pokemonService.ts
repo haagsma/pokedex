@@ -21,6 +21,7 @@ export class PokemonService {
             pokemons[i].exp += exp;
             const hp = pokemons[i].hp;
             pokemons[i].hp = pokemons[i].maxHp;
+            console.log(pokemons[i].exp > Math.floor(100 * Math.pow(1.1, pokemons[i].level)));
             while (pokemons[i].exp > Math.floor(100 * Math.pow(1.1, pokemons[i].level))) {
                 pokemons[i].exp -= Math.floor(100 * Math.pow(1.1, pokemons[i].level));
                 pokemons[i].level++;
@@ -44,6 +45,7 @@ export class PokemonService {
             }
             pokemons[i].hp = hp;
         }
+        this.treinadorService.updateExp((totalExp / 6));
         return totalExp;
     }
 

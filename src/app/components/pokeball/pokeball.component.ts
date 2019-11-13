@@ -15,4 +15,7 @@ export class PokeballComponent {
     open() {
         this.pokeball = true;
     }
+    level(pokemon) {
+        return Math.floor((pokemon.exp*100)/(100*Math.pow(1.1, pokemon.level)));
+    }
 }
