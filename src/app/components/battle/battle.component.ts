@@ -1,8 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {TreinadorService} from '../../service/treinadorService';
 import {BattleService} from '../../service/battleService';
 import {MessageService} from 'primeng/api';
 import {PokemonService} from '../../service/pokemonService';
+import {ChangePowerComponent} from '../change-power/change-power.component';
+import {LoadingComponent} from '../loading/loading.component';
+import {BlockService} from '../../service/blockService';
 
 declare const Math: any;
 
@@ -12,6 +15,8 @@ declare const Math: any;
     styleUrls: ['./battle.component.css']
 })
 export class BattleComponent {
+
+    @ViewChild(ChangePowerComponent, null) changeAttack: ChangePowerComponent;
 
     battlePanel = false;
     oponent: any = {};
@@ -26,10 +31,10 @@ export class BattleComponent {
     constructor(private treinador: TreinadorService,
                 private battleService: BattleService,
                 private msg: MessageService,
-                private pokemonService: PokemonService) {}
+                private pokemonService: PokemonService,
+                private blockService: BlockService) {}
 
     startBattle(pokemon) {
-        console.log(this.treinador.team);
         this.exp = 0;
         this.challenger.team = null;
         this.challenger.team = JSON.parse(JSON.stringify(this.treinador.team));
@@ -100,8 +105,9 @@ export class BattleComponent {
         }
     }
 
-    oponentDead() {
-        this.exp += this.pokemonService.receiveExp(this.inBattle, this.oponent.pokemon.level);
+    async oponentDead() {
+        this.blockService.activeBlock();
+        this.exp += await this.pokemonService.receiveExp(this.inBattle, this.oponent.pokemon.level);
         this.treinador.getMoney(50);
         this.inBattle = [this.challenger.pokemon];
         if (this.oponent.team && this.oponent.team.length > 0) {
@@ -116,6 +122,7 @@ export class BattleComponent {
             this.battlePanel = false;
             this.msg.add({severity: 'success', summary: 'Winner', detail: '+ ' + this.exp + ' exp'});
         }
+        this.blockService.unBlock();
     }
 
     challengerAttack(move) {
@@ -130,9 +137,23 @@ export class BattleComponent {
 
     }
     oponentAttack() {
-        let damage = (this.oponent.pokemon.attack * (this.oponent.pokemon.move1.power / 100));
+        let countMoves = 1;
+
+        if(this.oponent.pokemon.move2) countMoves++;
+        if(this.oponent.pokemon.move3) countMoves++;
+        if(this.oponent.pokemon.move4) countMoves++;
+
+        const nofAttack = Math.floor(Math.random() * (countMoves - 1) + (1));
+        let moveToAttack;
+        if (nofAttack === 1) moveToAttack = this.oponent.pokemon.move1;
+        if (nofAttack === 2) moveToAttack = this.oponent.pokemon.move2;
+        if (nofAttack === 3) moveToAttack = this.oponent.pokemon.move3;
+        if (nofAttack >= 4) moveToAttack = this.oponent.pokemon.move4;
+
+        this.msg.add({severity: 'info', summary: this.oponent.pokemon.pokemon.name, detail: 'used ' + moveToAttack.name});
+        let damage = (this.oponent.pokemon.attack * (moveToAttack.power / 100));
         damage = damage - (damage * (this.challenger.pokemon.defense / 1000));
-        damage = damage * this.battleService.elementalAdvantage(this.oponent.pokemon.move1, this.challenger.pokemon.pokemon.types);
+        damage = damage * this.battleService.elementalAdvantage(moveToAttack, this.challenger.pokemon.pokemon.types);
         if ((this.challenger.pokemon.hp - Math.floor(damage)) < 0) {
             this.challenger.pokemon.hp = 0;
         } else {
@@ -141,7 +162,7 @@ export class BattleComponent {
     }
 
     challengerStatus() {
-        if (!this.challenger.pokemon.maxHp) {
+        if (!this.challenger.pokemon.maxHp || this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) {
             this.challenger.pokemon.maxHp = this.challenger.pokemon.hp;
         }
     }
@@ -183,7 +204,6 @@ export class BattleComponent {
             if (chance >= random) {
                 this.treinador.catched(this.oponent.pokemon);
                 this.battlePanel = false;
-                this.msg.add({severity: 'success', summary: 'Catched', detail: this.oponent.pokemon.pokemon.name + ' catched!'});
             } else {
                 this.oponentAttack();
                 if (this.challenger.pokemon.hp <= 0) {

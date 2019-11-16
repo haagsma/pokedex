@@ -1,16 +1,37 @@
 <p-sidebar [showCloseIcon]="false"  [style]="{paddingTop: '30px'}" [(visible)]="shop" [fullScreen]="true" class="pokedex">
     <p-tabView>
         <p-tabPanel header="TM">
-            Content 1
+            <div class="ui-g">
+                <div *ngFor="let item of getTms()" class="ui-g-4 choose center">
+                    <a (click)="comprar(item)">
+                        <img class="item-bag" src="/assets/items/tm.png" />
+                    </a>
+                    <p>{{item.item.name}}</p>
+                    <p>$ {{item.price}}</p>
+                </div>
+            </div>
         </p-tabPanel>
         <p-tabPanel header="Pokeballs">
-            Content 2
+            <div class="ui-g">
+                <div *ngFor="let item of getPokeballs()" class="ui-g-4 choose center">
+                    <a (click)="comprar(item)">
+                        <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />
+                    </a>
+                    <p>{{item.item.name}}</p>
+                    <p>$ {{item.price}}</p>
+                </div>
+            </div>
         </p-tabPanel>
         <p-tabPanel header="Potions">
-            Content 3
-        </p-tabPanel>
-        <p-tabPanel header="Special">
-            Content 3
+            <div class="ui-g">
+                <div *ngFor="let item of getPotions()" class="ui-g-4 choose center">
+                    <a (click)="comprar(item)">
+                        <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />
+                    </a>
+                    <p>{{item.item.name}}</p>
+                    <p>$ {{item.price}}</p>
+                </div>
+            </div>
         </p-tabPanel>
     </p-tabView>
     <div class="center">

@@ -7,3 +7,17 @@
     width: 80px;
     height: 80px;
 }
+.btnPower {
+    width: 100% !important;
+    height: 90px !important;
+}
+.all {
+    width: 100% !important;
+    height: 100% !important;
+    background: url("https://image.freepik.com/vetores-gratis/fundo-de-tracado-de-pincel-amarelo-tinta-aquarela_1017-16290.jpg?1") no-repeat;
+}
+
+.pokedex-in {
+    margin-top: 30px;
+    height: 100%;
+}

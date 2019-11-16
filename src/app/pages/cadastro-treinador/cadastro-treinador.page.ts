@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import {HttpService} from '../../service/httpService';
+import {BlockService} from '../../service/blockService';
+import {MessageService} from 'primeng/api';
 
 
 @Component({
@@ -9,10 +12,25 @@ import {Router} from '@angular/router';
 })
 export class CadastroTreinadorPage {
 
-    constructor(private router: Router) {}
+    constructor(private router: Router,
+                private http: HttpService,
+                private block: BlockService,
+                private msg: MessageService) {}
 
-    continuar() {
-        this.router.navigateByUrl('/pokemon-inicial');
+    async continuar(form) {
+        this.block.activeBlock();
+        try {
+            const nick: any = await this.http.get('/treinador/nick/' + form.value.nick).toPromise();
+            console.log(nick);
+            if (nick) {
+                this.msg.add({severity: 'error', detail: 'Nome já existente!', summary: 'Falha'});
+            } else {
+                this.router.navigateByUrl('/pokemon-inicial');
+            }
+        } catch (e) {
+            this.msg.add({severity: 'error', detail: 'Algo deu errado, tente mais tarde!', summary: 'Falha'});
+        }
+        this.block.unBlock();
     }
 
 }

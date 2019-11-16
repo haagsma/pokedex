@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpService} from '../../service/httpService';
 import {ShopService} from '../../service/shopService';
 import {TreinadorService} from '../../service/treinadorService';
+import {BlockService} from '../../service/blockService';
+import {MessageService} from 'primeng/api';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Component({
   selector: 'login-page',
@@ -11,27 +14,51 @@ import {TreinadorService} from '../../service/treinadorService';
 })
 export class LoginPage {
 
-  constructor(private router: Router, private http: HttpService, private shop: ShopService, private treinador: TreinadorService) {
-
-  }
+  constructor(private router: Router,
+              private http: HttpService,
+              private shopService: ShopService,
+              private treinador: TreinadorService,
+              private block: BlockService,
+              private msg: MessageService,
+              private jwt: JwtHelperService) {}
 
   login(form) {
-    this.http.get('/treinador/' + form.value.email).subscribe(async (res: any) => {
-      console.log(res);
-      const treinador = res;
-      this.treinador.logged = true;
-      this.treinador.id = treinador.id;
-      this.treinador.nick = treinador.nick;
-      this.treinador.level = treinador.level;
-      this.treinador.exp = treinador.exp;
-      this.treinador.amount = treinador.amount;
-      this.treinador.status = treinador.status;
-      this.treinador.items = await this.http.get('/treinador/items/' + treinador.id).toPromise();
-      const pokemons: any = await this.http.get('/treinador/pokemons/' + treinador.id).toPromise();
-      this.treinador.team = pokemons.filter( p => p.inBag = true);
-      this.treinador.pokemons = pokemons.filter( p => p.inBag = false);
-      this.router.navigateByUrl('/home');
+    this.http.post('/login', form.value).subscribe((res: any) => {
+        localStorage.setItem('token', res);
+        this.loadTrainer(form.value.username);
+    }, (e) => {
+      this.msg.add({severity: 'error', detail: 'Email ou Login incorreto', summary: 'Falha'});
+      console.log(e);
     });
+  }
+
+  loadTrainer(email) {
+      this.block.activeBlock();
+      this.http.get('/treinador/' + email).subscribe(async (res: any) => {
+          if (res) {
+              const treinador = res;
+              this.treinador.logged = true;
+              this.treinador.id = treinador.id;
+              this.treinador.nick = treinador.nick;
+              this.treinador.level = treinador.level;
+              this.treinador.exp = treinador.exp;
+              this.treinador.amount = treinador.amount;
+              this.treinador.status = treinador.status;
+              this.treinador.items = await this.http.get('/treinador/items/' + treinador.id).toPromise();
+              const pokemons: any = await this.http.get('/treinador/pokemons/' + treinador.id).toPromise();
+              this.shopService.items = await this.http.get('/shop/all').toPromise();
+              this.treinador.team = pokemons.filter( p => p.inBag === true);
+              this.treinador.pokemons = pokemons.filter( p => p.inBag === false);
+              this.router.navigateByUrl('/home');
+              this.block.unBlock();
+          } else {
+              this.block.unBlock();
+              this.treinador.email = email;
+              this.router.navigateByUrl('/cadastro-treinador');
+          }
+      }, error1 => {
+          this.block.unBlock();
+      });
   }
 
 }

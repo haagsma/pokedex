@@ -1,0 +1,55 @@
+<!--<p-sidebar [showCloseIcon]="false"  [style]="{paddingTop: '30px'}" [(visible)]="activePanelPower" [fullScreen]="true" class="battle-panel" [baseZIndex]="910"></p-sidebar>-->
+<p-dialog [(visible)]="activePanelPower" [baseZIndex]="1000" [closeIcon]="false" >
+    <div class="ui-g">
+        <div class="ui-g-6 center">
+            <img src="/assets/pokemons/{{pokemon?.pokemon?.num || '001'}}.png">
+        </div>
+        <div class="ui-g-6 center">
+            <h3>Novo Ataque</h3>
+            <a pButton class="ui-button-danger ui-button-rounded btnPower">
+                <p class="uppercase">{{currencyMove?.name}}</p>
+                <small>Power: {{currencyMove?.power}}</small><br>
+                <small>Accuracy: {{currencyMove?.accuracy}}</small><br>
+                <small>Type: {{currencyMove?.type?.name}}</small>
+            </a>
+        </div>
+        <div class="ui-g-12">
+            <h3>Retirar Ataque</h3>
+        </div>
+        <div *ngIf="pokemon?.move1" class="ui-g-6 center">
+            <a (click)="changeMove(1)" pButton class="ui-button-danger ui-button-rounded btnPower">
+                <p class="uppercase">{{pokemon?.move1?.name}}</p>
+                <small>Power: {{pokemon?.move1?.power}}</small><br>
+                <small>Accuracy: {{pokemon?.move1?.accuracy}}</small><br>
+                <small>Type: {{pokemon?.move1?.type?.name}}</small>
+            </a>
+        </div>
+        <div *ngIf="pokemon?.move2" class="ui-g-6 center">
+            <a  (click)="changeMove(2)" pButton class="ui-button-danger ui-button-rounded btnPower">
+                <p class="uppercase">{{pokemon?.move2?.name}}</p>
+                <small>Power: {{pokemon?.move2?.power}}</small><br>
+                <small>Accuracy: {{pokemon?.move2?.accuracy}}</small><br>
+                <small>Type: {{pokemon?.move2?.type?.name}}</small>
+            </a>
+        </div>
+        <div *ngIf="pokemon?.move3" class="ui-g-6 center">
+            <a  (click)="changeMove(3)"  pButton class="ui-button-danger ui-button-rounded btnPower">
+                <p class="uppercase">{{pokemon?.move3?.name}}</p>
+                <small>Power: {{pokemon?.move3?.power}}</small><br>
+                <small>Accuracy: {{pokemon?.move3?.accuracy}}</small><br>
+                <small>Type: {{pokemon?.move3?.type?.name}}</small>
+            </a>
+        </div>
+        <div *ngIf="pokemon?.move4" class="ui-g-6 center">
+            <a (click)="changeMove(4)" pButton class="ui-button-danger ui-button-rounded btnPower">
+                <p class="uppercase">{{pokemon?.move4?.name}}</p>
+                <small>Power: {{pokemon?.move4?.power}}</small><br>
+                <small>Accuracy: {{pokemon?.move4?.accuracy}}</small><br>
+                <small>Type: {{pokemon?.move4?.type?.name}}</small>
+            </a>
+        </div>
+    </div>
+    <div class="center">
+        <button (click)="exit()" pButton class="ui-button-warning ui-button-rounded" label="Sair"></button>
+    </div>
+</p-dialog>

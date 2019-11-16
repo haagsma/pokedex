@@ -19,4 +19,8 @@ export class HttpService {
         return this.http.post(this.url + url, data, {headers: options});
     }
 
+    public put(url, data, options = {authorizarion: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImV4cCI6MTU3MzM0MzYxNH0.f1coQwQzZQcQQRBdDVS3XAW7FqyyHr0Y9wZ6lSSUPDk'}) {
+        return this.http.put(this.url + url, JSON.stringify(data), {headers: options});
+    }
+
 }

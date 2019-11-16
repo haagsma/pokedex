@@ -4,6 +4,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {
+    BlockUIModule,
     CardModule, DialogModule,
     InputTextModule, OverlayPanelModule,
     ProgressBarModule,
@@ -16,6 +17,7 @@ import {ButtonModule} from 'primeng/button';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {ToastModule} from 'primeng/toast';
+import {JwtModule} from '@auth0/angular-jwt';
 
 export const APP_MODULES = [
     BrowserModule,
@@ -36,5 +38,11 @@ export const APP_MODULES = [
     TabViewModule,
     DialogModule,
     OverlayPanelModule,
-    ToastModule
+    ToastModule,
+    BlockUIModule,
+    JwtModule.forRoot({
+        config: {
+            tokenGetter: () => localStorage.getItem('token')
+        }
+    })
 ];

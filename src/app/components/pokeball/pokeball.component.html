@@ -1,25 +1,88 @@
-<p-sidebar [showCloseIcon]="false" [style]="{paddingTop: '30px'}" [(visible)]="pokeball" [fullScreen]="true" class="pokedex">
+<p-sidebar [showCloseIcon]="false"  [baseZIndex]="800" [style]="{paddingTop: '30px'}" [(visible)]="pokeball" [fullScreen]="true" class="pokedex">
     <p-tabView>
         <p-tabPanel header="Equipe">
             <div class="ui-g">
                 <div *ngFor="let pokemon of treinador.team" class="ui-g-4 center">
-                    <img class="pokemon-pokedex" src="/assets/pokemons/{{pokemon.pokemon.num}}.png" />
-                    <p>{{pokemon.pokemon.name}}</p>
-                    <p>Level: {{pokemon.level}}</p>
+                    <a (click)="openDetail(pokemon)"><img class="pokemon-pokedex" src="/assets/pokemons/{{pokemon?.pokemon?.num}}.png" /></a>
+                    <p class="captalize">{{pokemon?.pokemon?.name}}</p>
+                    <p>Level: {{pokemon?.level}}</p>
                     <p><small>Exp: {{level(pokemon)}}%</small></p>
                 </div>
             </div>
         </p-tabPanel>
         <p-tabPanel header="Pokecenter">
-            <div *ngFor="let pokemon of treinador.pokemons" class="ui-g-4 center">
-                <img class="pokemon-pokedex" src="/assets/pokemons/{{pokemon.pokemon.num}}.png" />
-                <p>{{pokemon.pokemon.name}}</p>
-                <p>Level: {{pokemon.level}}</p>
-                <p><small>Exp: {{level(pokemon)}}</small></p>
+            <div class="ui-g">
+                <div *ngFor="let pokemon of treinador.pokemons" class="ui-g-4 center">
+                    <a (click)="openDetail(pokemon)"><img class="pokemon-pokedex" src="/assets/pokemons/{{pokemon?.pokemon?.num}}.png" /></a>
+                    <p class="captalize">{{pokemon?.pokemon?.name}}</p>
+                    <p>Level: {{pokemon?.level}}</p>
+                    <p><small>Exp: {{level(pokemon)}}%</small></p>
+                </div>
             </div>
         </p-tabPanel>
     </p-tabView>
     <div class="center">
         <button (click)="pokeball = false" pButton class="ui-button-warning ui-button-rounded" label="Sair"></button>
+    </div>
+</p-sidebar>
+<p-sidebar  class="pokeballs" [showCloseIcon]="false"  [baseZIndex]="801" [style]="{paddingTop: '30px'}" [(visible)]="detailPanel" [fullScreen]="true" >
+    <div>
+        <div class="ui-g center">
+            <div class="ui-g-5">
+                <p class="uppercase bold">{{pokemonDetail?.pokemon?.name}}</p>
+                <img src="/assets/pokemons/{{pokemonDetail?.pokemon?.num}}.png" />
+            </div>
+            <div class="ui-g-7">
+                <p class="bold">Level: {{pokemonDetail?.level}}</p>
+                <p class="bold">Exp: {{level(pokemonDetail)}}%</p>
+                <p class="bold">Attack: {{pokemonDetail?.attack}}</p>
+                <p class="bold">Defense: {{pokemonDetail?.defense}}</p>
+                <p class="bold">Speed: {{pokemonDetail?.speed}}</p>
+                <p class="bold">HP: {{pokemonDetail?.hp}}</p>
+            </div>
+        </div>
+        <div class="center">
+            <h3>Ataques</h3>
+        </div>
+        <div class="ui-g center">
+            <div class="ui-g-6">
+                <a pButton class="ui-button-danger ui-button-rounded btnPower">
+                    <p class="uppercase">{{pokemonDetail?.move1?.name}}</p>
+                    <small>Power: {{pokemonDetail?.move1?.power}}</small><br>
+                    <small>Accuracy: {{pokemonDetail?.move1?.accuracy}}</small><br>
+                    <small>Type: {{pokemonDetail?.move1?.type?.name}}</small>
+                </a>
+            </div>
+            <div *ngIf="pokemonDetail.move2" class="ui-g-6">
+                <a pButton class="ui-button-danger ui-button-rounded btnPower">
+                    <p class="uppercase">{{pokemonDetail?.move2?.name}}</p>
+                    <small>Power: {{pokemonDetail?.move2?.power}}</small><br>
+                    <small>Accuracy: {{pokemonDetail?.move2?.accuracy}}</small><br>
+                    <small>Type: {{pokemonDetail?.move2?.type?.name}}</small>
+                </a>
+            </div>
+            <div *ngIf="pokemonDetail.move3"  class="ui-g-6">
+                <a pButton class="ui-button-danger ui-button-rounded btnPower">
+                    <p class="uppercase">{{pokemonDetail?.move3?.name}}</p>
+                    <small>Power: {{pokemonDetail?.move3?.power}}</small><br>
+                    <small>Accuracy: {{pokemonDetail?.move3?.accuracy}}</small><br>
+                    <small>Type: {{pokemonDetail?.move3?.type?.name}}</small>
+                </a>
+            </div>
+            <div *ngIf="pokemonDetail.move4"  class="ui-g-6">
+                <a pButton class="ui-button-danger ui-button-rounded btnPower">
+                    <p class="uppercase">{{pokemonDetail?.move4?.name}}</p>
+                    <small>Power: {{pokemonDetail?.move4?.power}}</small><br>
+                    <small>Accuracy: {{pokemonDetail?.move4?.accuracy}}</small><br>
+                    <small>Type: {{pokemonDetail?.move4?.type?.name}}</small>
+                </a>
+            </div>
+        </div>
+        <div class="center">
+            <button type="button" style="margin-right: 20px" (click)="detailPanel = false" pButton class="ui-button-rounded" label="Sair"></button>
+            <button (click)="principal(pokemonDetail)" *ngIf="pokemonDetail.inBag" type="button" style="margin-right: 20px"  pButton class="ui-button-rounded" label="Principal"></button>
+            <button (click)="guardar(pokemonDetail)" *ngIf="pokemonDetail.inBag" type="button"  pButton class="ui-button-rounded" label="Guardar"></button>
+            <button (click)="recrutar(pokemonDetail)" *ngIf="!pokemonDetail.inBag && treinador.team.length < 6" type="button"  pButton class="ui-button-rounded" label="Recrutar"></button>
+        </div>
     </div>
 </p-sidebar>

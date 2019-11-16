@@ -10,6 +10,8 @@ import {ActiveGuard} from './guard/active.guard';
 import {BattleService} from './service/battleService';
 import {MessageService} from 'primeng/api';
 import {PokemonService} from './service/pokemonService';
+import {BlockService} from './service/blockService';
+import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 
 
 export const APP_PROVIDERS = [
@@ -24,5 +26,7 @@ export const APP_PROVIDERS = [
     ActiveGuard,
     BattleService,
     MessageService,
-    PokemonService
+    PokemonService,
+    BlockService,
+    JwtHelperService
 ];

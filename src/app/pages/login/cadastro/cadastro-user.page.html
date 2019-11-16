@@ -1,17 +1,17 @@
 <div class="background">
     <div class="ui-card">
-        <form>
+        <form #fCadastro="ngForm" (ngSubmit)="cadastrar(fCadastro)" >
             <div>
-                <input class="ui-inputtext" type="text" placeholder="Nick" />
+                <input class="ui-inputtext" type="text" name="nick" placeholder="Nick" ngModel required />
             </div>
             <div>
-                <input class="ui-inputtext" type="text" placeholder="E-mail" />
+                <input class="ui-inputtext" type="text" name="email" placeholder="E-mail" ngModel required />
             </div>
             <div>
-                <input class="ui-inputtext" type="password" placeholder="Password" />
+                <input class="ui-inputtext" type="password" name="password" placeholder="Password" ngModel required />
             </div>
             <div>
-                <button pButton type="button" class="ui-button-warning ui-button-rounded" label="Cadastre-se" ></button>
+                <button pButton type="submit" class="ui-button-warning ui-button-rounded" label="Cadastre-se" ></button>
             </div>
             <div>
                 <a [routerLink]="['/login']" pButton type="button" class="ui-button-warning ui-button-rounded" label="Voltar" ></a>
@@ -19,3 +19,5 @@
         </form>
     </div>
 </div>
+
+<p-toast [baseZIndex]="2000"></p-toast>

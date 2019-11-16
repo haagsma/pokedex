@@ -5,12 +5,12 @@
             <h3>Bem vindo treinador!</h3>
             <p>Escolha qual irá ser seu nome de treinador</p>
         </div>
-        <form #fContinuar="ngForm" (ngSubmit)="continuar()" >
+        <form #fContinuar="ngForm" (ngSubmit)="continuar(fContinuar)" >
             <div>
-                <input placeholder="Nome de Treinador" />
+                <input placeholder="Nome de Treinador" name="nick" ngModel required/>
             </div>
             <div>
-                <button pButton class="ui-button-warning ui-button-rounded" label="Continuar"></button>
+                <button type="submit" pButton class="ui-button-warning ui-button-rounded" label="Continuar"></button>
             </div>
         </form>
     </div>

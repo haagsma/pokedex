@@ -10,6 +10,8 @@ import {BagComponent} from './components/bag/bag.component';
 import {PokeballComponent} from './components/pokeball/pokeball.component';
 import {BattleComponent} from './components/battle/battle.component';
 import {ShopComponent} from './components/shop/shop.component';
+import {ChangePowerComponent} from './components/change-power/change-power.component';
+import {LoadingComponent} from './components/loading/loading.component';
 
 
 export const APP_DECLARATIONS = [
@@ -24,5 +26,7 @@ export const APP_DECLARATIONS = [
     BagComponent,
     PokeballComponent,
     BattleComponent,
-    ShopComponent
+    ShopComponent,
+    ChangePowerComponent,
+    LoadingComponent
 ];

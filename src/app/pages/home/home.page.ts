@@ -7,6 +7,9 @@ import {BagComponent} from '../../components/bag/bag.component';
 import {PokeballComponent} from '../../components/pokeball/pokeball.component';
 import {BattleComponent} from '../../components/battle/battle.component';
 import {ShopComponent} from '../../components/shop/shop.component';
+import {ChangePowerComponent} from '../../components/change-power/change-power.component';
+import {TreinadorService} from '../../service/treinadorService';
+import {PokemonService} from '../../service/pokemonService';
 
 declare const google: any;
 
@@ -22,12 +25,13 @@ export class HomePage implements OnInit {
   @ViewChild(PokeballComponent , null) pokeball: PokeballComponent;
   @ViewChild(BattleComponent , null) battle: BattleComponent;
   @ViewChild(ShopComponent , null) shop: ShopComponent;
+  @ViewChild(ChangePowerComponent , null) powerPanel: ChangePowerComponent;
 
-  constructor(private router: Router, private mapaService: MapaService, private http: HttpService) {}
+  constructor(private router: Router, public mapaService: MapaService, private http: HttpService, private pokemon: PokemonService) {}
 
   ngOnInit() {
    this.mapaService.showMap(this.battle);
-
+   this.pokemon.changePowerPanel = this.powerPanel;
   }
 
 }

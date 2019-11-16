@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {TreinadorService} from '../../service/treinadorService';
 
 
 @Component({
@@ -9,8 +10,19 @@ import {Component} from '@angular/core';
 export class BagComponent {
     bag = false;
 
+    constructor(private treinador: TreinadorService) {}
 
     open() {
         this.bag = true;
+    }
+
+    getPokeballs() {
+        return this.treinador.items.filter((i) => i.amount > 0 && i.item.category.name === 'standard-balls');
+    }
+    getPotions() {
+        return this.treinador.items.filter((i) => i.amount > 0 && i.item.category.name === 'healing');
+    }
+    getTms() {
+        return this.treinador.items.filter((i) => i.amount > 0 && i.item.category.name === 'all-machines');
     }
 }

@@ -1,7 +1,7 @@
 <div class="panel-treinador">
     <div class="ui-g">
         <div class="ui-g-4 no-pm">
-            <a><img class="avatar" src="/assets/icon/ash-avatar.png"></a>
+            <a (click)="op.toggle($event)"><img class="avatar" src="/assets/icon/ash-avatar.png"></a>
         </div>
         <div class="ui-g-8 ">
             <p class="no-pm name">{{treinador.nick}}</p>
@@ -19,3 +19,16 @@
         </div>
     </div>
 </div>
+<p-overlayPanel #op>
+    <div class="ui-g">
+        <div class="ui-g-6">
+            <a><img style="height: 100px" src="/assets/avatars/ash.png"></a>
+        </div>
+        <div class="ui-g-6">
+            <p class="bold">{{treinador.nick}}</p>
+            <p class="bold">Level: {{treinador.level}}</p>
+            <p class="bold">Exp: {{level()}}%</p>
+            <p class="bold">$ {{treinador.amount}}</p>
+        </div>
+    </div>
+</p-overlayPanel>

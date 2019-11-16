@@ -11,6 +11,9 @@ input {
 p-sidebar.pokedex div.ui-sidebar-full {
     background: url("/assets/sidebar.jpg") no-repeat 0% 0% / 100% 100%;
 }
+p-sidebar.pokeballs div.ui-sidebar-full {
+    background: url("https://image.freepik.com/vetores-gratis/fundo-de-tracado-de-pincel-amarelo-tinta-aquarela_1017-16290.jpg?1") no-repeat 0% 0% / 100% 100%;
+}
 p-sidebar.battle-panel div.ui-sidebar-full {
     padding: 0 0 0 0 !important;
 }
@@ -53,6 +56,15 @@ p-sidebar.battle-panel div.ui-sidebar-full {
 }
 .left {
     text-align: left;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+.bold {
+    font-weight: bold;
+}
+.captalize {
+    text-transform: capitalize;
 }
 button.ui-button-gray.ui-button {
     background-color: gray !important;

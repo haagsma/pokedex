@@ -15,6 +15,7 @@ export class MapaService {
     battle: any;
     pokemonMarkers = [];
 
+    inCenter = true;
     currentPosition: any;
     geolocationOptions = {
         enableHighAccuracy: true,
@@ -58,6 +59,9 @@ export class MapaService {
                 ]
             };
             this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            this.map.addListener('center_changed', () => {
+                this.inCenter = false;
+            });
             const icon = {
                 url: '/assets/avatars/ash.png', // url
                 scaledSize: new google.maps.Size(60, 70), // scaled size
@@ -117,30 +121,12 @@ export class MapaService {
         const lng = Math.random() * ((this.currentPosition.coords.longitude + 0.02) - (this.currentPosition.coords.longitude - 0.02)) + (this.currentPosition.coords.longitude - 0.02);
         return {lat, lng};
     }
-    async generatePokemonMarker() {
-        let icon = {
-            url: '/assets/pokemons/004.png', // url
-            scaledSize: new google.maps.Size(70, 70), // scaled size
-        };
-        let marker = new google.maps.Marker({id: 1, position: {lat: (this.currentPosition.coords.latitude + 0.001), lng: (this.currentPosition.coords.longitude + 0.001)}, map: this.map, icon: icon});
-        marker.set('pokemon', 1);
-        let i;
-        google.maps.event.addListener(marker, 'click', ( (marker, i = 1) => {
-            return () => {
-                console.log(marker.get('pokemon'))
-            }
-        })(marker, i));
-        icon = {
-            url: '/assets/pokemons/007.png', // url
-            scaledSize: new google.maps.Size(70, 70), // scaled size
-        };
-        marker = new google.maps.Marker({id: 2, position: {lat: (this.currentPosition.coords.latitude-0.0015), lng: (this.currentPosition.coords.longitude - 0.002)}, map: this.map, icon: icon});
-        marker.set('pokemon', 2);
-        google.maps.event.addListener(marker, 'click', ( (marker, i = 2) => {
-            return () => {
-                console.log(marker.get('pokemon'))
-            }
-        })(marker, i));
+    async goCenter() {
+        this.currentPosition = await this.geolocation.getCurrentPosition(this.geolocationOptions);
+        const latlng = new google.maps.LatLng(this.currentPosition.coords.latitude, this.currentPosition.coords.longitude);
+        this.trainer.setPosition(latlng);
+        this.map.panTo(this.trainer.getPosition());
+        this.inCenter = true;
     }
 
 }

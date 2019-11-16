@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpService} from './httpService';
-import {tryCatch} from 'rxjs/internal-compatibility';
-
+import {MessageService} from 'primeng/api';
+import {BlockService} from './blockService';
 
 @Injectable()
 export class TreinadorService {
@@ -11,13 +11,14 @@ export class TreinadorService {
     level;
     exp;
     status: any;
-    team: any[];
-    pokemons: any[];
-    items;
+    team: any[] = [];
+    pokemons: any[] = [];
+    items: any = [];
     amount;
     logged = false;
+    email: string;
 
-    constructor(private http: HttpService) {}
+    constructor(private http: HttpService, private msg: MessageService, private blockService: BlockService) {}
 
     updateExp(exp) {
         this.exp += exp;
@@ -47,6 +48,8 @@ export class TreinadorService {
     }
 
     async catched(pokemon) {
+        this.blockService.activeBlock();
+        let team;
         pokemon.exp = 0;
         pokemon.treinador = {id: this.id};
         pokemon.hp = pokemon.maxHp;
@@ -54,19 +57,46 @@ export class TreinadorService {
         if (inBag.length < 6) {
             pokemon.inBag = true;
             pokemon.order = inBag.length + 1;
-            this.team.push(pokemon);
+            team = true;
         } else {
             pokemon.inBag = false;
             pokemon.order = null;
-            this.pokemons.push(pokemon);
+            team = false;
         }
         try {
             const res: any = await this.http.post('/treinador/catched', pokemon).toPromise();
-            pokemon.id = res.id;
+            pokemon = res;
+            if (team) {
+                this.team.push(pokemon);
+            } else {
+                this.pokemons.push(pokemon);
+            }
+            this.msg.add({severity: 'success', summary: 'Catched', detail: pokemon.pokemon.name + ' catched!'});
         } catch (e) {
-            console.log('pokemon catched error');
+            this.msg.add({severity: 'warning', summary: 'Missed', detail: pokemon.pokemon.name + ' missed!'});
         }
+        this.blockService.unBlock();
     }
+
+    async sortTeam() {
+        const toUpdate = [];
+        this.team = await this.team.sort((p1, p2) => {
+            if (p1.order < p2.order) return -1;
+            if (p1.order > p2.order) return 1;
+        });
+        this.team = await this.team.map((p, index) => {
+            if (p.order !== (index + 1)) {
+                   p.order = index + 1;
+                   toUpdate.push(p);
+            }
+            return p;
+        });
+        toUpdate.forEach((p) => {
+            this.http.post('/pokemon/update', p).toPromise();
+        });
+        return true;
+    }
+
     getMoney(money) {
         this.amount += money;
         this.http.post('/treinador/getmoney', {id: this.id, money}).toPromise();
