@@ -23,10 +23,13 @@ export class LoginPage {
               private jwt: JwtHelperService) {}
 
   login(form) {
-    this.http.post('/login', form.value).subscribe((res: any) => {
+      this.block.activeBlock();
+        this.http.post('/login', form.value).subscribe((res: any) => {
         localStorage.setItem('token', res);
+        this.block.unBlock();
         this.loadTrainer(form.value.username);
     }, (e) => {
+      this.block.unBlock();
       this.msg.add({severity: 'error', detail: 'Email ou Login incorreto', summary: 'Falha'});
       console.log(e);
     });

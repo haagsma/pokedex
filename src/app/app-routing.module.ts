@@ -7,6 +7,7 @@ import {CadastroTreinadorPage} from './pages/cadastro-treinador/cadastro-treinad
 import {PokemonInicialPage} from './pages/cadastro-treinador/pokemon-inicial/pokemon-inicial.page';
 import {TreinadorService} from './service/treinadorService';
 import {ActiveGuard} from './guard/active.guard';
+import {CadastroGuard} from './guard/cadastro.guard';
 
 
 
@@ -15,8 +16,8 @@ const routes: Routes = [
     {path: 'login', component: LoginPage},
     {path: 'home', component: HomePage, canActivate: [ActiveGuard]},
     {path: 'login/cadastro', component: CadastroUserPage},
-    {path: 'cadastro-treinador', component: CadastroTreinadorPage},
-    {path: 'pokemon-inicial', component: PokemonInicialPage},
+    {path: 'cadastro-treinador', component: CadastroTreinadorPage, canActivate: [CadastroGuard]},
+    {path: 'pokemon-inicial', component: PokemonInicialPage, canActivate: [CadastroGuard]},
 ];
 
 @NgModule({

@@ -8,7 +8,6 @@ import {PokeballComponent} from '../../components/pokeball/pokeball.component';
 import {BattleComponent} from '../../components/battle/battle.component';
 import {ShopComponent} from '../../components/shop/shop.component';
 import {ChangePowerComponent} from '../../components/change-power/change-power.component';
-import {TreinadorService} from '../../service/treinadorService';
 import {PokemonService} from '../../service/pokemonService';
 
 declare const google: any;

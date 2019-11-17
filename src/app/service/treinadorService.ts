@@ -22,8 +22,8 @@ export class TreinadorService {
 
     updateExp(exp) {
         this.exp += exp;
-        if (this.exp > Math.floor(100 * Math.pow(1.1, this.level))) {
-            this.exp -= Math.floor(100 * Math.pow(1.1, this.level));
+        if (this.exp > Math.round(100 * Math.pow(1.1, this.level))) {
+            this.exp -= Math.round(100 * Math.pow(1.1, this.level));
             this.level++;
         }
         try {

@@ -1,7 +1,7 @@
 <p-sidebar [showCloseIcon]="false"  [style]="{paddingTop: '30px'}" [(visible)]="shop" [fullScreen]="true" class="pokedex">
     <p-tabView>
         <p-tabPanel header="TM">
-            <div class="ui-g">
+            <div *ngIf="getTms().length > 0"   class="ui-g">
                 <div *ngFor="let item of getTms()" class="ui-g-4 choose center">
                     <a (click)="comprar(item)">
                         <img class="item-bag" src="/assets/items/tm.png" />
@@ -10,9 +10,10 @@
                     <p>$ {{item.price}}</p>
                 </div>
             </div>
+            <p  *ngIf="getTms().length == 0">Ops, não tem nada aqui!</p>
         </p-tabPanel>
         <p-tabPanel header="Pokeballs">
-            <div class="ui-g">
+            <div *ngIf="getPokeballs().length > 0"  class="ui-g">
                 <div *ngFor="let item of getPokeballs()" class="ui-g-4 choose center">
                     <a (click)="comprar(item)">
                         <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />
@@ -21,9 +22,10 @@
                     <p>$ {{item.price}}</p>
                 </div>
             </div>
+            <p  *ngIf="getPokeballs().length == 0">Ops, não tem nada aqui!</p>
         </p-tabPanel>
         <p-tabPanel header="Potions">
-            <div class="ui-g">
+            <div *ngIf="getPotions().length > 0" class="ui-g">
                 <div *ngFor="let item of getPotions()" class="ui-g-4 choose center">
                     <a (click)="comprar(item)">
                         <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />
@@ -32,6 +34,7 @@
                     <p>$ {{item.price}}</p>
                 </div>
             </div>
+            <p  *ngIf="getPotions().length == 0">Ops, não tem nada aqui!</p>
         </p-tabPanel>
     </p-tabView>
     <div class="center">

@@ -1,7 +1,7 @@
 <p-sidebar [showCloseIcon]="false"  [baseZIndex]="800" [style]="{paddingTop: '30px'}" [(visible)]="pokeball" [fullScreen]="true" class="pokedex">
     <p-tabView>
         <p-tabPanel header="Equipe">
-            <div class="ui-g">
+            <div *ngIf="treinador.team.length > 0" class="ui-g">
                 <div *ngFor="let pokemon of treinador.team" class="ui-g-4 center">
                     <a (click)="openDetail(pokemon)"><img class="pokemon-pokedex" src="/assets/pokemons/{{pokemon?.pokemon?.num}}.png" /></a>
                     <p class="captalize">{{pokemon?.pokemon?.name}}</p>
@@ -9,9 +9,10 @@
                     <p><small>Exp: {{level(pokemon)}}%</small></p>
                 </div>
             </div>
+            <p  *ngIf="treinador.team.length <= 0">Ops, não tem nada aqui!</p>
         </p-tabPanel>
         <p-tabPanel header="Pokecenter">
-            <div class="ui-g">
+            <div *ngIf="treinador.pokemons.length > 0" class="ui-g">
                 <div *ngFor="let pokemon of treinador.pokemons" class="ui-g-4 center">
                     <a (click)="openDetail(pokemon)"><img class="pokemon-pokedex" src="/assets/pokemons/{{pokemon?.pokemon?.num}}.png" /></a>
                     <p class="captalize">{{pokemon?.pokemon?.name}}</p>
@@ -19,6 +20,7 @@
                     <p><small>Exp: {{level(pokemon)}}%</small></p>
                 </div>
             </div>
+            <p  *ngIf="treinador.pokemons.length <= 0">Ops, não tem nada aqui!</p>
         </p-tabPanel>
     </p-tabView>
     <div class="center">

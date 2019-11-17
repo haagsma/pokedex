@@ -79,7 +79,7 @@
         </div>
     </div>
 </p-overlayPanel>
-<p-dialog [(visible)]="pokemonPanel" [baseZIndex]="900">
+<p-dialog [(visible)]="pokemonPanel" [baseZIndex]="900" [closeIcon]="false">
     <div class="ui-g">
         <div *ngFor="let p of challenger.team" class="ui-g-4 choose center">
             <a *ngIf="p.hp > 0" (click)="changePokemon(p)">
@@ -94,11 +94,14 @@
             <small *ngIf="p.hp <= 0" style="color: red">HP: Defeat</small>
         </div>
     </div>
+    <div *ngIf="challenger.pokemon && challenger.pokemon.hp > 0" class="center">
+        <button (click)="pokemonPanel = false" pButton class="ui-button-warning ui-button-rounded" label="Sair"></button>
+    </div>
 </p-dialog>
 <p-dialog [(visible)]="itemsPanel" [baseZIndex]="900">
     <p-tabView>
         <p-tabPanel header="Pokeballs">
-            <div class="ui-g">
+            <div *ngIf="getPokeballs().length > 0" class="ui-g">
                 <div *ngFor="let item of getPokeballs()" class="ui-g-4 choose center">
                     <a (click)="catchPokemon(item)">
                         <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />
@@ -107,9 +110,10 @@
                     <p>x {{item.amount}}</p>
                 </div>
             </div>
+            <p  *ngIf="getPokeballs().length == 0">Ops, não tem nada aqui!</p>
         </p-tabPanel>
         <p-tabPanel header="Potions">
-            <div class="ui-g">
+            <div *ngIf="getPotions().length > 0" class="ui-g">
                 <div *ngFor="let item of getPotions()" class="ui-g-4 choose center">
                     <a (click)="heal(item)">
                         <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />
@@ -118,6 +122,7 @@
                     <p>x {{item.amount}}</p>
                 </div>
             </div>
+            <p  *ngIf="getPotions().length == 0">Ops, não tem nada aqui!</p>
         </p-tabPanel>
     </p-tabView>
 </p-dialog>

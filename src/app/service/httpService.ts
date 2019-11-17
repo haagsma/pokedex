@@ -7,7 +7,7 @@ declare const google: any;
 @Injectable()
 export class HttpService {
 
-    url = 'http://localhost:8080';
+    url = 'http://haagsma.com.br:8080';
 
     constructor(private http: HttpClient) {}
 

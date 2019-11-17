@@ -11,6 +11,9 @@ input, input::placeholder {
     font-weight: bold;
     text-align: center;
 }
+input {
+    height: 40px;
+}
 .laboratorio {
     background: url("/assets/laboratorio.png");
     background-size: 100% 100%;

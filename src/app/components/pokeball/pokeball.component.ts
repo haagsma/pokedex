@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {TreinadorService} from '../../service/treinadorService';
 import {HttpService} from '../../service/httpService';
+import {MessageService} from 'primeng/api';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class PokeballComponent {
 
     pokemonDetail: any = {};
 
-    constructor(public treinador: TreinadorService, private http: HttpService) {}
+    constructor(public treinador: TreinadorService, private http: HttpService, private msg: MessageService) {}
 
     open() {
         this.pokeball = true;
@@ -47,16 +48,20 @@ export class PokeballComponent {
         }
     }
     async guardar(pokemon) {
-        this.detailPanel = false;
-        pokemon.order = null;
-        pokemon.inBag = false;
-        this.treinador.team = await this.treinador.team.filter((p) => p.id !== pokemon.id);
-        this.treinador.pokemons.push(pokemon);
-        this.treinador.sortTeam();
-        try {
-            this.http.post('/pokemon/update', pokemon).toPromise();
-        } catch (e) {
-
+        if (this.treinador.team.length > 1) {
+            this.detailPanel = false;
+            try {
+                pokemon.order = null;
+                pokemon.inBag = false;
+                this.treinador.team = await this.treinador.team.filter((p) => p.id !== pokemon.id);
+                this.treinador.pokemons.push(pokemon);
+                this.treinador.sortTeam();
+                this.http.post('/pokemon/update', pokemon).toPromise();
+            } catch (e) {
+                console.log(e);
+            }
+        } else {
+            this.msg.add({severity: 'info', summary: 'Cuidado', detail: 'Pelo menos 1 Pokemon deve estar no Time!'});
         }
     }
     async recrutar(pokemon) {
@@ -86,6 +91,6 @@ export class PokeballComponent {
         }
     }
     level(pokemon) {
-        return Math.floor((pokemon.exp*100)/(100*Math.pow(1.1, pokemon.level)));
+        return Math.round((pokemon.exp*100)/(100*Math.pow(1.1, pokemon.level)));
     }
 }

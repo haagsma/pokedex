@@ -7,64 +7,25 @@
             <div>
                 <p-scrollPanel class="scroll" [style]="{width: '100%', height: '400px'}">
                     <div class="ui-g">
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/001.png" />
-                            <p>Charmander</p>
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/004.png" />
-                            <p>Charmander</p>
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/007.png" />
-                            <p>Charmander</p>
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/008.png" />
-                            <p>Charmander</p>
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/009.png" />
-                            <p>Charmander</p>
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/010.png" />
-                            <p>Charmander</p>
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/011.png" />
-                            <p>Charmander</p>
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/012.png" />
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/013.png" />
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/013.png" />
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/013.png" />
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/013.png" />
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/013.png" />
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/013.png" />
-                        </div>
-                        <div class="ui-g-4">
-                            <img class="pokemon" src="/assets/pokemons/013.png" />
+                        <div *ngFor="let pokemon of iniciais" class="ui-g-4">
+                            <a (click)="escolher(pokemon)"><img class="pokemon" src="/assets/pokemons/{{pokemon.num}}.png" /></a>
+                            <p class="captalize">{{pokemon.name}}</p>
                         </div>
                     </div>
                 </p-scrollPanel>
             </div>
             <div>
-                <button (click)="continuar()" pButton class="ui-button-warning ui-button-rounded" label="Continuar"></button>
+                <button (click)="continuar()" pButton class="ui-button-warning ui-button-rounded" label="Voltar"></button>
             </div>
         </form>
     </div>
 </div>
+<p-dialog [style]="{width: '80%'}" [closeIcon]="false" [(visible)]="confirmarPanel">
+    <h3>Tem certeza que deseja esse pokemon?</h3>
+    <div class="center">
+        <img class="pokemon" src="/assets/pokemons/{{pokemon?.num || '001'}}.png" />
+        <p class="captalize">{{pokemon?.name}}</p>
+        <button (click)="continuar()" pButton class="ui-button-warning ui-button-rounded" label="Sim"></button>
+        <button style="margin-left: 10px" (click)="confirmarPanel = false" pButton class="ui-button-warning ui-button-rounded" label="Não"></button>
+    </div>
+</p-dialog>

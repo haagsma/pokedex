@@ -12,6 +12,7 @@ import {MessageService} from 'primeng/api';
 import {PokemonService} from './service/pokemonService';
 import {BlockService} from './service/blockService';
 import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
+import {CadastroGuard} from './guard/cadastro.guard';
 
 
 export const APP_PROVIDERS = [
@@ -24,6 +25,7 @@ export const APP_PROVIDERS = [
     HttpService,
     ShopService,
     ActiveGuard,
+    CadastroGuard,
     BattleService,
     MessageService,
     PokemonService,

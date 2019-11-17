@@ -46,20 +46,22 @@ export class BattleComponent {
         this.battlePanel = true;
     }
 
-    changePokemon(pokemon) {
+    async changePokemon(pokemon) {
         if (!this.attacking) {
             this.attacking = true;
             const verify = this.inBattle.filter((p) => p.id === pokemon.id);
             if (verify.length === 0) this.inBattle.push(pokemon);
             const attack = this.challenger.pokemon.hp > 0;
             this.challenger.pokemon = pokemon;
-            this.challengerStatus();
+            await this.challengerStatus();
             this.pokemonPanel = false;
             if (attack) {
-                this.oponentAttack();
-                if (this.challenger.pokemon.hp <= 0) {
-                    this.challengerDead();
-                }
+                setTimeout(() => {
+                    this.oponentAttack();
+                    if (this.challenger.pokemon.hp <= 0) {
+                        this.challengerDead();
+                    }
+                }, 500);
             }
             setTimeout(() => this.attacking = false, 1000);
         }
@@ -129,10 +131,10 @@ export class BattleComponent {
         let damage = (this.challenger.pokemon.attack * (move.power / 100));
         damage = damage - (damage * (this.oponent.pokemon.defense / 1000));
         damage = damage * this.battleService.elementalAdvantage(move, this.oponent.pokemon.pokemon.types);
-        if ((this.oponent.pokemon.hp - Math.floor(damage)) < 0) {
+        if ((this.oponent.pokemon.hp - Math.round(damage)) < 0) {
             this.oponent.pokemon.hp = 0;
         } else {
-            this.oponent.pokemon.hp -= Math.floor(damage);
+            this.oponent.pokemon.hp -= Math.round(damage);
         }
 
     }
@@ -143,7 +145,7 @@ export class BattleComponent {
         if(this.oponent.pokemon.move3) countMoves++;
         if(this.oponent.pokemon.move4) countMoves++;
 
-        const nofAttack = Math.floor(Math.random() * (countMoves - 1) + (1));
+        const nofAttack = Math.round(Math.random() * (countMoves - 1) + (1));
         let moveToAttack;
         if (nofAttack === 1) moveToAttack = this.oponent.pokemon.move1;
         if (nofAttack === 2) moveToAttack = this.oponent.pokemon.move2;
@@ -154,28 +156,29 @@ export class BattleComponent {
         let damage = (this.oponent.pokemon.attack * (moveToAttack.power / 100));
         damage = damage - (damage * (this.challenger.pokemon.defense / 1000));
         damage = damage * this.battleService.elementalAdvantage(moveToAttack, this.challenger.pokemon.pokemon.types);
-        if ((this.challenger.pokemon.hp - Math.floor(damage)) < 0) {
+        if ((this.challenger.pokemon.hp - Math.round(damage)) < 0) {
             this.challenger.pokemon.hp = 0;
         } else {
-            this.challenger.pokemon.hp -= Math.floor(damage);
+            this.challenger.pokemon.hp -= Math.round(damage);
         }
     }
 
-    challengerStatus() {
+    async challengerStatus() {
         if (!this.challenger.pokemon.maxHp || this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) {
             this.challenger.pokemon.maxHp = this.challenger.pokemon.hp;
         }
+        return true;
     }
     oponentStatus(level) {
-        level = Math.floor(Math.random() * (level - 1) + 1);
+        level = Math.round(Math.random() * (level - 1) + 1);
         // Math.random() * (max - min) + min;
         this.oponent.pokemon.level = level;
-        this.oponent.pokemon.hp = Math.floor((Math.random() * ((50 + 2) - (50 - 2)) + (50 - 2)) * Math.pow(1.03, (level - 1)));
-        this.oponent.pokemon.attack = Math.floor((Math.random() * ((40 + 2) - (40 - 2)) + (40 - 2)) * Math.pow(1.03, (level - 1)));
-        this.oponent.pokemon.specialAttack = Math.floor((Math.random() * ((40 + 2) - (40 - 2)) + (40 - 2)) * Math.pow(1.03, (level - 1)));
-        this.oponent.pokemon.defense = Math.floor((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.03, (level - 1)));
-        this.oponent.pokemon.specialDefense = Math.floor((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.03, (level - 1)));
-        this.oponent.pokemon.speed = Math.floor((Math.random() * ((20 + 2) - (20 - 2)) + (20 - 2)) * Math.pow(1.03, (level - 1)));
+        this.oponent.pokemon.hp = Math.round((Math.random() * ((50 + 2) - (50 - 2)) + (50 - 2)) * Math.pow(1.03, (level - 1)));
+        this.oponent.pokemon.attack = Math.round((Math.random() * ((40 + 2) - (40 - 2)) + (40 - 2)) * Math.pow(1.03, (level - 1)));
+        this.oponent.pokemon.specialAttack = Math.round((Math.random() * ((40 + 2) - (40 - 2)) + (40 - 2)) * Math.pow(1.03, (level - 1)));
+        this.oponent.pokemon.defense = Math.round((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.03, (level - 1)));
+        this.oponent.pokemon.specialDefense = Math.round((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.03, (level - 1)));
+        this.oponent.pokemon.speed = Math.round((Math.random() * ((20 + 2) - (20 - 2)) + (20 - 2)) * Math.pow(1.03, (level - 1)));
         this.oponent.pokemon.maxHp = this.oponent.pokemon.hp;
     }
     heal(item) {
@@ -183,7 +186,7 @@ export class BattleComponent {
             this.attacking = true;
             this.treinador.useItem(item);
             this.challenger.pokemon.hp += item.item.effect;
-            if (this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) this.challenger.pokemon.hp = this.challenger.pokemon.maxHp
+            if (this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) this.challenger.pokemon.hp = this.challenger.pokemon.maxHp;
             this.oponentAttack();
             if (this.challenger.pokemon.hp <= 0) {
                 this.challengerDead();
@@ -197,10 +200,10 @@ export class BattleComponent {
         if (!this.attacking) {
             this.attacking = true;
             this.treinador.useItem(item);
-            const hpChance = Math.floor((100 - ((this.oponent.pokemon.hp / this.oponent.pokemon.maxHp) * 100)) / 4);
-            const levelChance = Math.floor(((100 - this.oponent.pokemon.level) / 2) * item.item.effect);
+            const hpChance = Math.round((100 - ((this.oponent.pokemon.hp / this.oponent.pokemon.maxHp) * 100)) / 4);
+            const levelChance = Math.round(((100 - this.oponent.pokemon.level) / 2) * item.item.effect);
             const chance = hpChance + levelChance;
-            const random = Math.floor(Math.random() * (100 - 1) + (1));
+            const random = Math.round(Math.random() * (100 - 1) + (1));
             if (chance >= random) {
                 this.treinador.catched(this.oponent.pokemon);
                 this.battlePanel = false;

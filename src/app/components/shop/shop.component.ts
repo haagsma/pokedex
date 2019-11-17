@@ -39,7 +39,7 @@ export class ShopComponent {
     comprar(item) {
         this.block.activeBlock();
         if (this.treinador.amount - item.price >= 0) {
-            this.http.post('/treinador/getmoney', {id: this.treinador.id, money: -(item.price)}).subscribe((res: any) => {
+            this.http.post('/treinador/getmoney', {id: this.treinador.id, money: -(item.price)}).subscribe(async (res: any) => {
                 this.treinador.amount -= item.price;
                 const verify = this.treinador.items.filter((i) => i.item.id === item.item.id);
                 if (verify.length > 0) {
@@ -61,8 +61,8 @@ export class ShopComponent {
                     try {
                         item.treinador = {id: this.treinador.id};
                         item.amount = 1;
-                        this.treinador.items.push(item);
-                        this.http.post('/treinador/useitem', item).toPromise();
+                        const newItem: any = await this.http.post('/treinador/useitem', item).toPromise();
+                        this.treinador.items.push(newItem);
                         this.block.unBlock();
                         this.msg.add({severity: 'success', summary: 'Sucesso', detail: 'Item comprado, verifique sua Bag!'});
                     } catch (e) {
