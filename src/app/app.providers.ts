@@ -8,7 +8,7 @@ import {HttpService} from './service/httpService';
 import {ShopService} from './service/shopService';
 import {ActiveGuard} from './guard/active.guard';
 import {BattleService} from './service/battleService';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {PokemonService} from './service/pokemonService';
 import {BlockService} from './service/blockService';
 import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
@@ -30,5 +30,6 @@ export const APP_PROVIDERS = [
     MessageService,
     PokemonService,
     BlockService,
-    JwtHelperService
+    JwtHelperService,
+    ConfirmationService
 ];

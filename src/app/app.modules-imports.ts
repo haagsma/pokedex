@@ -5,7 +5,7 @@ import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {
     BlockUIModule,
-    CardModule, DialogModule,
+    CardModule, ConfirmDialogModule, DialogModule,
     InputTextModule, OverlayPanelModule,
     ProgressBarModule,
     ProgressSpinnerModule,
@@ -44,5 +44,6 @@ export const APP_MODULES = [
         config: {
             tokenGetter: () => localStorage.getItem('token')
         }
-    })
+    }),
+    ConfirmDialogModule
 ];

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {TreinadorService} from '../../service/treinadorService';
 import {HttpService} from '../../service/httpService';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class PokeballComponent {
 
     pokemonDetail: any = {};
 
-    constructor(public treinador: TreinadorService, private http: HttpService, private msg: MessageService) {}
+    constructor(public treinador: TreinadorService, private http: HttpService, private msg: MessageService, private confirm: ConfirmationService) {}
 
     open() {
         this.pokeball = true;
@@ -92,5 +92,19 @@ export class PokeballComponent {
     }
     level(pokemon) {
         return Math.round((pokemon.exp*100)/(100*Math.pow(1.1, pokemon.level)));
+    }
+
+    abandonar(pokemon) {
+        this.confirm.confirm({
+            message: 'Tem certeza que quer abandonar seu Pokemon?',
+            accept: () => {
+                this.http.get('/pokemon/abandonar/' + pokemon.id).subscribe((res: any) => {
+                    this.treinador.pokemons = this.treinador.pokemons.filter((p) => p.id !== pokemon.id);
+                    this.detailPanel = false;
+                }, (e) => {
+                    this.msg.add({severity: 'info', summary: 'Cuidado', detail: 'Por algum motivo seu pokemon não foi abandonado, tem certeza que quer fazer isso?'});
+                });
+            },
+        });
     }
 }

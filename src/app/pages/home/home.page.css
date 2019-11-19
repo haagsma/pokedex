@@ -9,11 +9,10 @@
 .centered {
     position: absolute;
     z-index: 5;
-    bottom: 50px;
+    bottom: 100px;
     float: left;
     text-align: center;
-    padding-bottom: 10px;
-    padding-left: 10px;
+    padding-left: 20px;
     background: rgba(0,0,0,0);
     border-radius: 50%;
 }
@@ -28,4 +27,8 @@
 .item-menu {
     width: 50px;
     height: 50px;
+}
+.centralizar {
+    width: 100px;
+    height: 100px;
 }

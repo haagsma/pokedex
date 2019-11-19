@@ -12,7 +12,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.css'],
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
 
   constructor(private router: Router,
               private http: HttpService,
@@ -22,11 +22,18 @@ export class LoginPage {
               private msg: MessageService,
               private jwt: JwtHelperService) {}
 
-  login(form) {
+    ngOnInit() {
+      if (localStorage.getItem('emailToTrainer')) {
+          this.loadTrainer(localStorage.getItem('emailToTrainer'));
+      }
+    }
+
+    login(form) {
       this.block.activeBlock();
         this.http.post('/login', form.value).subscribe((res: any) => {
         localStorage.setItem('token', res);
         this.block.unBlock();
+        localStorage.setItem('emailToTrainer', form.value.username);
         this.loadTrainer(form.value.username);
     }, (e) => {
       this.block.unBlock();

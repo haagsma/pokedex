@@ -18,7 +18,6 @@ export class ChangePowerComponent {
     constructor(private treinador: TreinadorService, private http: HttpService, private pokemonService: PokemonService) {}
 
     open() {
-        console.log('panel if: ', !this.activePanelPower);
         if (!this.activePanelPower) {
             this.currencyMove = this.pokemonService.toChangePower[0].move;
             this.pokemon = this.pokemonService.toChangePower[0].pokemon;
@@ -51,9 +50,15 @@ export class ChangePowerComponent {
                 }
                 return p;
             });
+            this.pokemonService.toChangePower = await this.pokemonService.toChangePower.filter((p) => {
+                if (p.pokemon.id === this.pokemon.id) {
+                    p.pokemon = JSON.parse(JSON.stringify(this.pokemon));
+                }
+                return p;
+            });
             this.exit();
         } catch (e) {
-
+            console.log('error', e);
         }
     }
 

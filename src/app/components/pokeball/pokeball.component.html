@@ -12,7 +12,7 @@
             <p  *ngIf="treinador.team.length <= 0">Ops, não tem nada aqui!</p>
         </p-tabPanel>
         <p-tabPanel header="Pokecenter">
-            <div *ngIf="treinador.pokemons.length > 0" class="ui-g">
+            <div *ngIf="treinador.pokemons.length > 0" class="ui-g rolar">
                 <div *ngFor="let pokemon of treinador.pokemons" class="ui-g-4 center">
                     <a (click)="openDetail(pokemon)"><img class="pokemon-pokedex" src="/assets/pokemons/{{pokemon?.pokemon?.num}}.png" /></a>
                     <p class="captalize">{{pokemon?.pokemon?.name}}</p>
@@ -85,6 +85,7 @@
             <button (click)="principal(pokemonDetail)" *ngIf="pokemonDetail.inBag" type="button" style="margin-right: 20px"  pButton class="ui-button-rounded" label="Principal"></button>
             <button (click)="guardar(pokemonDetail)" *ngIf="pokemonDetail.inBag" type="button"  pButton class="ui-button-rounded" label="Guardar"></button>
             <button (click)="recrutar(pokemonDetail)" *ngIf="!pokemonDetail.inBag && treinador.team.length < 6" type="button"  pButton class="ui-button-rounded" label="Recrutar"></button>
+            <button type="button" style="margin-left: 20px" (click)="abandonar(pokemonDetail)" *ngIf="!pokemonDetail.inBag" pButton class="ui-button-rounded" label="Abandonar"></button>
         </div>
     </div>
 </p-sidebar>

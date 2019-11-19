@@ -71,10 +71,12 @@ export class PokemonInicialPage implements OnInit {
             this.treinador.team = pokemons.filter( p => p.inBag === true);
             this.treinador.pokemons = pokemons.filter( p => p.inBag === false);
             this.block.unBlock();
+            this.treinador.email = null;
             this.router.navigateByUrl('/home');
         } catch (e) {
             console.log(e);
             this.block.unBlock();
+            this.treinador.email = null;
             this.msg.add({severity: 'error', detail: 'Algo deu errado, tenta novamente!', summary: 'Falha'});
             this.router.navigateByUrl('/');
         }
