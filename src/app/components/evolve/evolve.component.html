@@ -1,0 +1,18 @@
+<p-dialog [style]="{width: '80%'}" header="Parabéns seu Pokemon Evoluiu!!" [closeIcon]="false" [(visible)]="pokemonService.evolvePanel">
+    <div class="ui-g">
+        <div class="ui-g-5 center">
+            <p class="captalize">{{pokemonService.evolveSource?.name}}</p>
+            <img class="pokemon" src="/assets/pokemons/{{pokemonService.evolveSource?.num || '001'}}.png" />
+        </div>
+        <div class="ui-g-2 center">
+            <p>para</p>
+        </div>
+        <div class="ui-g-5 center">
+            <p class="captalize">{{pokemonService.evolveTarget?.name}}</p>
+            <img class="pokemon" src="/assets/pokemons/{{pokemonService.evolveTarget?.num || '001'}}.png" />
+        </div>
+    </div>
+    <div class="center">
+        <button (click)="pokemonService.evolvePanel = false" pButton class="ui-button-warning ui-button-rounded" label="Ok"></button>
+    </div>
+</p-dialog>

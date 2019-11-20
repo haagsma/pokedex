@@ -1,17 +1,17 @@
 <p-sidebar [showCloseIcon]="false"  [style]="{paddingTop: '30px'}" [(visible)]="shop" [fullScreen]="true" class="pokedex">
     <p-tabView>
-        <p-tabPanel header="TM">
-            <div *ngIf="getTms().length > 0"   class="ui-g">
-                <div *ngFor="let item of getTms()" class="ui-g-4 choose center">
-                    <a (click)="comprar(item)">
-                        <img class="item-bag" src="/assets/items/tm.png" />
-                    </a>
-                    <p>{{item.item.name}}</p>
-                    <p>$ {{item.price}}</p>
-                </div>
-            </div>
-            <p  *ngIf="getTms().length == 0">Ops, não tem nada aqui!</p>
-        </p-tabPanel>
+        <!--<p-tabPanel header="TM">-->
+            <!--<div *ngIf="getTms().length > 0"   class="ui-g">-->
+                <!--<div *ngFor="let item of getTms()" class="ui-g-4 choose center">-->
+                    <!--<a (click)="comprar(item)">-->
+                        <!--<img class="item-bag" src="/assets/items/tm.png" />-->
+                    <!--</a>-->
+                    <!--<p>{{item.item.name}}</p>-->
+                    <!--<p>$ {{item.price}}</p>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<p  *ngIf="getTms().length == 0">Ops, não tem nada aqui!</p>-->
+        <!--</p-tabPanel>-->
         <p-tabPanel header="Pokeballs">
             <div *ngIf="getPokeballs().length > 0"  class="ui-g">
                 <div *ngFor="let item of getPokeballs()" class="ui-g-4 choose center">
@@ -35,6 +35,18 @@
                 </div>
             </div>
             <p  *ngIf="getPotions().length == 0">Ops, não tem nada aqui!</p>
+        </p-tabPanel>
+        <p-tabPanel header="Special">
+            <div *ngIf="getSpecials().length > 0" class="ui-g">
+                <div *ngFor="let item of getSpecials()" class="ui-g-4 choose center">
+                    <a (click)="comprar(item)">
+                        <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />
+                    </a>
+                    <p>{{item.item.name}}</p>
+                    <p>$ {{item.price}}</p>
+                </div>
+            </div>
+            <p  *ngIf="getSpecials().length == 0">Ops, não tem nada aqui!</p>
         </p-tabPanel>
     </p-tabView>
     <div class="center">

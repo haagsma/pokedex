@@ -11,6 +11,10 @@ export class PokemonService {
     toChangePower: any = [];
     changePowerPanel: ChangePowerComponent;
 
+    evolveSource: any;
+    evolveTarget: any;
+    evolvePanel: any;
+
     constructor(private http: HttpService, private treinadorService: TreinadorService) {}
 
     async receiveExp(pokemons, level) {
@@ -54,6 +58,7 @@ export class PokemonService {
         try {
             const checkEvolution: any = await this.http.post('/pokemon/check-evolution', pokemon).toPromise();
             if (checkEvolution && pokemon.level >= checkEvolution.minLevel) {
+                const source = pokemon.pokemon;
                 pokemon.pokemon = checkEvolution.target;
                 pokemon.attack = Math.round(pokemon.attack * 1.03);
                 pokemon.specialAttack = Math.round(pokemon.specialAttack * 1.03);
@@ -62,6 +67,7 @@ export class PokemonService {
                 pokemon.hp = Math.round(pokemon.hp * 1.03);
                 pokemon.speed = Math.round(pokemon.speed * 1.03);
                 await this.http.post('/pokemon/update', pokemon).toPromise();
+                this.openPanelEvolve(source, pokemon.pokemon);
             }
         } catch (e) {
             console.log(e);
@@ -94,6 +100,26 @@ export class PokemonService {
             console.log(e);
         }
         return true;
+    }
+
+    async evolutionStone(pokemon) {
+        try {
+            pokemon.attack = Math.round(pokemon.attack * 1.03);
+            pokemon.specialAttack = Math.round(pokemon.specialAttack * 1.03);
+            pokemon.defense = Math.round(pokemon.defense * 1.03);
+            pokemon.specialDefense = Math.round(pokemon.specialDefense * 1.03);
+            pokemon.hp = Math.round(pokemon.hp * 1.03);
+            pokemon.speed = Math.round(pokemon.speed * 1.03);
+            await this.http.post('/pokemon/update', pokemon).toPromise();
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    openPanelEvolve(source, target) {
+        this.evolveSource = source;
+        this.evolveTarget = target;
+        this.evolvePanel = true;
     }
 
 }

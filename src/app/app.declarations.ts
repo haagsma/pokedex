@@ -12,6 +12,7 @@ import {BattleComponent} from './components/battle/battle.component';
 import {ShopComponent} from './components/shop/shop.component';
 import {ChangePowerComponent} from './components/change-power/change-power.component';
 import {LoadingComponent} from './components/loading/loading.component';
+import {EvolveComponent} from './components/evolve/evolve.component';
 
 
 export const APP_DECLARATIONS = [
@@ -28,5 +29,6 @@ export const APP_DECLARATIONS = [
     BattleComponent,
     ShopComponent,
     ChangePowerComponent,
-    LoadingComponent
+    LoadingComponent,
+    EvolveComponent
 ];

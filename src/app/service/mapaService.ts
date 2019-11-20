@@ -15,6 +15,7 @@ export class MapaService {
     battle: any;
     pokemonMarkers = [];
 
+    interval: any;
     inCenter = true;
     currentPosition: any;
     geolocationOptions = {
@@ -82,7 +83,10 @@ export class MapaService {
         }, (err) => {
             this.getPokemonsToMap();
         });
-        setInterval(() => {
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
+        this.interval = setInterval(() => {
             this.http.get('/mapa').subscribe((res: any) => {
                 this.cleanPokemonsMarkers();
                 const count = res.length;

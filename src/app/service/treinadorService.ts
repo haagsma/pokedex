@@ -102,4 +102,11 @@ export class TreinadorService {
         this.http.post('/treinador/getmoney', {id: this.id, money}).toPromise();
     }
 
+    getAllPokemons() {
+        const pokemons: any = [];
+        pokemons.push(...this.pokemons);
+        pokemons.push(...this.team);
+        return pokemons;
+    }
+
 }

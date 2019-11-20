@@ -35,6 +35,9 @@ export class ShopComponent {
     getTms() {
         return this.shopService.items.filter((i) => i.item.category.name === 'all-machines');
     }
+    getSpecials() {
+        return this.shopService.items.filter((i) => i.item.category.name === 'evolution');
+    }
 
     comprar(item) {
         this.block.activeBlock();
