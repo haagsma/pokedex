@@ -92,7 +92,7 @@ export class PokemonService {
                     checkAttack.shift();
                 }
                 if (checkAttack.length > 0) {
-                    await checkAttack.forEach((attack) => this.toChangePower.push({pokemon: {...pokemon, hp: pokemon.maxHp}, move: attack.move}));
+                    await checkAttack.forEach((attack) => this.toChangePower.push({pokemon: {...pokemon}, move: attack.move}));
                     this.changePowerPanel.open();
                 }
             }
