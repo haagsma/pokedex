@@ -13,7 +13,7 @@
             <!--<p  *ngIf="getTms().length == 0">Ops, não tem nada aqui!</p>-->
         <!--</p-tabPanel>-->
         <p-tabPanel header="Pokeballs">
-            <div *ngIf="getPokeballs().length > 0"  class="ui-g">
+            <div *ngIf="getPokeballs().length > 0"  class="ui-g rolar">
                 <div *ngFor="let item of getPokeballs()" class="ui-g-4 choose center">
                     <a (click)="comprar(item)">
                         <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />
@@ -25,7 +25,7 @@
             <p  *ngIf="getPokeballs().length == 0">Ops, não tem nada aqui!</p>
         </p-tabPanel>
         <p-tabPanel header="Potions">
-            <div *ngIf="getPotions().length > 0" class="ui-g">
+            <div *ngIf="getPotions().length > 0" class="ui-g rolar">
                 <div *ngFor="let item of getPotions()" class="ui-g-4 choose center">
                     <a (click)="comprar(item)">
                         <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />
@@ -37,7 +37,7 @@
             <p  *ngIf="getPotions().length == 0">Ops, não tem nada aqui!</p>
         </p-tabPanel>
         <p-tabPanel header="Special">
-            <div *ngIf="getSpecials().length > 0" class="ui-g">
+            <div *ngIf="getSpecials().length > 0" class="ui-g rolar">
                 <div *ngFor="let item of getSpecials()" class="ui-g-4 choose center">
                     <a (click)="comprar(item)">
                         <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />
