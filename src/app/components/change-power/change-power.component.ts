@@ -21,6 +21,7 @@ export class ChangePowerComponent {
         if (!this.activePanelPower) {
             this.currencyMove = this.pokemonService.toChangePower[0].move;
             this.pokemon = this.pokemonService.toChangePower[0].pokemon;
+            this.pokemon.hp = this.pokemon.maxHp;
             this.pokemonService.toChangePower.shift();
             this.activePanelPower = true;
         }
@@ -66,6 +67,7 @@ export class ChangePowerComponent {
         if (this.pokemonService.toChangePower.length > 0) {
             this.currencyMove = this.pokemonService.toChangePower[0].move;
             this.pokemon = this.pokemonService.toChangePower[0].pokemon;
+            this.pokemon.hp = this.pokemon.maxHp;
             this.pokemonService.toChangePower.shift();
             this.activePanelPower = true;
         } else {

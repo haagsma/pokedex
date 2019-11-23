@@ -6,6 +6,7 @@ import {PokemonService} from '../../service/pokemonService';
 import {ChangePowerComponent} from '../change-power/change-power.component';
 import {LoadingComponent} from '../loading/loading.component';
 import {BlockService} from '../../service/blockService';
+import set = Reflect.set;
 
 declare const Math: any;
 
@@ -187,12 +188,14 @@ export class BattleComponent {
             this.treinador.useItem(item);
             this.challenger.pokemon.hp += item.item.effect;
             if (this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) this.challenger.pokemon.hp = this.challenger.pokemon.maxHp;
-            this.oponentAttack();
-            if (this.challenger.pokemon.hp <= 0) {
-                this.challengerDead();
-            }
-            this.itemsPanel = false;
-            setTimeout(() => this.attacking = false, 1000);
+            setTimeout(() => {
+                this.oponentAttack();
+                if (this.challenger.pokemon.hp <= 0) {
+                    this.challengerDead();
+                }
+                this.itemsPanel = false;
+                setTimeout(() => this.attacking = false, 1000);
+            }, 1500);
         }
     }
 
