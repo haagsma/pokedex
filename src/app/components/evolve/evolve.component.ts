@@ -10,6 +10,7 @@ import {PokemonService} from '../../service/pokemonService';
 })
 export class EvolveComponent {
     evolvePanel: any;
+    giftPanel: any;
     source: any;
     target: any;
 

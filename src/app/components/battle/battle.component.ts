@@ -4,9 +4,8 @@ import {BattleService} from '../../service/battleService';
 import {MessageService} from 'primeng/api';
 import {PokemonService} from '../../service/pokemonService';
 import {ChangePowerComponent} from '../change-power/change-power.component';
-import {LoadingComponent} from '../loading/loading.component';
 import {BlockService} from '../../service/blockService';
-import set = Reflect.set;
+import {HttpService} from '../../service/httpService';
 
 declare const Math: any;
 
@@ -25,6 +24,7 @@ export class BattleComponent {
     attacking = false;
     inBattle = [];
     exp = 0;
+    gym: any;
 
     itemsPanel = false;
     pokemonPanel = false;
@@ -33,7 +33,8 @@ export class BattleComponent {
                 private battleService: BattleService,
                 private msg: MessageService,
                 private pokemonService: PokemonService,
-                private blockService: BlockService) {}
+                private blockService: BlockService,
+                private http: HttpService) {}
 
     startBattle(pokemon) {
         this.exp = 0;
@@ -45,6 +46,30 @@ export class BattleComponent {
         this.oponentStatus(this.treinador.level);
         this.inBattle = [this.challenger.pokemon];
         this.battlePanel = true;
+    }
+    async startBattleGym(gym) {
+        if (this.treinador.getBadge(gym.badge) !== 0 && (new Date().getTime() - this.treinador.getBadge(gym.badge)) < 43200000) {
+            this.msg.add({severity: 'warn', summary: 'Ops....', detail: 'Você deve esperar 12 horas para lutar novamente nesse ginásio!'});
+        } else {
+            this.blockService.activeBlock();
+            try {
+                this.gym = gym;
+                this.exp = 0;
+                this.challenger.team = null;
+                this.challenger.team = JSON.parse(JSON.stringify(this.treinador.team));
+                this.challenger.pokemon = this.challenger.team[0];
+                this.oponent.team = await this.http.get('/treinador/pokemons/' + gym.treinador.id).toPromise();
+                this.oponent.pokemon = this.oponent.team[0];
+                this.challengerStatus();
+                this.oponentStatusToGym(this.treinador.level, this.treinador.level > gym.treinador.level);
+                this.inBattle = [this.challenger.pokemon];
+                this.battlePanel = true;
+            } catch (e) {
+                this.msg.add({severity: 'error', summary: 'Ops....', detail: 'Houve um erro ao carregar a batalha, verifique sua internet!'});
+                console.log(e);
+            }
+            this.blockService.unBlock();
+        }
     }
 
     async changePokemon(pokemon) {
@@ -117,20 +142,26 @@ export class BattleComponent {
             this.oponent.team = this.oponent.team.filter( p => p.hp > 0);
             if (this.oponent.team.length > 0) {
                 this.oponent.pokemon = this.oponent.team[0];
+                this.oponentStatusToGym(this.treinador.level, this.treinador.level > this.gym.treinador.level);
             } else {
+                if (this.gym) {
+                    this.msg.add({severity: 'success', summary: 'Winner', detail: 'Parabéns você venceu ' + this.gym.treinador.nick});
+                    this.treinador.setBadge(this.gym.badge);
+                }
+                this.gym = null;
                 this.battlePanel = false;
-                this.msg.add({severity: 'success', summary: 'Winner', detail: '+ ' + this.exp + ' exp'});
             }
         } else {
-            this.battlePanel = false;
             this.msg.add({severity: 'success', summary: 'Winner', detail: '+ ' + this.exp + ' exp'});
+            this.gym = null;
+            this.battlePanel = false;
         }
         this.blockService.unBlock();
     }
 
     challengerAttack(move) {
         let damage = (this.challenger.pokemon.attack * (move.power / 100));
-        damage = damage - (damage * (this.oponent.pokemon.defense / 1000));
+        damage = damage - (damage * (this.oponent.pokemon.defense / 300));
         damage = damage * this.battleService.elementalAdvantage(move, this.oponent.pokemon.pokemon.types);
         if ((this.oponent.pokemon.hp - Math.round(damage)) < 0) {
             this.oponent.pokemon.hp = 0;
@@ -155,7 +186,7 @@ export class BattleComponent {
 
         this.msg.add({severity: 'info', summary: this.oponent.pokemon.pokemon.name, detail: 'used ' + moveToAttack.name});
         let damage = (this.oponent.pokemon.attack * (moveToAttack.power / 100));
-        damage = damage - (damage * (this.challenger.pokemon.defense / 1000));
+        damage = damage - (damage * (this.challenger.pokemon.defense / 300));
         damage = damage * this.battleService.elementalAdvantage(moveToAttack, this.challenger.pokemon.pokemon.types);
         if ((this.challenger.pokemon.hp - Math.round(damage)) < 0) {
             this.challenger.pokemon.hp = 0;
@@ -182,6 +213,26 @@ export class BattleComponent {
         this.oponent.pokemon.speed = Math.round((Math.random() * ((20 + 2) - (20 - 2)) + (20 - 2)) * Math.pow(1.03, (level - 1)));
         this.oponent.pokemon.maxHp = this.oponent.pokemon.hp;
     }
+    oponentStatusToGym(level, changeLevel = false) {
+        if (changeLevel) {
+            const min = level - 2;
+            const max = level + 3;
+            level = Math.round(Math.random() * (max - min) + min);
+            // Math.random() * (max - min) + min;
+            this.oponent.pokemon.level = level;
+            this.oponent.pokemon.hp = Math.round((Math.random() * ((50 + 2) - (50 - 2)) + (50 - 2)) * Math.pow(1.03, (level - 1)));
+            this.oponent.pokemon.attack = Math.round((Math.random() * ((40 + 2) - (40 - 2)) + (40 - 2)) * Math.pow(1.03, (level - 1)));
+            this.oponent.pokemon.specialAttack = Math.round((Math.random() * ((40 + 2) - (40 - 2)) + (40 - 2)) * Math.pow(1.03, (level - 1)));
+            this.oponent.pokemon.defense = Math.round((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.03, (level - 1)));
+            this.oponent.pokemon.specialDefense = Math.round((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.03, (level - 1)));
+            this.oponent.pokemon.speed = Math.round((Math.random() * ((20 + 2) - (20 - 2)) + (20 - 2)) * Math.pow(1.03, (level - 1)));
+            this.oponent.pokemon.maxHp = this.oponent.pokemon.hp;
+        } else {
+            if (!this.oponent.pokemon.maxHp || this.oponent.pokemon.hp > this.oponent.pokemon.maxHp) {
+                this.oponent.pokemon.maxHp = this.oponent.pokemon.hp;
+            }
+        }
+    }
     heal(item) {
         if (!this.attacking) {
             this.attacking = true;
@@ -200,24 +251,28 @@ export class BattleComponent {
     }
 
     catchPokemon(item) {
-        if (!this.attacking) {
-            this.attacking = true;
-            this.treinador.useItem(item);
-            const hpChance = Math.round((100 - ((this.oponent.pokemon.hp / this.oponent.pokemon.maxHp) * 100)) / 4);
-            const levelChance = Math.round(((100 - this.oponent.pokemon.level) / 2) * item.item.effect);
-            const chance = hpChance + levelChance;
-            const random = Math.round(Math.random() * (100 - 1) + (1));
-            if (chance >= random) {
-                this.treinador.catched(this.oponent.pokemon);
-                this.battlePanel = false;
-            } else {
-                this.oponentAttack();
-                if (this.challenger.pokemon.hp <= 0) {
-                    this.challengerDead();
+        if (!this.gym) {
+            if (!this.attacking) {
+                this.attacking = true;
+                this.treinador.useItem(item);
+                const hpChance = Math.round(((100 - ((this.oponent.pokemon.hp / this.oponent.pokemon.maxHp) * 100)) / 4) * item.item.effect);
+                const levelChance = Math.round(((100 - this.oponent.pokemon.level) / 2));
+                const chance = hpChance + levelChance;
+                const random = Math.round(Math.random() * (100 - 1) + (1));
+                if (chance >= random) {
+                    this.treinador.catched(this.oponent.pokemon);
+                    this.battlePanel = false;
+                } else {
+                    this.oponentAttack();
+                    if (this.challenger.pokemon.hp <= 0) {
+                        this.challengerDead();
+                    }
                 }
+                this.itemsPanel = false;
+                setTimeout(() => this.attacking = false, 1000);
             }
-            this.itemsPanel = false;
-            setTimeout(() => this.attacking = false, 1000);
+        } else {
+            this.msg.add({severity: 'warn', summary: 'Ops...', detail: 'Você não pode capturar esse pokemon!'});
         }
     }
 

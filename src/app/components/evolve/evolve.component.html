@@ -16,3 +16,14 @@
         <button (click)="pokemonService.evolvePanel = false" pButton class="ui-button-warning ui-button-rounded" label="Ok"></button>
     </div>
 </p-dialog>
+<p-dialog [style]="{width: '80%'}" header="Parabéns, você ganhou um novo Pokemon!!" [closeIcon]="false" [(visible)]="pokemonService.giftPanel">
+    <div class="ui-g">
+        <div class="ui-g-12 center">
+            <p class="captalize">{{pokemonService.evolveSource?.name}}</p>
+            <img class="pokemon" src="/assets/pokemons/{{pokemonService.evolveSource?.num || '001'}}.png" />
+        </div>
+    </div>
+    <div class="center">
+        <button (click)="pokemonService.giftPanel = false" pButton class="ui-button-warning ui-button-rounded" label="Ok"></button>
+    </div>
+</p-dialog>

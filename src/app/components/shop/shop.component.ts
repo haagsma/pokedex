@@ -64,6 +64,7 @@ export class ShopComponent {
                     try {
                         item.treinador = {id: this.treinador.id};
                         item.amount = 1;
+                        item.id = null;
                         const newItem: any = await this.http.post('/treinador/useitem', item).toPromise();
                         this.treinador.items.push(newItem);
                         this.block.unBlock();

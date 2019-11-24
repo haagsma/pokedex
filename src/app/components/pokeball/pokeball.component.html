@@ -3,7 +3,10 @@
         <p-tabPanel header="Equipe">
             <div *ngIf="treinador.team.length > 0" class="ui-g">
                 <div *ngFor="let pokemon of treinador.team" class="ui-g-4 center">
-                    <a (click)="openDetail(pokemon)"><img class="pokemon-pokedex" src="/assets/pokemons/{{pokemon?.pokemon?.num}}.png" /></a>
+                    <a (click)="openDetail(pokemon)">
+                        <img *ngIf="pokemon?.pokemon?.num != '006'" class="pokemon-pokedex" src="/assets/pokemons/{{pokemon?.pokemon?.num}}.png" />
+                        <img *ngIf="pokemon?.pokemon?.num == '006'" class="pokemon-pokedex" src="/assets/pokemons/{{pokemon?.pokemon?.num}}.gif" />
+                    </a>
                     <p class="captalize">{{pokemon?.pokemon?.name}}</p>
                     <p>Level: {{pokemon?.level}}</p>
                     <p><small>Exp: {{level(pokemon)}}%</small></p>
@@ -14,7 +17,10 @@
         <p-tabPanel header="Pokecenter">
             <div *ngIf="treinador.pokemons.length > 0" class="ui-g rolar">
                 <div *ngFor="let pokemon of treinador.pokemons" class="ui-g-4 center">
-                    <a (click)="openDetail(pokemon)"><img class="pokemon-pokedex" src="/assets/pokemons/{{pokemon?.pokemon?.num}}.png" /></a>
+                    <a (click)="openDetail(pokemon)">
+                        <img *ngIf="pokemon?.pokemon?.num != '006'" class="pokemon-pokedex" src="/assets/pokemons/{{pokemon?.pokemon?.num}}.png" />
+                        <img *ngIf="pokemon?.pokemon?.num == '006'" class="pokemon-pokedex" src="/assets/pokemons/{{pokemon?.pokemon?.num}}.gif" />
+                    </a>
                     <p class="captalize">{{pokemon?.pokemon?.name}}</p>
                     <p>Level: {{pokemon?.level}}</p>
                     <p><small>Exp: {{level(pokemon)}}%</small></p>
@@ -32,7 +38,8 @@
         <div class="ui-g center">
             <div class="ui-g-5">
                 <p class="uppercase bold">{{pokemonDetail?.pokemon?.name}}</p>
-                <img src="/assets/pokemons/{{pokemonDetail?.pokemon?.num}}.png" />
+                <img *ngIf="pokemonDetail?.pokemon?.num != '006'" src="/assets/pokemons/{{pokemonDetail?.pokemon?.num}}.png" />
+                <img *ngIf="pokemonDetail?.pokemon?.num == '006'" src="/assets/pokemons/{{pokemonDetail?.pokemon?.num}}.gif" />
             </div>
             <div class="ui-g-7">
                 <p class="bold">Level: {{pokemonDetail?.level}}</p>

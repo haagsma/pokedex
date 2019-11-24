@@ -2,6 +2,8 @@ import {Injectable} from "@angular/core";
 import {HttpService} from './httpService';
 import {TreinadorService} from './treinadorService';
 import {ChangePowerComponent} from '../components/change-power/change-power.component';
+import {MessageService} from 'primeng/api';
+import {BlockService} from './blockService';
 
 
 @Injectable()
@@ -15,7 +17,9 @@ export class PokemonService {
     evolveTarget: any;
     evolvePanel: any;
 
-    constructor(private http: HttpService, private treinadorService: TreinadorService) {}
+    giftPanel: any;
+
+    constructor(private http: HttpService, private treinadorService: TreinadorService, private msg: MessageService, private block: BlockService) {}
 
     async receiveExp(pokemons, level) {
         const totalExp = Math.round(this.baseReceiveExp * Math.pow(1.05, level));
@@ -92,7 +96,7 @@ export class PokemonService {
                     checkAttack.shift();
                 }
                 if (checkAttack.length > 0) {
-                    await checkAttack.forEach((attack) => this.toChangePower.push({pokemon: {...pokemon}, move: attack.move}));
+                    await checkAttack.forEach((attack) => this.toChangePower.push({pokemon, move: attack.move}));
                     this.changePowerPanel.open();
                 }
             }
@@ -120,6 +124,32 @@ export class PokemonService {
         this.evolveSource = source;
         this.evolveTarget = target;
         this.evolvePanel = true;
+    }
+
+    async giftPokemon() {
+        this.block.activeBlock();
+        if (this.treinadorService.getBadges().length >= 8) {
+            try {
+                const pokemonSorted: any = await this.http.get('/pokemon/gift').toPromise();
+                this.evolveSource = pokemonSorted.pokemon;
+                pokemonSorted.attack = 180;
+                pokemonSorted.specialAttack = 180;
+                pokemonSorted.defense = 167;
+                pokemonSorted.specialDefense = 167;
+                pokemonSorted.speed = 93;
+                pokemonSorted.hp = 224;
+                pokemonSorted.maxHp = 224;
+                await this.treinadorService.catched(pokemonSorted);
+                this.treinadorService.cleanBadges();
+                this.giftPanel = true;
+            } catch (e) {
+                this.msg.add({severity: 'error', summary: 'Failed', detail: 'Falha ao salvar o pokemon, verifique sua internet'});
+                console.log(e);
+            }
+        } else {
+            this.msg.add({severity: 'warn', summary: 'Opss', detail: 'Você deve completar todos os ginásios para pegar esse presente!'});
+        }
+        this.block.unBlock();
     }
 
 }

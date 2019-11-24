@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
   @ViewChild(ShopComponent , null) shop: ShopComponent;
   @ViewChild(ChangePowerComponent , null) powerPanel: ChangePowerComponent;
 
-  constructor(private router: Router, public mapaService: MapaService, private http: HttpService, private pokemon: PokemonService) {}
+  constructor(private router: Router, public mapaService: MapaService, private http: HttpService, public pokemon: PokemonService) {}
 
   ngOnInit() {
    this.mapaService.showMap(this.battle);

@@ -33,7 +33,8 @@ export class MapaService {
             this.currentPosition = await this.geolocation.getCurrentPosition(this.geolocationOptions);
 
             const mapOptions = {
-                zoom: 16,
+                zoom: 8,
+                minZoom: 7,
                 center: {lat: this.currentPosition.coords.latitude, lng: this.currentPosition.coords.longitude},
                 // zoomControl: false,
                 // scaleControl: false,
@@ -69,6 +70,7 @@ export class MapaService {
             };
             this.trainer = new google.maps.Marker({id: 1, position: {lat: (this.currentPosition.coords.latitude), lng: this.currentPosition.coords.longitude}, map: this.map, icon: icon});
             this.getPokemonsToMap();
+            this.getGymToMap();
         } catch (e) {
             this.showMap(battle);
         }
@@ -120,9 +122,38 @@ export class MapaService {
             }
         })(marker, i));
     }
+
+    getGymToMap() {
+        this.http.get('/gym').subscribe((res: any) => {
+            for (const i in res) {
+                this.generateGymInMap(res[i]);
+            }
+        }, (e) => {
+           console.log(e);
+           setTimeout(() => this.getGymToMap(), 3000);
+        });
+    }
+    generateGymInMap(gym) {
+        const icon = {
+            url: '/assets/gyms/' + gym.nemotecnico + '-gym.png', // url
+            scaledSize: new google.maps.Size(80, 80), // scaled size
+        };
+        const marker = new google.maps.Marker({id: 1, position: {lat: gym.lat, lng: gym.lng}, map: this.map, icon: icon});
+        marker.set('gym', gym);
+        let i;
+        google.maps.event.addListener(marker, 'click', ( (marker, i = 1) => {
+            return () => {
+                this.battle.startBattleGym(marker.get('gym'));
+                // console.log(marker.get('pokemon'));
+            };
+        })(marker, i));
+    }
+
     getRandomNearLocal() {
-        const lat = Math.random() * ((this.currentPosition.coords.latitude + 0.02) - (this.currentPosition.coords.latitude - 0.02)) + (this.currentPosition.coords.latitude - 0.02);
-        const lng = Math.random() * ((this.currentPosition.coords.longitude + 0.02) - (this.currentPosition.coords.longitude - 0.02)) + (this.currentPosition.coords.longitude - 0.02);
+        const lat = Math.random() * ((-14.019848 + 10) - (-14.019848 - 10)) + (-14.019848 - 10);
+        const lng = Math.random() * ((-50.153169 + 10) - (-50.153169 - 10)) + (-50.153169 - 10);
+        // const lat = Math.random() * ((this.currentPosition.coords.latitude + 0.02) - (this.currentPosition.coords.latitude - 0.02)) + (this.currentPosition.coords.latitude - 0.02);
+        // const lng = Math.random() * ((this.currentPosition.coords.longitude + 0.02) - (this.currentPosition.coords.longitude - 0.02)) + (this.currentPosition.coords.longitude - 0.02);
         return {lat, lng};
     }
     async goCenter() {

@@ -31,4 +31,12 @@
             <p class="bold">$ {{treinador.amount}}</p>
         </div>
     </div>
+    <div class="center">
+        <p class="bold">Insígnias</p>
+    </div>
+    <div *ngIf="treinador.getBadges().length > 0" class="ui-g center">
+        <div class="ui-g-3 center" *ngFor="let badge of treinador.getBadges()">
+            <img class="badge" src="/assets/gyms/{{badge}}-badge.png">
+        </div>
+    </div>
 </p-overlayPanel>

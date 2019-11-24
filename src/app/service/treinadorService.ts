@@ -64,14 +64,13 @@ export class TreinadorService {
             team = false;
         }
         try {
-            const res: any = await this.http.post('/treinador/catched', pokemon).toPromise();
-            pokemon = res;
+            pokemon = await this.http.post('/treinador/catched', pokemon).toPromise();
             if (team) {
                 this.team.push(pokemon);
             } else {
                 this.pokemons.push(pokemon);
             }
-            this.msg.add({severity: 'success', summary: 'Catched', detail: pokemon.pokemon.name + ' catched!'});
+            this.msg.add({severity: 'success', summary: 'Catched', detail: pokemon.pokemon.name + ' capiturado!'});
         } catch (e) {
             this.msg.add({severity: 'warning', summary: 'Missed', detail: pokemon.pokemon.name + ' missed!'});
         }
@@ -107,6 +106,38 @@ export class TreinadorService {
         pokemons.push(...this.pokemons);
         pokemons.push(...this.team);
         return pokemons;
+    }
+
+    getBadges() {
+        const badges = localStorage.getItem('badges') || JSON.stringify([]);
+        return JSON.parse(badges);
+    }
+
+    cleanBadges() {
+        // const badges = this.getBadges();
+        // for (const i in badges) {
+        //     localStorage.removeItem(badges[i]);
+        // }
+        localStorage.removeItem('badges');
+    }
+
+    setBadges(badges) {
+        localStorage.setItem('badges', JSON.stringify(badges));
+    }
+
+    getBadge(badge) {
+        return Number(localStorage.getItem(badge));
+    }
+
+    setBadge(badge) {
+        const badges = this.getBadges();
+        if (badges.includes(badge)) {
+            localStorage.setItem(badge, new Date().getTime().toString());
+        } else {
+            badges.push(badge);
+            this.setBadges(badges);
+            localStorage.setItem(badge, new Date().getTime().toString());
+        }
     }
 
 }
