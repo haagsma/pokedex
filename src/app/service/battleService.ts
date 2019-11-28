@@ -56,784 +56,1059 @@ export class BattleService {
         const array = types.filter(t => t.type.name === name);
         return array.length > 0;
     }
+
+    // null 1
+    // 2 1
+    // 1 2
+    calcAdvantage(control, advantage) {
+        control *= advantage;
+    }
+
     fairy() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 0.5;
-        } else if (this.contain('water', this.types)) {
-            return 1;
-        } else if (this.contain('grass', this.types)) {
-            return 1;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 2;
-        } else if (this.contain('poison', this.types)) {
-            return 0.5;
-        } else if (this.contain('ground', this.types)) {
-            return 1;
-        } else if (this.contain('flying', this.types)) {
-            return 1;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 1;
-        } else if (this.contain('rock', this.types)) {
-            return 1;
-        } else if (this.contain('ghost', this.types)) {
-            return 1;
-        } else if (this.contain('dragon', this.types)) {
-            return 2;
-        } else if (this.contain('dark', this.types)) {
-            return 2;
-        } else if (this.contain('steel', this.types)) {
-            return 0.5;
-        } else if (this.contain('fairy', this.types)) {
-            return 1;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
         }
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        }
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 2);
+        }
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        }
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 2);
+        }
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 2);
+        }
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        }
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+
+        return control;
     }
     steel() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 0.5;
-        } else if (this.contain('water', this.types)) {
-            return 0.5;
-        } else if (this.contain('grass', this.types)) {
-            return 1;
-        } else if (this.contain('eletric', this.types)) {
-            return 0.5;
-        } else if (this.contain('ice', this.types)) {
-            return 2;
-        } else if (this.contain('fighting', this.types)) {
-            return 1;
-        } else if (this.contain('poison', this.types)) {
-            return 1;
-        } else if (this.contain('ground', this.types)) {
-            return 1;
-        } else if (this.contain('flying', this.types)) {
-            return 1;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 1;
-        } else if (this.contain('rock', this.types)) {
-            return 2;
-        } else if (this.contain('ghost', this.types)) {
-            return 1;
-        } else if (this.contain('dragon', this.types)) {
-            return 1;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 0.5;
-        } else if (this.contain('fairy', this.types)) {
-            return 2;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
         }
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        }
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        }
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        }
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 2);
+        }
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 2);
+        }
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        }
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        }
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 2);
+        }
+        return control;
     }
     dark() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 1;
-        } else if (this.contain('water', this.types)) {
-            return 1;
-        } else if (this.contain('grass', this.types)) {
-            return 1;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 0.5;
-        } else if (this.contain('poison', this.types)) {
-            return 1;
-        } else if (this.contain('ground', this.types)) {
-            return 1;
-        } else if (this.contain('flying', this.types)) {
-            return 1;
-        } else if (this.contain('psychic', this.types)) {
-            return 2;
-        } else if (this.contain('bug', this.types)) {
-            return 1;
-        } else if (this.contain('rock', this.types)) {
-            return 1;
-        } else if (this.contain('ghost', this.types)) {
-            return 2;
-        } else if (this.contain('dragon', this.types)) {
-            return 1;
-        } else if (this.contain('dark', this.types)) {
-            return 0.5;
-        } else if (this.contain('steel', this.types)) {
-            return 1;
-        } else if (this.contain('fairy', this.types)) {
-            return 0.5;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 0.5);
         }
+        return control;
     }
     dragon() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 1;
-        } else if (this.contain('water', this.types)) {
-            return 1;
-        } else if (this.contain('grass', this.types)) {
-            return 1;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 1;
-        } else if (this.contain('poison', this.types)) {
-            return 1;
-        } else if (this.contain('ground', this.types)) {
-            return 1;
-        } else if (this.contain('flying', this.types)) {
-            return 1;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 1;
-        } else if (this.contain('rock', this.types)) {
-            return 1;
-        } else if (this.contain('ghost', this.types)) {
-            return 1;
-        } else if (this.contain('dragon', this.types)) {
-            return 2;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 0.5;
-        } else if (this.contain('fairy', this.types)) {
-            return 0;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 0);
         }
+
+        return control;
     }
     ghost() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 0;
-        } else if (this.contain('fire', this.types)) {
-            return 1;
-        } else if (this.contain('water', this.types)) {
-            return 1;
-        } else if (this.contain('grass', this.types)) {
-            return 1;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 1;
-        } else if (this.contain('poison', this.types)) {
-            return 1;
-        } else if (this.contain('ground', this.types)) {
-            return 1;
-        } else if (this.contain('flying', this.types)) {
-            return 1;
-        } else if (this.contain('psychic', this.types)) {
-            return 2;
-        } else if (this.contain('bug', this.types)) {
-            return 1;
-        } else if (this.contain('rock', this.types)) {
-            return 1;
-        } else if (this.contain('ghost', this.types)) {
-            return 2;
-        } else if (this.contain('dragon', this.types)) {
-            return 1;
-        } else if (this.contain('dark', this.types)) {
-            return 0.5;
-        } else if (this.contain('steel', this.types)) {
-            return 1;
-        } else if (this.contain('fairy', this.types)) {
-            return 1;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 0);
+        } 
+         if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+         if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+         if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+         if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+         if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 1);
         }
+        return control;
     }
     rock() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 2;
-        } else if (this.contain('water', this.types)) {
-            return 1;
-        } else if (this.contain('grass', this.types)) {
-            return 1;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 2;
-        } else if (this.contain('fighting', this.types)) {
-            return 0.5;
-        } else if (this.contain('poison', this.types)) {
-            return 1;
-        } else if (this.contain('ground', this.types)) {
-            return 0.5;
-        } else if (this.contain('flying', this.types)) {
-            return 2;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 2;
-        } else if (this.contain('rock', this.types)) {
-            return 1;
-        } else if (this.contain('ghost', this.types)) {
-            return 1;
-        } else if (this.contain('dragon', this.types)) {
-            return 1;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 0.5;
-        } else if (this.contain('fairy', this.types)) {
-            return 1;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 1);
         }
+        return control;
     }
     bug() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 0.5;
-        } else if (this.contain('water', this.types)) {
-            return 1;
-        } else if (this.contain('grass', this.types)) {
-            return 2;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 0.5;
-        } else if (this.contain('poison', this.types)) {
-            return 0.5;
-        } else if (this.contain('ground', this.types)) {
-            return 1;
-        } else if (this.contain('flying', this.types)) {
-            return 0.5;
-        } else if (this.contain('psychic', this.types)) {
-            return 2;
-        } else if (this.contain('bug', this.types)) {
-            return 1;
-        } else if (this.contain('rock', this.types)) {
-            return 1;
-        } else if (this.contain('ghost', this.types)) {
-            return 0.5;
-        } else if (this.contain('dragon', this.types)) {
-            return 1;
-        } else if (this.contain('dark', this.types)) {
-            return 2;
-        } else if (this.contain('steel', this.types)) {
-            return 0.5;
-        } else if (this.contain('fairy', this.types)) {
-            return 0.5;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 0.5);
         }
+        return control;
     }
     psychic() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 1;
-        } else if (this.contain('water', this.types)) {
-            return 1;
-        } else if (this.contain('grass', this.types)) {
-            return 1;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 2;
-        } else if (this.contain('poison', this.types)) {
-            return 2;
-        } else if (this.contain('ground', this.types)) {
-            return 1;
-        } else if (this.contain('flying', this.types)) {
-            return 1;
-        } else if (this.contain('psychic', this.types)) {
-            return 0.5;
-        } else if (this.contain('bug', this.types)) {
-            return 1;
-        } else if (this.contain('rock', this.types)) {
-            return 1;
-        } else if (this.contain('ghost', this.types)) {
-            return 1;
-        } else if (this.contain('dragon', this.types)) {
-            return 1;
-        } else if (this.contain('dark', this.types)) {
-            return 0;
-        } else if (this.contain('steel', this.types)) {
-            return 0.5;
-        } else if (this.contain('fairy', this.types)) {
-            return 1;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 0);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 1);
         }
+        return control;
     }
     flying() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 1;
-        } else if (this.contain('water', this.types)) {
-            return 1;
-        } else if (this.contain('grass', this.types)) {
-            return 2;
-        } else if (this.contain('eletric', this.types)) {
-            return 0.5;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 2;
-        } else if (this.contain('poison', this.types)) {
-            return 1;
-        } else if (this.contain('ground', this.types)) {
-            return 1;
-        } else if (this.contain('flying', this.types)) {
-            return 1;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 2;
-        } else if (this.contain('rock', this.types)) {
-            return 0.5;
-        } else if (this.contain('ghost', this.types)) {
-            return 1;
-        } else if (this.contain('dragon', this.types)) {
-            return 1;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 0.5;
-        } else if (this.contain('fairy', this.types)) {
-            return 1;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 1);
         }
+        return control;
     }
-    // ground() {
-    //     if (this.contain('normal', this.types)) {
-    //         return 1;
-    //     } else if (this.contain('fire', this.types)) {
-    //         return 2;
-    //     } else if (this.contain('water', this.types)) {
-    //         return 1;
-    //     } else if (this.contain('grass', this.types)) {
-    //         return 0.5;
-    //     } else if (this.contain('eletric', this.types)) {
-    //         return 2;
-    //     } else if (this.contain('ice', this.types)) {
-    //         return 1;
-    //     } else if (this.contain('fighting', this.types)) {
-    //         return 1;
-    //     } else if (this.contain('poison', this.types)) {
-    //         return 2;
-    //     } else if (this.contain('ground', this.types)) {
-    //         return 1;
-    //     } else if (this.contain('flying', this.types)) {
-    //         return 0;
-    //     } else if (this.contain('psychic', this.types)) {
-    //         return 1;
-    //     } else if (this.contain('bug', this.types)) {
-    //         return 0.5;
-    //     } else if (this.contain('rock', this.types)) {
-    //         return 2;
-    //     } else if (this.contain('ghost', this.types)) {
-    //         return 1;
-    //     } else if (this.contain('dragon', this.types)) {
-    //         return 1;
-    //     } else if (this.contain('dark', this.types)) {
-    //         return 1;
-    //     } else if (this.contain('steel', this.types)) {
-    //         return 2;
-    //     } else if (this.contain('fairy', this.types)) {
-    //         return 1;
-    //     } else {
-    //         return 1;
-    //     }
-    // }
     ground() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 2;
-        } else if (this.contain('water', this.types)) {
-            return 1;
-        } else if (this.contain('grass', this.types)) {
-            return 0.5;
-        } else if (this.contain('eletric', this.types)) {
-            return 2;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 1;
-        } else if (this.contain('poison', this.types)) {
-            return 2;
-        } else if (this.contain('ground', this.types)) {
-            return 1;
-        } else if (this.contain('flying', this.types)) {
-            return 0;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 0.5;
-        } else if (this.contain('rock', this.types)) {
-            return 2;
-        } else if (this.contain('ghost', this.types)) {
-            return 1;
-        } else if (this.contain('dragon', this.types)) {
-            return 1;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 2;
-        } else if (this.contain('fairy', this.types)) {
-            return 1;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 0);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 1);
         }
+        return control;
     }
     poison() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 1;
-        } else if (this.contain('water', this.types)) {
-            return 1;
-        } else if (this.contain('grass', this.types)) {
-            return 2;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 1;
-        } else if (this.contain('poison', this.types)) {
-            return 0.5;
-        } else if (this.contain('ground', this.types)) {
-            return 0.5;
-        } else if (this.contain('flying', this.types)) {
-            return 1;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 1;
-        } else if (this.contain('rock', this.types)) {
-            return 0.5;
-        } else if (this.contain('ghost', this.types)) {
-            return 0.5;
-        } else if (this.contain('dragon', this.types)) {
-            return 1;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 0;
-        } else if (this.contain('fairy', this.types)) {
-            return 2;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 0);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 2);
         }
+        return control;
     }
     fighting() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 2;
-        } else if (this.contain('fire', this.types)) {
-            return 1;
-        } else if (this.contain('water', this.types)) {
-            return 1;
-        } else if (this.contain('grass', this.types)) {
-            return 1;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 2;
-        } else if (this.contain('fighting', this.types)) {
-            return 1;
-        } else if (this.contain('poison', this.types)) {
-            return 0.5;
-        } else if (this.contain('ground', this.types)) {
-            return 1;
-        } else if (this.contain('flying', this.types)) {
-            return 0.5;
-        } else if (this.contain('psychic', this.types)) {
-            return 0.5;
-        } else if (this.contain('bug', this.types)) {
-            return 0.5;
-        } else if (this.contain('rock', this.types)) {
-            return 2;
-        } else if (this.contain('ghost', this.types)) {
-            return 0;
-        } else if (this.contain('dragon', this.types)) {
-            return 1;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 2;
-        } else if (this.contain('fairy', this.types)) {
-            return 0.5;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 0);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 0.5);
         }
+        return control;
     }
     ice() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 0.5;
-        } else if (this.contain('water', this.types)) {
-            return 0.5;
-        } else if (this.contain('grass', this.types)) {
-            return 2;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 0.5;
-        } else if (this.contain('fighting', this.types)) {
-            return 1;
-        } else if (this.contain('poison', this.types)) {
-            return 1;
-        } else if (this.contain('ground', this.types)) {
-            return 2;
-        } else if (this.contain('flying', this.types)) {
-            return 2;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 1;
-        } else if (this.contain('rock', this.types)) {
-            return 1;
-        } else if (this.contain('ghost', this.types)) {
-            return 1;
-        } else if (this.contain('dragon', this.types)) {
-            return 2;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 0.5;
-        } else if (this.contain('fairy', this.types)) {
-            return 1;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 1);
         }
+        return control;
     }
     eletric() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 1;
-        } else if (this.contain('water', this.types)) {
-            return 2;
-        } else if (this.contain('grass', this.types)) {
-            return 0.5;
-        } else if (this.contain('eletric', this.types)) {
-            return 0.5;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 1;
-        } else if (this.contain('poison', this.types)) {
-            return 1;
-        } else if (this.contain('ground', this.types)) {
-            return 0;
-        } else if (this.contain('flying', this.types)) {
-            return 2;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 1;
-        } else if (this.contain('rock', this.types)) {
-            return 1;
-        } else if (this.contain('ghost', this.types)) {
-            return 1;
-        } else if (this.contain('dragon', this.types)) {
-            return 0.5;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 1;
-        } else if (this.contain('fairy', this.types)) {
-            return 1;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 0);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 1);
         }
+        return control;
     }
     grass() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 0.5;
-        } else if (this.contain('water', this.types)) {
-            return 2;
-        } else if (this.contain('grass', this.types)) {
-            return 0.5;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 1;
-        } else if (this.contain('poison', this.types)) {
-            return 0.5;
-        } else if (this.contain('ground', this.types)) {
-            return 2;
-        } else if (this.contain('flying', this.types)) {
-            return 0.5;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 0.5;
-        } else if (this.contain('rock', this.types)) {
-            return 2;
-        } else if (this.contain('ghost', this.types)) {
-            return 1;
-        } else if (this.contain('dragon', this.types)) {
-            return 0.5;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 0.5;
-        } else if (this.contain('fairy', this.types)) {
-            return 1;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 1);
         }
+        return control;
     }
     water() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 2;
-        } else if (this.contain('water', this.types)) {
-            return 0.5;
-        } else if (this.contain('grass', this.types)) {
-            return 0.5;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 1;
-        } else if (this.contain('poison', this.types)) {
-            return 1;
-        } else if (this.contain('ground', this.types)) {
-            return 2;
-        } else if (this.contain('flying', this.types)) {
-            return 1;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 1;
-        } else if (this.contain('rock', this.types)) {
-            return 2;
-        } else if (this.contain('ghost', this.types)) {
-            return 1;
-        } else if (this.contain('dragon', this.types)) {
-            return 0.5;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 1;
-        } else if (this.contain('fairy', this.types)) {
-            return 1;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 1);
         }
+        return control;
     }
     fire() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 0.5;
-        } else if (this.contain('water', this.types)) {
-            return 0.5;
-        } else if (this.contain('grass', this.types)) {
-            return 2;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 2;
-        } else if (this.contain('fighting', this.types)) {
-            return 1;
-        } else if (this.contain('poison', this.types)) {
-            return 1;
-        } else if (this.contain('ground', this.types)) {
-            return 1;
-        } else if (this.contain('flying', this.types)) {
-            return 1;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 2;
-        } else if (this.contain('rock', this.types)) {
-            return 0.5;
-        } else if (this.contain('ghost', this.types)) {
-            return 1;
-        } else if (this.contain('dragon', this.types)) {
-            return 0.5;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 2;
-        } else if (this.contain('fairy', this.types)) {
-            return 1;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 2);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 1);
         }
+        return control;
     }
     normal() {
+        let control = 1;
         if (this.contain('normal', this.types)) {
-            return 1;
-        } else if (this.contain('fire', this.types)) {
-            return 1;
-        } else if (this.contain('water', this.types)) {
-            return 1;
-        } else if (this.contain('grass', this.types)) {
-            return 1;
-        } else if (this.contain('eletric', this.types)) {
-            return 1;
-        } else if (this.contain('ice', this.types)) {
-            return 1;
-        } else if (this.contain('fighting', this.types)) {
-            return 1;
-        } else if (this.contain('poison', this.types)) {
-            return 1;
-        } else if (this.contain('ground', this.types)) {
-            return 1;
-        } else if (this.contain('flying', this.types)) {
-            return 1;
-        } else if (this.contain('psychic', this.types)) {
-            return 1;
-        } else if (this.contain('bug', this.types)) {
-            return 1;
-        } else if (this.contain('rock', this.types)) {
-            return 0.5;
-        } else if (this.contain('ghost', this.types)) {
-            return 0;
-        } else if (this.contain('dragon', this.types)) {
-            return 1;
-        } else if (this.contain('dark', this.types)) {
-            return 1;
-        } else if (this.contain('steel', this.types)) {
-            return 0.5;
-        } else if (this.contain('fairy', this.types)) {
-            return 1;
-        } else {
-            return 1;
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fire', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('water', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('grass', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('eletric', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ice', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('fighting', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('poison', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('ground', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('flying', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('psychic', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('bug', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('rock', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('ghost', this.types)) {
+            this.calcAdvantage(control, 0);
+        } 
+        if (this.contain('dragon', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('dark', this.types)) {
+            this.calcAdvantage(control, 1);
+        } 
+        if (this.contain('steel', this.types)) {
+            this.calcAdvantage(control, 0.5);
+        } 
+        if (this.contain('fairy', this.types)) {
+            this.calcAdvantage(control, 1);
         }
+        return control;
     }
 
 }
