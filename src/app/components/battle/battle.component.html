@@ -38,7 +38,7 @@
                 <button (click)="itemsPanel = true" pButton class="ui-button-success ui-button-rounded" label="Items"></button>
             </div>
             <div class="ui-g-6 center">
-                <button pButton (click)="battlePanel = false" class="ui-button-gray ui-button-rounded" label="Fugir"></button>
+                <button [disabled]="gym" pButton (click)="battlePanel = false" class="ui-button-gray ui-button-rounded" label="Fugir"></button>
             </div>
         </div>
     </div>

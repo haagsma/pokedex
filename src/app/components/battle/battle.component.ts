@@ -128,7 +128,7 @@ export class BattleComponent {
         if (vivos.length > 0) {
             this.pokemonPanel = true;
         } else {
-            this.battlePanel = false;
+            this.leave();
             this.msg.add({severity: 'error', summary: 'Failed', detail: 'Seus Pokemons morreram'});
         }
     }
@@ -148,13 +148,11 @@ export class BattleComponent {
                     this.msg.add({severity: 'success', summary: 'Winner', detail: 'Parabéns você venceu ' + this.gym.treinador.nick});
                     this.treinador.setBadge(this.gym.badge);
                 }
-                this.gym = null;
-                this.battlePanel = false;
+                this.leave();
             }
         } else {
             this.msg.add({severity: 'success', summary: 'Winner', detail: '+ ' + this.exp + ' exp'});
-            this.gym = null;
-            this.battlePanel = false;
+            this.leave();
         }
         this.blockService.unBlock();
     }
@@ -261,12 +259,14 @@ export class BattleComponent {
                 const random = Math.round(Math.random() * (100 - 1) + (1));
                 if (chance >= random) {
                     this.treinador.catched(this.oponent.pokemon);
-                    this.battlePanel = false;
+                    this.leave();
                 } else {
-                    this.oponentAttack();
-                    if (this.challenger.pokemon.hp <= 0) {
-                        this.challengerDead();
-                    }
+                    setTimeout(() => {
+                        this.oponentAttack();
+                        if (this.challenger.pokemon.hp <= 0) {
+                            this.challengerDead();
+                        }
+                    }, 1000);
                 }
                 this.itemsPanel = false;
                 setTimeout(() => this.attacking = false, 1000);
@@ -275,7 +275,11 @@ export class BattleComponent {
             this.msg.add({severity: 'warn', summary: 'Ops...', detail: 'Você não pode capturar esse pokemon!'});
         }
     }
-
+    leave() {
+        this.gym = null;
+        this.oponent = null;
+        this.battlePanel = false;
+    }
     getPokeballs() {
         return this.treinador.items.filter((i) => i.amount > 0 && i.item.category.name === 'standard-balls');
     }
