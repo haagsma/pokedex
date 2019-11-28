@@ -166,6 +166,10 @@ export class BattleComponent {
         } else {
             this.oponent.pokemon.hp -= Math.round(damage);
         }
+        if (move.heal > 0) {
+            this.challenger.pokemon.hp += move.heal;
+            if (this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) this.challenger.pokemon.hp = this.challenger.pokemon.maxHp;
+        }
 
     }
     oponentAttack() {
@@ -190,6 +194,10 @@ export class BattleComponent {
             this.challenger.pokemon.hp = 0;
         } else {
             this.challenger.pokemon.hp -= Math.round(damage);
+        }
+        if (moveToAttack.heal > 0) {
+            this.oponent.pokemon.hp += moveToAttack.heal;
+            if (this.oponent.pokemon.hp > this.oponent.pokemon.maxHp) this.oponent.pokemon.hp = this.oponent.pokemon.maxHp;
         }
     }
 
