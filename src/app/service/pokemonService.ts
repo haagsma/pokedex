@@ -32,12 +32,7 @@ export class PokemonService {
             while (pokemons[i].exp > Math.round(100 * Math.pow(1.1, pokemons[i].level))) {
                 pokemons[i].exp -= Math.round(100 * Math.pow(1.1, pokemons[i].level));
                 pokemons[i].level++;
-                pokemons[i].attack = Math.round(pokemons[i].attack * 1.03);
-                pokemons[i].specialAttack = Math.round(pokemons[i].specialAttack * 1.03);
-                pokemons[i].defense = Math.round(pokemons[i].defense * 1.03);
-                pokemons[i].specialDefense = Math.round(pokemons[i].specialDefense * 1.03);
-                pokemons[i].hp = Math.round(pokemons[i].hp * 1.03);
-                pokemons[i].speed = Math.round(pokemons[i].speed * 1.03);
+                pokemons[i] = this.upStatus(pokemons[i]);
                 await this.checkEvolution(pokemons[i]);
                 await this.checkAttack(pokemons[i]);
             }
@@ -64,12 +59,7 @@ export class PokemonService {
             if (checkEvolution && pokemon.level >= checkEvolution.minLevel) {
                 const source = pokemon.pokemon;
                 pokemon.pokemon = checkEvolution.target;
-                pokemon.attack = Math.round(pokemon.attack * 1.03);
-                pokemon.specialAttack = Math.round(pokemon.specialAttack * 1.03);
-                pokemon.defense = Math.round(pokemon.defense * 1.03);
-                pokemon.specialDefense = Math.round(pokemon.specialDefense * 1.03);
-                pokemon.hp = Math.round(pokemon.hp * 1.03);
-                pokemon.speed = Math.round(pokemon.speed * 1.03);
+                pokemon = this.upStatus(pokemon);
                 await this.http.post('/pokemon/update', pokemon).toPromise();
                 this.openPanelEvolve(source, pokemon.pokemon);
             }
@@ -108,12 +98,7 @@ export class PokemonService {
 
     async evolutionStone(pokemon) {
         try {
-            pokemon.attack = Math.round(pokemon.attack * 1.03);
-            pokemon.specialAttack = Math.round(pokemon.specialAttack * 1.03);
-            pokemon.defense = Math.round(pokemon.defense * 1.03);
-            pokemon.specialDefense = Math.round(pokemon.specialDefense * 1.03);
-            pokemon.hp = Math.round(pokemon.hp * 1.03);
-            pokemon.speed = Math.round(pokemon.speed * 1.03);
+            pokemon = this.upStatus(pokemon);
             await this.http.post('/pokemon/update', pokemon).toPromise();
         } catch (e) {
             console.log(e);
@@ -135,10 +120,10 @@ export class PokemonService {
                 pokemonSorted.attack = 180;
                 pokemonSorted.specialAttack = 180;
                 pokemonSorted.defense = 167;
-                pokemonSorted.specialDefense = 167;
+                pokemonSorted.specialDefense = 87;
                 pokemonSorted.speed = 93;
-                pokemonSorted.hp = 224;
-                pokemonSorted.maxHp = 224;
+                pokemonSorted.hp = 369;
+                pokemonSorted.maxHp = 369;
                 await this.treinadorService.catched(pokemonSorted);
                 this.treinadorService.cleanBadges();
                 this.giftPanel = true;
@@ -150,6 +135,26 @@ export class PokemonService {
             this.msg.add({severity: 'warn', summary: 'Opss', detail: 'Você deve completar todos os ginásios para pegar esse presente!'});
         }
         this.block.unBlock();
+    }
+
+    upStatus(pokemon) {
+        pokemon.attack = Math.round(pokemon.attack * 1.03);
+        pokemon.specialAttack = Math.round(pokemon.specialAttack * 1.03);
+        pokemon.defense = Math.ceil(pokemon.defense * 1.01);
+        pokemon.specialDefense = Math.round(pokemon.specialDefense * 1.03);
+        pokemon.hp = Math.round(pokemon.hp * 1.04);
+        pokemon.speed = Math.round(pokemon.speed * 1.03);
+        return pokemon;
+    }
+
+    calcStatus(level, pokemon) {
+        pokemon.hp = Math.round((Math.random() * ((50 + 2) - (50 - 2)) + (50 - 2)) * Math.pow(1.04, (level - 1)));
+        pokemon.attack = Math.round((Math.random() * ((40 + 2) - (40 - 2)) + (40 - 2)) * Math.pow(1.03, (level - 1)));
+        pokemon.specialAttack = Math.round((Math.random() * ((40 + 2) - (40 - 2)) + (40 - 2)) * Math.pow(1.03, (level - 1)));
+        pokemon.defense = Math.ceil((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.01, (level - 1))) + 35;
+        pokemon.specialDefense = Math.round((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.03, (level - 1)));
+        pokemon.speed = Math.round((Math.random() * ((20 + 2) - (20 - 2)) + (20 - 2)) * Math.pow(1.03, (level - 1)));
+        return pokemon;
     }
 
 }

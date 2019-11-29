@@ -160,14 +160,17 @@ export class BattleComponent {
     challengerAttack(move) {
         let damage = (this.challenger.pokemon.attack * (move.power / 100));
         damage = damage - (damage * (this.oponent.pokemon.defense / 300));
+        console.log('elementFactor: ', this.battleService.elementalAdvantage(move, this.oponent.pokemon.pokemon.types));
+        console.log('damageb4: ', damage);
         damage = damage * this.battleService.elementalAdvantage(move, this.oponent.pokemon.pokemon.types);
+        console.log('damageafter: ', damage);
         if ((this.oponent.pokemon.hp - Math.round(damage)) < 0) {
             this.oponent.pokemon.hp = 0;
         } else {
             this.oponent.pokemon.hp -= Math.round(damage);
         }
         if (move.heal > 0) {
-            this.challenger.pokemon.hp += move.heal;
+            this.challenger.pokemon.hp = (move.heal * this.challenger.pokemon.hp) / 100;
             if (this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) this.challenger.pokemon.hp = this.challenger.pokemon.maxHp;
         }
 
@@ -196,7 +199,7 @@ export class BattleComponent {
             this.challenger.pokemon.hp -= Math.round(damage);
         }
         if (moveToAttack.heal > 0) {
-            this.oponent.pokemon.hp += moveToAttack.heal;
+            this.oponent.pokemon.hp = (moveToAttack.heal * this.oponent.pokemon.hp) / 100;
             if (this.oponent.pokemon.hp > this.oponent.pokemon.maxHp) this.oponent.pokemon.hp = this.oponent.pokemon.maxHp;
         }
     }
@@ -211,12 +214,7 @@ export class BattleComponent {
         level = Math.round(Math.random() * (level - 1) + 1);
         // Math.random() * (max - min) + min;
         this.oponent.pokemon.level = level;
-        this.oponent.pokemon.hp = Math.round((Math.random() * ((50 + 2) - (50 - 2)) + (50 - 2)) * Math.pow(1.03, (level - 1)));
-        this.oponent.pokemon.attack = Math.round((Math.random() * ((40 + 2) - (40 - 2)) + (40 - 2)) * Math.pow(1.03, (level - 1)));
-        this.oponent.pokemon.specialAttack = Math.round((Math.random() * ((40 + 2) - (40 - 2)) + (40 - 2)) * Math.pow(1.03, (level - 1)));
-        this.oponent.pokemon.defense = Math.round((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.03, (level - 1)));
-        this.oponent.pokemon.specialDefense = Math.round((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.03, (level - 1)));
-        this.oponent.pokemon.speed = Math.round((Math.random() * ((20 + 2) - (20 - 2)) + (20 - 2)) * Math.pow(1.03, (level - 1)));
+        this.oponent.pokemon = this.pokemonService.calcStatus(level, this.oponent.pokemon);
         this.oponent.pokemon.maxHp = this.oponent.pokemon.hp;
     }
     oponentStatusToGym(level, changeLevel = false) {
@@ -226,12 +224,7 @@ export class BattleComponent {
             level = Math.round(Math.random() * (max - min) + min);
             // Math.random() * (max - min) + min;
             this.oponent.pokemon.level = level;
-            this.oponent.pokemon.hp = Math.round((Math.random() * ((50 + 2) - (50 - 2)) + (50 - 2)) * Math.pow(1.03, (level - 1)));
-            this.oponent.pokemon.attack = Math.round((Math.random() * ((40 + 2) - (40 - 2)) + (40 - 2)) * Math.pow(1.03, (level - 1)));
-            this.oponent.pokemon.specialAttack = Math.round((Math.random() * ((40 + 2) - (40 - 2)) + (40 - 2)) * Math.pow(1.03, (level - 1)));
-            this.oponent.pokemon.defense = Math.round((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.03, (level - 1)));
-            this.oponent.pokemon.specialDefense = Math.round((Math.random() * ((35 + 2) - (35 - 2)) + (35 - 2)) * Math.pow(1.03, (level - 1)));
-            this.oponent.pokemon.speed = Math.round((Math.random() * ((20 + 2) - (20 - 2)) + (20 - 2)) * Math.pow(1.03, (level - 1)));
+            this.oponent.pokemon = this.pokemonService.calcStatus(level, this.oponent.pokemon);
             this.oponent.pokemon.maxHp = this.oponent.pokemon.hp;
         } else {
             if (!this.oponent.pokemon.maxHp || this.oponent.pokemon.hp > this.oponent.pokemon.maxHp) {
@@ -285,7 +278,7 @@ export class BattleComponent {
     }
     leave() {
         this.gym = null;
-        this.oponent = null;
+        this.oponent = {};
         this.battlePanel = false;
     }
     getPokeballs() {

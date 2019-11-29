@@ -5,6 +5,7 @@
                 <div *ngFor="let pokemon of pokedexList" class="ui-g-4 center">
                     <img class="pokemon-pokedex" src="/assets/pokemons/{{pokemon.num}}.png" />
                     <p>{{pokemon.name}}</p>
+                    <p><span style="color: #888a96 !important;" *ngFor="let t of pokemon.types"> {{t.type.name}} </span></p>
                 </div>
             </div>
             <div class="more">

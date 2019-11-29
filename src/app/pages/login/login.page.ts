@@ -4,7 +4,7 @@ import {HttpService} from '../../service/httpService';
 import {ShopService} from '../../service/shopService';
 import {TreinadorService} from '../../service/treinadorService';
 import {BlockService} from '../../service/blockService';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Component({
@@ -20,27 +20,29 @@ export class LoginPage implements OnInit {
               private treinador: TreinadorService,
               private block: BlockService,
               private msg: MessageService,
-              private jwt: JwtHelperService) {}
+              private jwt: JwtHelperService,
+              private confirm: ConfirmationService) {}
 
-    ngOnInit() {
-      if (localStorage.getItem('emailToTrainer')) {
-          this.loadTrainer(localStorage.getItem('emailToTrainer'));
-      }
+  ngOnInit() {
+    this.checkVersion();
+    if (localStorage.getItem('emailToTrainer')) {
+        this.loadTrainer(localStorage.getItem('emailToTrainer'));
     }
-
-    login(form) {
-      this.block.activeBlock();
-        this.http.post('/login', form.value).subscribe((res: any) => {
-        localStorage.setItem('token', res);
-        this.block.unBlock();
-        localStorage.setItem('emailToTrainer', form.value.username);
-        this.loadTrainer(form.value.username);
-    }, (e) => {
-      this.block.unBlock();
-      this.msg.add({severity: 'error', detail: 'Email ou Login incorreto', summary: 'Falha'});
-      console.log(e);
-    });
   }
+
+  login(form) {
+      this.block.activeBlock();
+      this.http.post('/login', form.value).subscribe((res: any) => {
+      localStorage.setItem('token', res);
+      this.block.unBlock();
+      localStorage.setItem('emailToTrainer', form.value.username);
+      this.loadTrainer(form.value.username);
+      }, (e) => {
+        this.block.unBlock();
+        this.msg.add({severity: 'error', detail: 'Email ou Login incorreto', summary: 'Falha'});
+        console.log(e);
+      });
+    }
 
   loadTrainer(email) {
       this.block.activeBlock();
@@ -69,6 +71,23 @@ export class LoginPage implements OnInit {
       }, error1 => {
           this.block.unBlock();
       });
+  }
+
+  async checkVersion() {
+      try {
+          const version: any = await this.http.get('/version').toPromise();
+          if (version.id !== 1) {
+              this.confirm.confirm({
+                  message: 'Temos uma nova atualização, deseja baixar agora?',
+                  accept: () => {
+                      window.open(version.url, '_blank');
+                  },
+              });
+          }
+      } catch (e) {
+          console.log(e);
+          setTimeout(() => this.checkVersion(), 3000);
+      }
   }
 
 }
