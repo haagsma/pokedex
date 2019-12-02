@@ -160,10 +160,7 @@ export class BattleComponent {
     challengerAttack(move) {
         let damage = (this.challenger.pokemon.attack * (move.power / 100));
         damage = damage - (damage * (this.oponent.pokemon.defense / 300));
-        console.log('elementFactor: ', this.battleService.elementalAdvantage(move, this.oponent.pokemon.pokemon.types));
-        console.log('damageb4: ', damage);
         damage = damage * this.battleService.elementalAdvantage(move, this.oponent.pokemon.pokemon.types);
-        console.log('damageafter: ', damage);
         if ((this.oponent.pokemon.hp - Math.round(damage)) < 0) {
             this.oponent.pokemon.hp = 0;
         } else {

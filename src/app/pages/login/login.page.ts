@@ -6,6 +6,7 @@ import {TreinadorService} from '../../service/treinadorService';
 import {BlockService} from '../../service/blockService';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {NativeAudio} from '@ionic-native/native-audio/ngx';
 
 @Component({
   selector: 'login-page',
@@ -21,9 +22,16 @@ export class LoginPage implements OnInit {
               private block: BlockService,
               private msg: MessageService,
               private jwt: JwtHelperService,
-              private confirm: ConfirmationService) {}
+              private confirm: ConfirmationService,
+              private audio: NativeAudio) {}
 
   ngOnInit() {
+      try {
+          this.audio.preloadSimple('uniqueId1', '/assets/mp3/inicio.mp3').then(()=> console.log('parou audio')).catch(()=> console.log('nao parou audio'));
+          this.audio.loop('uniqueId1').then(()=> console.log('parou audio')).catch(()=> console.log('nao parou audio'));
+      } catch (e) {
+
+      }
     this.checkVersion();
     if (localStorage.getItem('emailToTrainer')) {
         this.loadTrainer(localStorage.getItem('emailToTrainer'));

@@ -48,32 +48,32 @@
         <div *ngIf="challenger?.pokemon?.move1" class="ui-g-6 center">
             <a (click)="attack(challenger?.pokemon?.move1, attackPanels);" pButton class="ui-button-danger ui-button-rounded btnPower">
                 <p class="uppercase">{{challenger?.pokemon?.move1?.name}}</p>
-                <small>Power: {{challenger?.pokemon?.move1?.power}}</small><br>
-                <small>Accuracy: {{challenger?.pokemon?.move1?.accuracy}}</small><br>
+                <small>Power: {{challenger?.pokemon?.move1?.power || 0}}</small><br>
+                <small>Accuracy: {{challenger?.pokemon?.move1?.accuracy || 0}}</small><br>
                 <small>Type: {{challenger?.pokemon?.move1?.type?.name}}</small>
             </a>
         </div>
         <div *ngIf="challenger?.pokemon?.move2" class="ui-g-6 center">
             <a  (click)="attack(challenger?.pokemon?.move2, attackPanels);" pButton class="ui-button-danger ui-button-rounded btnPower">
                 <p class="uppercase">{{challenger?.pokemon?.move2?.name}}</p>
-                <small>Power: {{challenger?.pokemon?.move2?.power}}</small><br>
-                <small>Accuracy: {{challenger?.pokemon?.move2?.accuracy}}</small><br>
+                <small>Power: {{challenger?.pokemon?.move2?.power || 0}}</small><br>
+                <small>Accuracy: {{challenger?.pokemon?.move2?.accuracy || 0}}</small><br>
                 <small>Type: {{challenger?.pokemon?.move2?.type?.name}}</small>
             </a>
         </div>
         <div *ngIf="challenger?.pokemon?.move3" class="ui-g-6 center">
             <a  (click)="attack(challenger?.pokemon?.move3, attackPanels);"  pButton class="ui-button-danger ui-button-rounded btnPower">
                 <p class="uppercase">{{challenger?.pokemon?.move3?.name}}</p>
-                <small>Power: {{challenger?.pokemon?.move3?.power}}</small><br>
-                <small>Accuracy: {{challenger?.pokemon?.move3?.accuracy}}</small><br>
+                <small>Power: {{challenger?.pokemon?.move3?.power || 0}}</small><br>
+                <small>Accuracy: {{challenger?.pokemon?.move3?.accuracy || 0}}</small><br>
                 <small>Type: {{challenger?.pokemon?.move3?.type?.name}}</small>
             </a>
         </div>
         <div *ngIf="challenger?.pokemon?.move4" class="ui-g-6 center">
             <a (click)="attack(challenger?.pokemon?.move4, attackPanels);" pButton class="ui-button-danger ui-button-rounded btnPower">
                 <p class="uppercase">{{challenger?.pokemon?.move4?.name}}</p>
-                <small>Power: {{challenger?.pokemon?.move4?.power}}</small><br>
-                <small>Accuracy: {{challenger?.pokemon?.move4?.accuracy}}</small><br>
+                <small>Power: {{challenger?.pokemon?.move4?.power || 0}}</small><br>
+                <small>Accuracy: {{challenger?.pokemon?.move4?.accuracy || 0}}</small><br>
                 <small>Type: {{challenger?.pokemon?.move4?.type?.name}}</small>
             </a>
         </div>
