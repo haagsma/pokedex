@@ -2,11 +2,20 @@
     <div class="arena">
         <div class="ui-g">
             <div class="ui-g-7 right">
-                <div class="life-panel">
-                    <p class="captalize">{{oponent?.pokemon?.pokemon?.name || ''}}</p>
-                    <p>Level: {{oponent?.pokemon?.level || ''}}</p>
-                    <p>{{oponent?.pokemon?.hp}} / {{oponent?.pokemon?.maxHp}}</p>
-                    <p-progressBar class="life-bar" [value]="((100/oponent?.pokemon?.maxHp)*oponent?.pokemon?.hp)"></p-progressBar>
+                <div class="life-panel box-shadow">
+                    <div class="ui-g center">
+                        <div class="ui-g-7">
+                            <span class="captalize text-black bold f12">{{oponent?.pokemon?.pokemon?.name || ''}}</span>
+                        </div>
+                        <div class="ui-g-5">
+                            <span class="captalize text-black bold f12">Lv: {{oponent?.pokemon?.level || ''}}</span>
+                        </div>
+                    </div>
+                    <div class="m-auto w-80">
+                        <span style="padding-right: 5px;float: left;font-size: 10px" class="bold">HP: </span>
+                        <p-progressBar [style]="{marginTop: '4px'}" class="life-bar" [value]="((100/oponent?.pokemon?.maxHp)*oponent?.pokemon?.hp)"></p-progressBar>
+                        <p class="f12">{{oponent?.pokemon?.hp}} / {{oponent?.pokemon?.maxHp}}</p>
+                    </div>
                 </div>
             </div>
             <div class="ui-g-5 right">
@@ -16,11 +25,20 @@
                 <img class="pokemon-in-battle" src="/assets/pokemons/{{challenger?.pokemon?.pokemon?.num || '001'}}.png">
             </div>
             <div class="ui-g-7 left">
-                <div class="life-panel">
-                    <p class="captalize">{{challenger?.pokemon?.pokemon?.name || ''}}</p>
-                    <p>Level: {{challenger?.pokemon?.level || ''}}</p>
-                    <p>{{challenger?.pokemon?.hp}} / {{challenger?.pokemon?.maxHp}}</p>
-                    <p-progressBar class="life-bar" [value]="((100/challenger?.pokemon?.maxHp)*challenger?.pokemon?.hp)"></p-progressBar>
+                <div class="life-panel box-shadow">
+                    <div class="ui-g center">
+                        <div class="ui-g-7">
+                            <span class="captalize text-black bold f12">{{challenger?.pokemon?.pokemon?.name || ''}}</span>
+                        </div>
+                        <div class="ui-g-5">
+                            <span class="captalize text-black bold f12">Lv: {{challenger?.pokemon?.level || ''}}</span>
+                        </div>
+                    </div>
+                    <div class="m-auto w-80">
+                        <span style="padding-right: 5px;float: left;font-size: 10px" class="bold">HP: </span>
+                        <p-progressBar [style]="{marginTop: '4px'}" class="life-bar" [value]="((100/challenger?.pokemon?.maxHp)*challenger?.pokemon?.hp)"></p-progressBar>
+                        <p class="f12">{{challenger?.pokemon?.hp}} / {{challenger?.pokemon?.maxHp}}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,17 +46,17 @@
     <div class="down-panel">
         <div class="ui-g">
             <div class="ui-g-6 center">
-                <button pButton *ngIf="!attacking" (click)="attackPanels.toggle($event)" class="ui-button-danger ui-button-rounded" label="Atacar"></button>
-                <button pButton *ngIf="attacking" class="ui-button-danger ui-button-rounded" label="Atacar"></button>
+                <button pButton *ngIf="!attacking" (click)="attackPanels.toggle($event)" class="ui-button-danger ui-button-rounded box-shadow" label="Atacar"></button>
+                <button pButton *ngIf="attacking" class="ui-button-danger ui-button-rounded box-shadow" label="Atacar"></button>
             </div>
             <div class="ui-g-6 center">
-                <button (click)="pokemonPanel = true" pButton class="ui-button-rounded" label="Pokemon"></button>
+                <button (click)="pokemonPanel = true" pButton class="ui-button-rounded box-shadow" label="Pokemon"></button>
             </div>
             <div class="ui-g-6 center">
-                <button (click)="itemsPanel = true" pButton class="ui-button-success ui-button-rounded" label="Items"></button>
+                <button (click)="itemsPanel = true" pButton class="ui-button-success ui-button-rounded box-shadow" label="Items"></button>
             </div>
             <div class="ui-g-6 center">
-                <button [disabled]="gym" pButton (click)="battlePanel = false" class="ui-button-gray ui-button-rounded" label="Fugir"></button>
+                <button [disabled]="gym" pButton (click)="battlePanel = false" class="ui-button-gray ui-button-rounded box-shadow" label="Fugir"></button>
             </div>
         </div>
     </div>

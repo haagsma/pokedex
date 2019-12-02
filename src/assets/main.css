@@ -30,7 +30,7 @@ p-sidebar.battle-panel div.ui-sidebar-full {
     background: aqua !important;
 }
 .life-bar .ui-progressbar .ui-progressbar-value {
-    background: red !important;
+    background: #2aff04 !important;
 }
 .life-bar .ui-progressbar {
     height: 7px;
@@ -65,6 +65,15 @@ p-sidebar.battle-panel div.ui-sidebar-full {
 }
 .captalize {
     text-transform: capitalize;
+}
+.w-80 {
+    width: 80%;
+}
+.m-auto {
+    margin: auto;
+}
+.box-shadow {
+    box-shadow: 2px 2px 4px #000000
 }
 button.ui-button-gray.ui-button {
     background-color: gray !important;

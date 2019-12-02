@@ -18,7 +18,6 @@ import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {ToastModule} from 'primeng/toast';
 import {JwtModule} from '@auth0/angular-jwt';
-import {NativeAudio} from '@ionic-native/native-audio';
 
 export const APP_MODULES = [
     BrowserModule,

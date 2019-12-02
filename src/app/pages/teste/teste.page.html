@@ -1,0 +1,144 @@
+<p-sidebar [showCloseIcon]="false"  [style]="{paddingTop: '30px'}" [(visible)]="battlePanel" [fullScreen]="true" class="battle-panel" [baseZIndex]="800">
+    <div class="arena">
+        <div class="ui-g">
+            <div class="ui-g-7 right">
+                <div class="life-panel box-shadow">
+                    <div class="ui-g center">
+                        <div class="ui-g-7">
+                            <span class="captalize text-black bold f12">Charmander</span>
+                        </div>
+                        <div class="ui-g-5">
+                            <span class="captalize text-black bold f12">Lv: 12</span>
+                        </div>
+                    </div>
+                    <div class="m-auto w-80">
+                        <p-progressBar class="life-bar" [value]="100"></p-progressBar>
+                    </div>
+                    <p class="f12">122 / 122</p>
+                </div>
+            </div>
+            <div class="ui-g-5 right">
+                <img class="pokemon-in-battle" src="/assets/pokemons/001.png">
+            </div>
+            <div class="ui-g-5 left">
+                <img class="pokemon-in-battle" src="/assets/pokemons/001.png">
+            </div>
+            <div class="ui-g-7 left">
+                <div class="life-panel box-shadow">
+                    <div class="ui-g center">
+                        <div class="ui-g-7">
+                            <span class="captalize text-black bold f12">Charmander</span>
+                        </div>
+                        <div class="ui-g-5">
+                            <span class="captalize text-black bold f12">Lv: 12</span>
+                        </div>
+                    </div>
+                    <div class="m-auto w-80">
+                        <span style="padding-right: 5px;float: left;font-size: 10px" class="bold">HP: </span>
+                        <p-progressBar [style]="{marginTop: '4px'}" class="life-bar" [value]="100"></p-progressBar>
+                        <p class="f12">122 / 122</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="down-panel">
+        <div class="ui-g">
+            <div class="ui-g-6 center">
+                <button pButton  class="ui-button-danger ui-button-rounded box-shadow" label="Atacar"></button>
+            </div>
+            <div class="ui-g-6 center">
+                <button (click)="pokemonPanel = true" pButton class="ui-button-rounded box-shadow" label="Pokemon"></button>
+            </div>
+            <div class="ui-g-6 center">
+                <button (click)="itemsPanel = true" pButton class="ui-button-success ui-button-rounded box-shadow" label="Items"></button>
+            </div>
+            <div class="ui-g-6 center">
+                <button [disabled]="gym" pButton (click)="battlePanel = false" class="ui-button-gray ui-button-rounded box-shadow" label="Fugir"></button>
+            </div>
+        </div>
+    </div>
+</p-sidebar>
+<!--<p-overlayPanel #attackPanels [style]="{'width': '100%'}" [baseZIndex]="900" >-->
+<!--    <div class="ui-g">-->
+<!--        <div *ngIf="challenger?.pokemon?.move1" class="ui-g-6 center">-->
+<!--            <a (click)="attack(challenger?.pokemon?.move1, attackPanels);" pButton class="ui-button-danger ui-button-rounded btnPower">-->
+<!--                <p class="uppercase">{{challenger?.pokemon?.move1?.name}}</p>-->
+<!--                <small>Power: {{challenger?.pokemon?.move1?.power || 0}}</small><br>-->
+<!--                <small>Accuracy: {{challenger?.pokemon?.move1?.accuracy || 0}}</small><br>-->
+<!--                <small>Type: {{challenger?.pokemon?.move1?.type?.name}}</small>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div *ngIf="challenger?.pokemon?.move2" class="ui-g-6 center">-->
+<!--            <a  (click)="attack(challenger?.pokemon?.move2, attackPanels);" pButton class="ui-button-danger ui-button-rounded btnPower">-->
+<!--                <p class="uppercase">{{challenger?.pokemon?.move2?.name}}</p>-->
+<!--                <small>Power: {{challenger?.pokemon?.move2?.power || 0}}</small><br>-->
+<!--                <small>Accuracy: {{challenger?.pokemon?.move2?.accuracy || 0}}</small><br>-->
+<!--                <small>Type: {{challenger?.pokemon?.move2?.type?.name}}</small>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div *ngIf="challenger?.pokemon?.move3" class="ui-g-6 center">-->
+<!--            <a  (click)="attack(challenger?.pokemon?.move3, attackPanels);"  pButton class="ui-button-danger ui-button-rounded btnPower">-->
+<!--                <p class="uppercase">{{challenger?.pokemon?.move3?.name}}</p>-->
+<!--                <small>Power: {{challenger?.pokemon?.move3?.power || 0}}</small><br>-->
+<!--                <small>Accuracy: {{challenger?.pokemon?.move3?.accuracy || 0}}</small><br>-->
+<!--                <small>Type: {{challenger?.pokemon?.move3?.type?.name}}</small>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div *ngIf="challenger?.pokemon?.move4" class="ui-g-6 center">-->
+<!--            <a (click)="attack(challenger?.pokemon?.move4, attackPanels);" pButton class="ui-button-danger ui-button-rounded btnPower">-->
+<!--                <p class="uppercase">{{challenger?.pokemon?.move4?.name}}</p>-->
+<!--                <small>Power: {{challenger?.pokemon?.move4?.power || 0}}</small><br>-->
+<!--                <small>Accuracy: {{challenger?.pokemon?.move4?.accuracy || 0}}</small><br>-->
+<!--                <small>Type: {{challenger?.pokemon?.move4?.type?.name}}</small>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</p-overlayPanel>-->
+<!--<p-dialog [(visible)]="pokemonPanel" [baseZIndex]="900" [closeIcon]="false">-->
+<!--    <div class="ui-g">-->
+<!--        <div *ngFor="let p of challenger.team" class="ui-g-4 choose center">-->
+<!--            <a *ngIf="p.hp > 0" (click)="changePokemon(p)">-->
+<!--                <img class="pokemon-pokedex" src="/assets/pokemons/{{p.pokemon.num}}.png" />-->
+<!--            </a>-->
+<!--            <a *ngIf="p.hp <= 0">-->
+<!--                <img class="pokemon-pokedex" src="/assets/pokemons/{{p.pokemon.num}}.png" />-->
+<!--            </a>-->
+<!--            <p class="captalize">{{p.pokemon.name}}</p>-->
+<!--            <small>Level: {{p.level}}</small><br>-->
+<!--            <small *ngIf="p.hp > 0">HP: {{p.hp}}</small>-->
+<!--            <small *ngIf="p.hp <= 0" style="color: red">HP: Defeat</small>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div *ngIf="challenger.pokemon && challenger.pokemon.hp > 0" class="center">-->
+<!--        <button (click)="pokemonPanel = false" pButton class="ui-button-warning ui-button-rounded" label="Sair"></button>-->
+<!--    </div>-->
+<!--</p-dialog>-->
+<!--<p-dialog [(visible)]="itemsPanel" [baseZIndex]="900">-->
+<!--    <p-tabView>-->
+<!--        <p-tabPanel header="Pokeballs">-->
+<!--            <div *ngIf="getPokeballs().length > 0" class="ui-g">-->
+<!--                <div *ngFor="let item of getPokeballs()" class="ui-g-4 choose center">-->
+<!--                    <a (click)="catchPokemon(item)">-->
+<!--                        <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />-->
+<!--                    </a>-->
+<!--                    <p class="captalize">{{item.item.name}}</p>-->
+<!--                    <p>x {{item.amount}}</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <p  *ngIf="getPokeballs().length == 0">Ops, não tem nada aqui!</p>-->
+<!--        </p-tabPanel>-->
+<!--        <p-tabPanel header="Potions">-->
+<!--            <div *ngIf="getPotions().length > 0" class="ui-g">-->
+<!--                <div *ngFor="let item of getPotions()" class="ui-g-4 choose center">-->
+<!--                    <a (click)="heal(item)">-->
+<!--                        <img class="item-bag" src="/assets/items/{{item.item.nemotecnico}}.png" />-->
+<!--                    </a>-->
+<!--                    <p>{{item.item.name}}</p>-->
+<!--                    <p>x {{item.amount}}</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <p  *ngIf="getPotions().length == 0">Ops, não tem nada aqui!</p>-->
+<!--        </p-tabPanel>-->
+<!--    </p-tabView>-->
+<!--</p-dialog>-->
