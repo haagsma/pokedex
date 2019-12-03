@@ -119,7 +119,7 @@ export class PokemonService {
                 this.evolveSource = pokemonSorted.pokemon;
                 pokemonSorted.attack = 180;
                 pokemonSorted.specialAttack = 180;
-                pokemonSorted.defense = 167;
+                pokemonSorted.defense = 87;
                 pokemonSorted.specialDefense = 87;
                 pokemonSorted.speed = 93;
                 pokemonSorted.hp = 369;
