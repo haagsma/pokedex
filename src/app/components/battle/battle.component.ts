@@ -235,12 +235,12 @@ export class BattleComponent {
             this.treinador.useItem(item);
             this.challenger.pokemon.hp += item.item.effect;
             if (this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) this.challenger.pokemon.hp = this.challenger.pokemon.maxHp;
+            this.itemsPanel = false;
             setTimeout(() => {
                 this.oponentAttack();
                 if (this.challenger.pokemon.hp <= 0) {
                     this.challengerDead();
                 }
-                this.itemsPanel = false;
                 setTimeout(() => this.attacking = false, 1000);
             }, 1500);
         }
