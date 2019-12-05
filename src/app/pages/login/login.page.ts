@@ -84,7 +84,7 @@ export class LoginPage implements OnInit {
   async checkVersion() {
       try {
           const version: any = await this.http.get('/version').toPromise();
-          if (version.id !== 2) {
+          if (version.id !== 3) {
               this.confirm.confirm({
                   message: 'Temos uma nova atualização, deseja baixar agora?',
                   accept: () => {

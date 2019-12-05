@@ -158,17 +158,21 @@ export class BattleComponent {
     }
 
     challengerAttack(move) {
-        let damage = (this.challenger.pokemon.attack * (move.power / 100));
-        damage = damage - (damage * (this.oponent.pokemon.defense / 300));
-        damage = damage * this.battleService.elementalAdvantage(move, this.oponent.pokemon.pokemon.types);
-        if ((this.oponent.pokemon.hp - Math.round(damage)) < 0) {
-            this.oponent.pokemon.hp = 0;
+        if (move.accuracy > ((Math.random() * 100) + 1)) {
+            let damage = (this.challenger.pokemon.attack * (move.power / 100));
+            damage = damage - (damage * (this.oponent.pokemon.defense / 300));
+            damage = damage * this.battleService.elementalAdvantage(move, this.oponent.pokemon.pokemon.types);
+            if ((this.oponent.pokemon.hp - Math.round(damage)) < 0) {
+                this.oponent.pokemon.hp = 0;
+            } else {
+                this.oponent.pokemon.hp -= Math.round(damage);
+            }
+            if (move.heal > 0) {
+                this.challenger.pokemon.hp += Math.round((move.heal * this.challenger.pokemon.maxHp) / 100);
+                if (this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) this.challenger.pokemon.hp = this.challenger.pokemon.maxHp;
+            }
         } else {
-            this.oponent.pokemon.hp -= Math.round(damage);
-        }
-        if (move.heal > 0) {
-            this.challenger.pokemon.hp += Math.round((move.heal * this.challenger.pokemon.maxHp) / 100);
-            if (this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) this.challenger.pokemon.hp = this.challenger.pokemon.maxHp;
+            this.msg.add({severity: 'info', summary: 'Seu ataque falhou!'});
         }
 
     }
@@ -186,18 +190,22 @@ export class BattleComponent {
         if (nofAttack === 3) moveToAttack = this.oponent.pokemon.move3;
         if (nofAttack >= 4) moveToAttack = this.oponent.pokemon.move4;
 
-        this.msg.add({severity: 'info', summary: this.oponent.pokemon.pokemon.name, detail: 'used ' + moveToAttack.name});
-        let damage = (this.oponent.pokemon.attack * (moveToAttack.power / 100));
-        damage = damage - (damage * (this.challenger.pokemon.defense / 300));
-        damage = damage * this.battleService.elementalAdvantage(moveToAttack, this.challenger.pokemon.pokemon.types);
-        if ((this.challenger.pokemon.hp - Math.round(damage)) < 0) {
-            this.challenger.pokemon.hp = 0;
+        if (moveToAttack.accuracy > ((Math.random() * 100) + 1)) {
+            this.msg.add({severity: 'info', summary: this.oponent.pokemon.pokemon.name, detail: 'used ' + moveToAttack.name});
+            let damage = (this.oponent.pokemon.attack * (moveToAttack.power / 100));
+            damage = damage - (damage * (this.challenger.pokemon.defense / 300));
+            damage = damage * this.battleService.elementalAdvantage(moveToAttack, this.challenger.pokemon.pokemon.types);
+            if ((this.challenger.pokemon.hp - Math.round(damage)) < 0) {
+                this.challenger.pokemon.hp = 0;
+            } else {
+                this.challenger.pokemon.hp -= Math.round(damage);
+            }
+            if (moveToAttack.heal > 0) {
+                this.oponent.pokemon.hp += Math.round((moveToAttack.heal * this.oponent.pokemon.maxHp) / 100);
+                if (this.oponent.pokemon.hp > this.oponent.pokemon.maxHp) this.oponent.pokemon.hp = this.oponent.pokemon.maxHp;
+            }
         } else {
-            this.challenger.pokemon.hp -= Math.round(damage);
-        }
-        if (moveToAttack.heal > 0) {
-            this.oponent.pokemon.hp += Math.round((moveToAttack.heal * this.oponent.pokemon.maxHp) / 100);
-            if (this.oponent.pokemon.hp > this.oponent.pokemon.maxHp) this.oponent.pokemon.hp = this.oponent.pokemon.maxHp;
+            this.msg.add({severity: 'info', summary: 'O ataqueu do oponente falhou!'});
         }
     }
 
