@@ -138,6 +138,18 @@ export class PokemonService {
         this.block.unBlock();
     }
 
+    defaultStatusEffects(pokemons) {
+        return pokemons.map((pokemon) => {
+            pokemon.paralized = false;
+            pokemon.freezed = false;
+            pokemon.poisoned = false;
+            pokemon.sleeping = false;
+            pokemon.burned = false;
+            pokemon.effectSteps = 0;
+            return pokemon;
+        });
+    }
+
     upStatus(pokemon) {
         pokemon.attack = Math.round(pokemon.attack * 1.03);
         pokemon.specialAttack = Math.round(pokemon.specialAttack * 1.03);

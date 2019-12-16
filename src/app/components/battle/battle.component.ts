@@ -39,7 +39,7 @@ export class BattleComponent {
     startBattle(pokemon) {
         this.exp = 0;
         this.challenger.team = null;
-        this.challenger.team = JSON.parse(JSON.stringify(this.treinador.team));
+        this.challenger.team = this.pokemonService.defaultStatusEffects(JSON.parse(JSON.stringify(this.treinador.team)));
         this.challenger.pokemon = this.challenger.team[0];
         this.oponent.pokemon = pokemon;
         this.challengerStatus();
@@ -56,7 +56,7 @@ export class BattleComponent {
                 this.gym = gym;
                 this.exp = 0;
                 this.challenger.team = null;
-                this.challenger.team = JSON.parse(JSON.stringify(this.treinador.team));
+                this.challenger.team = this.pokemonService.defaultStatusEffects(JSON.parse(JSON.stringify(this.treinador.team)));
                 this.challenger.pokemon = this.challenger.team[0];
                 this.oponent.team = await this.http.get('/treinador/pokemons/' + gym.treinador.id).toPromise();
                 this.oponent.pokemon = this.oponent.team[0];
@@ -158,6 +158,29 @@ export class BattleComponent {
     }
 
     challengerAttack(move) {
+        if (this.challenger.pokemon.paralized && 80 <= ((Math.random() * 100) + 1)) {
+            this.msg.add({severity: 'info', summary: 'Seu Pokemon está paralizado, não pode atacar!'});
+            return;
+        }
+
+        if (this.challenger.pokemon.freezed && 80 <= ((Math.random() * 100) + 1) && this.challenger.pokemon.effectSteps < 3) {
+            this.msg.add({severity: 'info', summary: 'Seu Pokemon está congelado, não pode atacar!'});
+            return;
+        } else {
+            this.challenger.pokemon.effectSteps = 0;
+            this.challenger.pokemon.freezed = false;
+        }
+
+        if (this.challenger.pokemon.sleeping && 80 <= ((Math.random() * 100) + 1) && this.challenger.pokemon.effectSteps < 3) {
+            this.msg.add({severity: 'info', summary: 'Seu Pokemon está dormindo, não pode atacar!'});
+            return;
+        } else {
+            this.challenger.pokemon.effectSteps = 0;
+            this.challenger.pokemon.sleeping = false;
+        }
+
+
+
         if (move.accuracy > ((Math.random() * 100) + 1)) {
             let damage = (this.challenger.pokemon.attack * (move.power / 100));
             damage = damage - (damage * (this.oponent.pokemon.defense / 300));
@@ -209,11 +232,10 @@ export class BattleComponent {
         }
     }
 
-    async challengerStatus() {
+    challengerStatus() {
         if (!this.challenger.pokemon.maxHp || this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) {
             this.challenger.pokemon.maxHp = this.challenger.pokemon.hp;
         }
-        return true;
     }
     oponentStatus(level) {
         level = Math.round(Math.random() * (level - 1) + 1);
@@ -281,6 +303,7 @@ export class BattleComponent {
             this.msg.add({severity: 'warn', summary: 'Ops...', detail: 'Você não pode capturar esse pokemon!'});
         }
     }
+
     leave() {
         this.gym = null;
         this.oponent = {};
