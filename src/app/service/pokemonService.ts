@@ -26,6 +26,7 @@ export class PokemonService {
         const exp = totalExp / pokemons.length;
 
         for (let i = 0; i < pokemons.length; i++) {
+            if (pokemons[i].level >= 100) continue;
             pokemons[i].exp += exp;
             const hp = pokemons[i].hp;
             pokemons[i].hp = pokemons[i].maxHp;

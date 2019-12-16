@@ -21,6 +21,7 @@ export class TreinadorService {
     constructor(private http: HttpService, private msg: MessageService, private blockService: BlockService) {}
 
     updateExp(exp) {
+        if(this.level >= 100) return null;
         this.exp += exp;
         if (this.exp > Math.round(100 * Math.pow(1.1, this.level))) {
             this.exp -= Math.round(100 * Math.pow(1.1, this.level));
