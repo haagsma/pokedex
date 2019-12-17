@@ -41,7 +41,7 @@ export class BattleComponent {
         this.challenger.team = null;
         this.challenger.team = this.pokemonService.defaultStatusEffects(JSON.parse(JSON.stringify(this.treinador.team)));
         this.challenger.pokemon = this.challenger.team[0];
-        this.oponent.pokemon = pokemon;
+        this.oponent.pokemon = this.pokemonService.defaultStatusEffects(pokemon, true);
         this.challengerStatus();
         this.oponentStatus(this.treinador.level);
         this.inBattle = [this.challenger.pokemon];
@@ -157,29 +157,97 @@ export class BattleComponent {
         this.blockService.unBlock();
     }
 
+    canAttackCheckEffects(pokemon) {
+        if (pokemon.paralized && 75 < ((Math.random() * 100) + 1)) {
+            this.msg.add({severity: 'info', summary: 'Esse Pokemon está paralizado, não pode atacar!'});
+            return false;
+        }
+
+        if (pokemon.freezed && 80 <= ((Math.random() * 100) + 1) && pokemon.effectSteps < 3) {
+            this.msg.add({severity: 'info', summary: 'Esse Pokemon está congelado, não pode atacar!'});
+            pokemon.effectSteps++;
+            return false;
+        } else {
+            if (pokemon.freezed) pokemon.effectSteps = 0;
+            pokemon.affected = false;
+            pokemon.freezed = false;
+        }
+
+        if (pokemon.sleeping && 80 <= ((Math.random() * 100) + 1) && pokemon.effectSteps < 3) {
+            this.msg.add({severity: 'info', summary: 'Esse Pokemon está dormindo, não pode atacar!'});
+            pokemon.effectSteps++;
+            return false;
+        } else {
+            if (pokemon.sleeping) pokemon.effectSteps = 0;
+            pokemon.affected = false;
+            pokemon.sleeping = false;
+        }
+        return true;
+    }
+
+    effectsDownHpAfterAttack(pokemon) {
+        if (pokemon.poisoned || pokemon.burned) {
+            if ((pokemon.hp - (pokemon.maxHp * 0.1)) <= 0) {
+                pokemon.hp = 0;
+            } else {
+                pokemon.hp -= (pokemon.maxHp * 0.1);
+            }
+        }
+    }
+
+    moveEffects(move, challenger) {
+        let pokemonTarget;
+        let pokemonSource;
+        if (challenger) {
+            pokemonTarget = this.oponent.pokemon;
+            pokemonSource = this.challenger.pokemon;
+        } else {
+            pokemonTarget = this.challenger.pokemon;
+            pokemonSource = this.oponent.pokemon;
+        }
+        if (move.heal > 0) {
+            pokemonSource.hp += Math.round((move.heal * pokemonSource.maxHp) / 100);
+            if (pokemonSource.hp > pokemonSource.maxHp) pokemonSource.hp = pokemonSource.maxHp;
+        }
+        if (move.paralize && !pokemonTarget.affected) {
+            pokemonTarget.paralized = true;
+            pokemonTarget.affected = true;
+            pokemonTarget.effectSteps = 0;
+        }
+        if (move.poison && !pokemonTarget.affected) {
+            const n = ((Math.random() * 100) + 1);
+            if (n < 30) {
+                pokemonTarget.poison = true;
+                pokemonTarget.affected = true;
+                pokemonTarget.effectSteps = 0;
+            }
+        }
+        if (move.freeze && !pokemonTarget.affected) {
+            const n = ((Math.random() * 100) + 1);
+            if (n < 20) {
+                pokemonTarget.freezed = true;
+                pokemonTarget.affected = true;
+                pokemonTarget.effectSteps = 0;
+            }
+        }
+        if (move.sleep && !pokemonTarget.affected) {
+            pokemonTarget.sleeping = true;
+            pokemonTarget.affected = true;
+            pokemonTarget.effectSteps = 0;
+        }
+        if (move.burn && !pokemonTarget.affected) {
+            const n = ((Math.random() * 100) + 1);
+            if (n < 15) {
+                pokemonTarget.burned = true;
+                pokemonTarget.affected = true;
+                pokemonTarget.effectSteps = 0;
+            }
+        }
+    }
+
     challengerAttack(move) {
-        if (this.challenger.pokemon.paralized && 80 <= ((Math.random() * 100) + 1)) {
-            this.msg.add({severity: 'info', summary: 'Seu Pokemon está paralizado, não pode atacar!'});
-            return;
-        }
 
-        if (this.challenger.pokemon.freezed && 80 <= ((Math.random() * 100) + 1) && this.challenger.pokemon.effectSteps < 3) {
-            this.msg.add({severity: 'info', summary: 'Seu Pokemon está congelado, não pode atacar!'});
-            return;
-        } else {
-            this.challenger.pokemon.effectSteps = 0;
-            this.challenger.pokemon.freezed = false;
-        }
-
-        if (this.challenger.pokemon.sleeping && 80 <= ((Math.random() * 100) + 1) && this.challenger.pokemon.effectSteps < 3) {
-            this.msg.add({severity: 'info', summary: 'Seu Pokemon está dormindo, não pode atacar!'});
-            return;
-        } else {
-            this.challenger.pokemon.effectSteps = 0;
-            this.challenger.pokemon.sleeping = false;
-        }
-
-
+        if (!this.canAttackCheckEffects(this.challenger.pokemon)) return;
 
         if (move.accuracy > ((Math.random() * 100) + 1)) {
             let damage = (this.challenger.pokemon.attack * (move.power / 100));
@@ -190,16 +258,22 @@ export class BattleComponent {
             } else {
                 this.oponent.pokemon.hp -= Math.round(damage);
             }
-            if (move.heal > 0) {
-                this.challenger.pokemon.hp += Math.round((move.heal * this.challenger.pokemon.maxHp) / 100);
-                if (this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) this.challenger.pokemon.hp = this.challenger.pokemon.maxHp;
-            }
+            this.moveEffects(move, true);
+            // if (move.heal > 0) {
+            //     this.challenger.pokemon.hp += Math.round((move.heal * this.challenger.pokemon.maxHp) / 100);
+            //     if (this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) this.challenger.pokemon.hp = this.challenger.pokemon.maxHp;
+            // }
         } else {
             this.msg.add({severity: 'info', summary: 'Seu ataque falhou!'});
         }
 
+        this.effectsDownHpAfterAttack(this.challenger.pokemon);
+
     }
     oponentAttack() {
+
+        if (!this.canAttackCheckEffects(this.oponent.pokemon)) return;
+
         let countMoves = 1;
 
         if(this.oponent.pokemon.move2) countMoves++;
@@ -223,13 +297,16 @@ export class BattleComponent {
             } else {
                 this.challenger.pokemon.hp -= Math.round(damage);
             }
-            if (moveToAttack.heal > 0) {
-                this.oponent.pokemon.hp += Math.round((moveToAttack.heal * this.oponent.pokemon.maxHp) / 100);
-                if (this.oponent.pokemon.hp > this.oponent.pokemon.maxHp) this.oponent.pokemon.hp = this.oponent.pokemon.maxHp;
-            }
+            this.moveEffects(moveToAttack, false);
+            // if (moveToAttack.heal > 0) {
+            //     this.oponent.pokemon.hp += Math.round((moveToAttack.heal * this.oponent.pokemon.maxHp) / 100);
+            //     if (this.oponent.pokemon.hp > this.oponent.pokemon.maxHp) this.oponent.pokemon.hp = this.oponent.pokemon.maxHp;
+            // }
         } else {
-            this.msg.add({severity: 'info', summary: 'O ataqueu do oponente falhou!'});
+            this.msg.add({severity: 'info', summary: 'O ataque do oponente falhou!'});
         }
+
+        this.effectsDownHpAfterAttack(this.oponent.pokemon);
     }
 
     challengerStatus() {

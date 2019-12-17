@@ -138,16 +138,30 @@ export class PokemonService {
         this.block.unBlock();
     }
 
-    defaultStatusEffects(pokemons) {
-        return pokemons.map((pokemon) => {
-            pokemon.paralized = false;
-            pokemon.freezed = false;
-            pokemon.poisoned = false;
-            pokemon.sleeping = false;
-            pokemon.burned = false;
-            pokemon.effectSteps = 0;
-            return pokemon;
-        });
+    defaultStatusEffects(pokemons, single = false) {
+        if (single) {
+            pokemons.paralized = false;
+            pokemons.stun = false;
+            pokemons.freezed = false;
+            pokemons.poisoned = false;
+            pokemons.sleeping = false;
+            pokemons.burned = false;
+            pokemons.effectSteps = 0;
+            pokemons.affected = false;
+            return pokemons;
+        } else {
+            return pokemons.map((pokemon) => {
+                pokemon.paralized = false;
+                pokemon.stun = false;
+                pokemon.freezed = false;
+                pokemon.poisoned = false;
+                pokemon.sleeping = false;
+                pokemon.burned = false;
+                pokemon.effectSteps = 0;
+                pokemons.affected = false;
+                return pokemon;
+            });
+        }
     }
 
     upStatus(pokemon) {
