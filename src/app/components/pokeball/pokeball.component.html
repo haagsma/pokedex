@@ -51,37 +51,25 @@
         <div class="center">
             <h3>Ataques</h3>
         </div>
-        <div class="ui-g center">
+        <div class="ui-g center p-b">
             <div class="ui-g-6">
-                <a pButton class="ui-button-danger ui-button-rounded btnPower">
-                    <p class="uppercase">{{pokemonDetail?.move1?.name}}</p>
-                    <small>Power: {{pokemonDetail?.move1?.power || 0}}</small><br>
-                    <small>Accuracy: {{pokemonDetail?.move1?.accuracy || 0}}</small><br>
-                    <small>Type: {{pokemonDetail?.move1?.type?.name}}</small>
+                <a>
+                   <btn-ataque [move]="pokemonDetail.move1 || {type: {}}" ></btn-ataque>
                 </a>
             </div>
             <div *ngIf="pokemonDetail.move2" class="ui-g-6">
-                <a pButton class="ui-button-danger ui-button-rounded btnPower">
-                    <p class="uppercase">{{pokemonDetail?.move2?.name}}</p>
-                    <small>Power: {{pokemonDetail?.move2?.power || 0}}</small><br>
-                    <small>Accuracy: {{pokemonDetail?.move2?.accuracy || 0}}</small><br>
-                    <small>Type: {{pokemonDetail?.move2?.type?.name}}</small>
+                <a>
+                    <btn-ataque [move]="pokemonDetail.move2 || {type: {}}" ></btn-ataque>
                 </a>
             </div>
             <div *ngIf="pokemonDetail.move3"  class="ui-g-6">
-                <a pButton class="ui-button-danger ui-button-rounded btnPower">
-                    <p class="uppercase">{{pokemonDetail?.move3?.name}}</p>
-                    <small>Power: {{pokemonDetail?.move3?.power || 0}}</small><br>
-                    <small>Accuracy: {{pokemonDetail?.move3?.accuracy || 0}}</small><br>
-                    <small>Type: {{pokemonDetail?.move3?.type?.name}}</small>
+                <a>
+                    <btn-ataque [move]="pokemonDetail.move3 || {type: {}}" ></btn-ataque>
                 </a>
             </div>
             <div *ngIf="pokemonDetail.move4"  class="ui-g-6">
-                <a pButton class="ui-button-danger ui-button-rounded btnPower">
-                    <p class="uppercase">{{pokemonDetail?.move4?.name}}</p>
-                    <small>Power: {{pokemonDetail?.move4?.power || 0}}</small><br>
-                    <small>Accuracy: {{pokemonDetail?.move4?.accuracy || 0}}</small><br>
-                    <small>Type: {{pokemonDetail?.move4?.type?.name}}</small>
+                <a>
+                    <btn-ataque [move]="pokemonDetail.move4 || {type: {}}" ></btn-ataque>
                 </a>
             </div>
         </div>

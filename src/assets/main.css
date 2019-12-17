@@ -75,6 +75,9 @@ p-sidebar.battle-panel div.ui-sidebar-full {
 .box-shadow {
     box-shadow: 2px 2px 4px #000000
 }
+.p-b {
+    padding-bottom: 20px;
+}
 button.ui-button-gray.ui-button {
     background-color: gray !important;
     border-color: gray;

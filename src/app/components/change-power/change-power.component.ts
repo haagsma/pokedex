@@ -12,8 +12,8 @@ import {PokemonService} from '../../service/pokemonService';
 export class ChangePowerComponent {
 
     activePanelPower = false;
-    currencyMove: any = {};
-    pokemon: any = {};
+    currencyMove: any = {type: {name: ''}};
+    pokemon: any = {move: {type: {name: ''}}};
 
     constructor(private treinador: TreinadorService, private http: HttpService, private pokemonService: PokemonService) {}
 

@@ -1,0 +1,143 @@
+.bug {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/bug.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.dark {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/dark.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.dragon {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/dragon.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.electric {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/electric.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.fairy {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/fairy.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.fighting {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/fighting.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.fire {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/fire.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.flying {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/flying.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.ghost {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/ghost.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.grass {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/grass.jpg");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.ground {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/ground.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.ice {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/ice.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.normal {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/normal.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.poison {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/poison.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.psychic {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/psychic.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.rock {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/rock.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.shadow {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/shadow.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.steel {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/steel.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.water {
+    box-shadow: 5px 10px 18px #888888;
+    background: url("/assets/elementos-ataque/water.PNG");
+    background-size: 106% 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.btn {
+    border-radius: 5px;
+    border: none;
+}
+.p {
+    margin: 0;
+    color: white;
+    text-shadow: black;
+    font-weight: bold;
+}
