@@ -92,14 +92,22 @@ export class TreinadorService {
             return p;
         });
         toUpdate.forEach((p) => {
-            this.http.post('/pokemon/update', p).toPromise();
+            try {
+                this.http.post('/pokemon/update', p).toPromise();
+            } catch(e) {
+
+            }
         });
         return true;
     }
 
     getMoney(money) {
-        this.amount += money;
-        this.http.post('/treinador/getmoney', {id: this.id, money}).toPromise();
+        try {
+            this.amount += money;
+            this.http.post('/treinador/getmoney', {id: this.id, money}).toPromise();
+        } catch(e) {
+
+        }
     }
 
     getAllPokemons() {

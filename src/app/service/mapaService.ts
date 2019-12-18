@@ -157,11 +157,15 @@ export class MapaService {
         return {lat, lng};
     }
     async goCenter() {
-        this.currentPosition = await this.geolocation.getCurrentPosition(this.geolocationOptions);
-        const latlng = new google.maps.LatLng(this.currentPosition.coords.latitude, this.currentPosition.coords.longitude);
-        this.trainer.setPosition(latlng);
-        this.map.panTo(this.trainer.getPosition());
-        this.inCenter = true;
+        try {
+            this.currentPosition = await this.geolocation.getCurrentPosition(this.geolocationOptions);
+            const latlng = new google.maps.LatLng(this.currentPosition.coords.latitude, this.currentPosition.coords.longitude);
+            this.trainer.setPosition(latlng);
+            this.map.panTo(this.trainer.getPosition());
+            this.inCenter = true;
+        } catch (e) {
+            
+        }
     }
 
 }
