@@ -6,7 +6,6 @@ import {TreinadorService} from '../../service/treinadorService';
 import {BlockService} from '../../service/blockService';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {NativeAudio} from '@ionic-native/native-audio/ngx';
 
 @Component({
   selector: 'login-page',
@@ -22,16 +21,9 @@ export class LoginPage implements OnInit {
               private block: BlockService,
               private msg: MessageService,
               private jwt: JwtHelperService,
-              private confirm: ConfirmationService,
-              private audio: NativeAudio) {}
+              private confirm: ConfirmationService) {}
 
   ngOnInit() {
-      try {
-          this.audio.preloadSimple('uniqueId1', '/assets/mp3/inicio.mp3').then(()=> console.log('parou audio')).catch(()=> console.log('nao parou audio'));
-          this.audio.loop('uniqueId1').then(()=> console.log('parou audio')).catch(()=> console.log('nao parou audio'));
-      } catch (e) {
-
-      }
     this.checkVersion();
     if (localStorage.getItem('emailToTrainer')) {
         this.loadTrainer(localStorage.getItem('emailToTrainer'));
@@ -84,7 +76,7 @@ export class LoginPage implements OnInit {
   async checkVersion() {
       try {
           const version: any = await this.http.get('/version').toPromise();
-          if (version.id !== 3) {
+          if (version.id !== 4) {
               this.confirm.confirm({
                   message: 'Temos uma nova atualização, deseja baixar agora?',
                   accept: () => {

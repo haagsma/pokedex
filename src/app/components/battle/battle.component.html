@@ -28,7 +28,9 @@
                 <div class="life-panel box-shadow">
                     <div class="ui-g center">
                         <div class="ui-g-7">
-                            <span class="captalize text-black bold f12">{{challenger?.pokemon?.pokemon?.name || ''}}</span>
+                            <span class="captalize text-black bold f12">
+                                {{challenger?.pokemon?.pokemon?.name || ''}}
+                            </span>
                         </div>
                         <div class="ui-g-5">
                             <span class="captalize text-black bold f12">Lv: {{challenger?.pokemon?.level || ''}}</span>
@@ -56,7 +58,7 @@
                 <button (click)="itemsPanel = true" pButton class="ui-button-success ui-button-rounded box-shadow" label="Items"></button>
             </div>
             <div class="ui-g-6 center">
-                <button [disabled]="gym" pButton (click)="battlePanel = false" class="ui-button-gray ui-button-rounded box-shadow" label="Fugir"></button>
+                <button [disabled]="gym" pButton (click)="leave()" class="ui-button-gray ui-button-rounded box-shadow" label="Fugir"></button>
             </div>
         </div>
     </div>

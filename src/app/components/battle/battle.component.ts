@@ -6,6 +6,7 @@ import {PokemonService} from '../../service/pokemonService';
 import {ChangePowerComponent} from '../change-power/change-power.component';
 import {BlockService} from '../../service/blockService';
 import {HttpService} from '../../service/httpService';
+import {AudioService} from '../../service/audioService';
 
 declare const Math: any;
 
@@ -34,23 +35,28 @@ export class BattleComponent {
                 private msg: MessageService,
                 private pokemonService: PokemonService,
                 private blockService: BlockService,
-                private http: HttpService) {}
+                private http: HttpService,
+                private audio: AudioService) {}
 
     startBattle(pokemon) {
-        this.exp = 0;
-        this.challenger.team = null;
-        this.challenger.team = this.pokemonService.defaultStatusEffects(JSON.parse(JSON.stringify(this.treinador.team)));
-        this.challenger.pokemon = this.challenger.team[0];
-        this.oponent.pokemon = this.pokemonService.defaultStatusEffects(pokemon, true);
-        this.challengerStatus();
-        this.oponentStatus(this.treinador.level);
-        this.inBattle = [this.challenger.pokemon];
-        this.battlePanel = true;
+        this.audio.wildBattle();
+        setTimeout(() => {
+            this.exp = 0;
+            this.challenger.team = null;
+            this.challenger.team = this.pokemonService.defaultStatusEffects(JSON.parse(JSON.stringify(this.treinador.team)));
+            this.challenger.pokemon = this.challenger.team[0];
+            this.oponent.pokemon = this.pokemonService.defaultStatusEffects(pokemon, true);
+            this.challengerStatus();
+            this.oponentStatus(this.treinador.level);
+            this.inBattle = [this.challenger.pokemon];
+            this.battlePanel = true;
+        }, 500);
     }
     async startBattleGym(gym) {
         if (this.treinador.getBadge(gym.badge) !== 0 && (new Date().getTime() - this.treinador.getBadge(gym.badge)) < 43200000) {
             this.msg.add({severity: 'warn', summary: 'Ops....', detail: 'Você deve esperar 12 horas para lutar novamente nesse ginásio!'});
         } else {
+            this.audio.gym();
             this.blockService.activeBlock();
             try {
                 this.gym = gym;
@@ -159,12 +165,12 @@ export class BattleComponent {
 
     canAttackCheckEffects(pokemon) {
         if (pokemon.paralized && 75 < ((Math.random() * 100) + 1)) {
-            this.msg.add({severity: 'info', summary: 'Esse Pokemon está paralizado, não pode atacar!'});
+            this.msg.add({severity: 'info', summary: pokemon.pokemon.name + ' está paralizado, não pode atacar!'});
             return false;
         }
 
         if (pokemon.freezed && 80 <= ((Math.random() * 100) + 1) && pokemon.effectSteps < 3) {
-            this.msg.add({severity: 'info', summary: 'Esse Pokemon está congelado, não pode atacar!'});
+            this.msg.add({severity: 'info', summary: pokemon.pokemon.name + ' está congelado, não pode atacar!'});
             pokemon.effectSteps++;
             return false;
         } else {
@@ -174,7 +180,7 @@ export class BattleComponent {
         }
 
         if (pokemon.sleeping && 80 <= ((Math.random() * 100) + 1) && pokemon.effectSteps < 3) {
-            this.msg.add({severity: 'info', summary: 'Esse Pokemon está dormindo, não pode atacar!'});
+            this.msg.add({severity: 'info', summary: pokemon.pokemon.name + ' está dormindo, não pode atacar!'});
             pokemon.effectSteps++;
             return false;
         } else {
@@ -385,6 +391,7 @@ export class BattleComponent {
         this.gym = null;
         this.oponent = {};
         this.battlePanel = false;
+        this.audio.home();
     }
     getPokeballs() {
         return this.treinador.items.filter((i) => i.amount > 0 && i.item.category.name === 'standard-balls');
