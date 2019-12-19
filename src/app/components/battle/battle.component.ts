@@ -222,8 +222,8 @@ export class BattleComponent {
         }
         if (move.poison && !pokemonTarget.affected) {
             const n = ((Math.random() * 100) + 1);
-            if (n < 30) {
-                pokemonTarget.poison = true;
+            if (n < 50) {
+                pokemonTarget.poisoned = true;
                 pokemonTarget.affected = true;
                 pokemonTarget.effectSteps = 0;
             }
@@ -265,10 +265,6 @@ export class BattleComponent {
                 this.oponent.pokemon.hp -= Math.round(damage);
             }
             this.moveEffects(move, true);
-            // if (move.heal > 0) {
-            //     this.challenger.pokemon.hp += Math.round((move.heal * this.challenger.pokemon.maxHp) / 100);
-            //     if (this.challenger.pokemon.hp > this.challenger.pokemon.maxHp) this.challenger.pokemon.hp = this.challenger.pokemon.maxHp;
-            // }
         } else {
             this.msg.add({severity: 'info', summary: 'Seu ataque falhou!'});
         }

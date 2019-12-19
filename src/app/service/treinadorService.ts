@@ -28,9 +28,9 @@ export class TreinadorService {
             this.level++;
         }
         try {
-            const res = this.http.post('/treinador/attexp', {id: this.id, exp: this.exp, level: this.level}).toPromise();
+            this.http.post('/treinador/attexp', {id: this.id, exp: this.exp, level: this.level}).toPromise();
         } catch (e) {
-            console.log('Não foi possível salvar exp');
+            console.log('Não foi possível salvar exp do treinador!');
         }
     }
 
@@ -39,7 +39,7 @@ export class TreinadorService {
             if (i.id === item.id) {
                 i.amount--;
                 try {
-                   const res = this.http.post('/treinador/useitem', i).toPromise();
+                   this.http.post('/treinador/useitem', i).toPromise();
                 } catch (e) {
                     console.log('item não atualizado');
                 }
@@ -105,8 +105,8 @@ export class TreinadorService {
         try {
             this.amount += money;
             this.http.post('/treinador/getmoney', {id: this.id, money}).toPromise();
-        } catch(e) {
-
+        } catch (e) {
+            console.log(e);
         }
     }
 

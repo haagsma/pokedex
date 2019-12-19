@@ -30,7 +30,7 @@ export class PokemonService {
             pokemons[i].exp += exp;
             const hp = pokemons[i].hp;
             pokemons[i].hp = pokemons[i].maxHp;
-            while (pokemons[i].exp > Math.round(100 * Math.pow(1.1, pokemons[i].level))) {
+            while (pokemons[i].exp >= Math.round(100 * Math.pow(1.1, pokemons[i].level))) {
                 pokemons[i].exp -= Math.round(100 * Math.pow(1.1, pokemons[i].level));
                 pokemons[i].level++;
                 pokemons[i] = this.upStatus(pokemons[i]);
@@ -44,10 +44,11 @@ export class PokemonService {
                 return p;
             });
             try {
-                const res = this.http.post('/pokemon/att', pokemons[i]).toPromise();
+                await this.http.post('/pokemon/att', pokemons[i]).toPromise();
             } catch (e) {
                 console.log('Erro ao salvar os  atributos do pokemon');
             }
+            pokemons[i].maxHp = pokemons[i].hp;
             pokemons[i].hp = hp;
         }
         this.treinadorService.updateExp((totalExp / 6));

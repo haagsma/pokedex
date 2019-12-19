@@ -8,4 +8,9 @@ import {Component, Input} from '@angular/core';
 export class BtnAtaqueComponent {
 
     @Input() move: any  = {type: {name: ''}};
+
+    replace(data) {
+        if (data) return data.replace('-', ' ');
+        return null;
+    }
 }
