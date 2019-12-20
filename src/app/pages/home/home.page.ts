@@ -10,6 +10,8 @@ import {ShopComponent} from '../../components/shop/shop.component';
 import {ChangePowerComponent} from '../../components/change-power/change-power.component';
 import {PokemonService} from '../../service/pokemonService';
 import {AudioService} from '../../service/audioService';
+import {SocketService} from "../../service/socketService";
+import {ChatGlobalComponent} from "../../components/chat/chat-global.component";
 
 declare const google: any;
 
@@ -26,8 +28,13 @@ export class HomePage implements OnInit {
   @ViewChild(BattleComponent , null) battle: BattleComponent;
   @ViewChild(ShopComponent , null) shop: ShopComponent;
   @ViewChild(ChangePowerComponent , null) powerPanel: ChangePowerComponent;
+  @ViewChild(ChatGlobalComponent , null) chatPanel: ChatGlobalComponent;
 
-  constructor(private router: Router, public mapaService: MapaService, private http: HttpService, public pokemon: PokemonService, private audio: AudioService) {}
+  constructor(private router: Router,
+              public mapaService: MapaService,
+              private http: HttpService,
+              public pokemon: PokemonService,
+              private audio: AudioService) {}
 
   ngOnInit() {
    this.audio.home();

@@ -1,0 +1,23 @@
+<p-sidebar [showCloseIcon]="false"  [style]="{paddingTop: '30px'}" [(visible)]="chatPanel" [fullScreen]="true" class="battle-panel" [baseZIndex]="800">
+    <div class="center chat-container w-100">
+        <div *ngFor="let msg of socket.messages">
+            <div *ngIf="msg.sender != treinador.nick" class="left message">
+                <p><strong>{{msg?.sender}}</strong></p>
+                <p>{{msg?.message}}</p>
+            </div>
+            <div *ngIf="msg.sender === treinador.nick" class="right message">
+                <p><strong>{{msg?.sender}}</strong></p>
+                <p>{{msg?.message}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="center w-100">
+        <div class="w-100">
+            <input  class="field-chat" [(ngModel)]="message" />
+            <button (click)="send()" class="btn-send ui-button ui-button-info"><i class="pi pi-step-forward"></i></button>
+        </div>
+    </div>
+    <div class="center w-100">
+        <button (click)="chatPanel = false" pButton class="ui-button-warning ui-button-rounded" label="Sair"></button>
+    </div>
+</p-sidebar>

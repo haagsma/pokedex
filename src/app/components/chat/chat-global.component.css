@@ -1,0 +1,22 @@
+.message {
+    padding: 10px;
+    margin: 10px;
+    background-color: #ededed;
+    box-shadow: 5px 10px 18px #888888;
+    border-radius: 30px;
+}
+.chat-container {
+    overflow: auto;
+    height: 80%;
+}
+.field-chat {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 5px 10px 18px #888888;
+}
+.btn-send {
+    border-radius: 50%;
+    margin: 20px;
+    padding: 10px;
+}

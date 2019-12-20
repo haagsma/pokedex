@@ -55,7 +55,9 @@ export class PokemonInicialPage implements OnInit {
                 treinador,
                 pokemon: this.pokemon,
                 inBag: true,
-                order: 1
+                order: 1,
+                createdAt: new Date(),
+                updatedAt: new Date()
             };
             await this.http.post('/treinador/pokemon-inicial', treinadorPokemon).toPromise();
             this.treinador.logged = true;

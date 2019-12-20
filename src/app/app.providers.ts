@@ -15,6 +15,7 @@ import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import {CadastroGuard} from './guard/cadastro.guard';
 import {NativeAudio} from '@ionic-native/native-audio/ngx';
 import {AudioService} from './service/audioService';
+import {SocketService} from "./service/socketService";
 
 
 export const APP_PROVIDERS = [
@@ -35,5 +36,6 @@ export const APP_PROVIDERS = [
     JwtHelperService,
     ConfirmationService,
     NativeAudio,
-    AudioService
+    AudioService,
+    SocketService
 ];

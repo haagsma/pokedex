@@ -15,6 +15,7 @@ import {LoadingComponent} from './components/loading/loading.component';
 import {EvolveComponent} from './components/evolve/evolve.component';
 import {TestePage} from './pages/teste/teste.page';
 import {BtnAtaqueComponent} from './components/btn-ataque/btn-ataque.component';
+import {ChatGlobalComponent} from "./components/chat/chat-global.component";
 
 
 export const APP_DECLARATIONS = [
@@ -34,5 +35,6 @@ export const APP_DECLARATIONS = [
     LoadingComponent,
     EvolveComponent,
     TestePage,
-    BtnAtaqueComponent
+    BtnAtaqueComponent,
+    ChatGlobalComponent
 ];

@@ -5,7 +5,9 @@
 </div>
 <div class="footer-menu">
     <div class="ui-g">
-        <div class="ui-g-2"></div>
+        <div class="ui-g-2">
+            <a (click)="chatPanel.open()"><img class="item-menu" src="/assets/icon/chat-icon.png"></a>
+        </div>
         <div class="ui-g-2">
             <a (click)="pokemon.giftPokemon()"><img class="item-menu" src="/assets/icon/gift.png"></a>
         </div>
@@ -30,3 +32,4 @@
 <battle-component></battle-component>
 <change-power></change-power>
 <evolve-panel></evolve-panel>
+<chat-global></chat-global>
