@@ -71,7 +71,7 @@ export class TreinadorService {
             } else {
                 this.pokemons.push(pokemon);
             }
-            this.msg.add({severity: 'success', summary: 'Catched', detail: pokemon.pokemon.name + ' capiturado!'});
+            this.msg.add({severity: 'success', summary: 'Catched', detail: pokemon.pokemon.name + ' capturado!'});
         } catch (e) {
             this.msg.add({severity: 'warning', summary: 'Missed', detail: pokemon.pokemon.name + ' missed!'});
         }
@@ -94,8 +94,8 @@ export class TreinadorService {
         toUpdate.forEach((p) => {
             try {
                 this.http.post('/pokemon/update', p).toPromise();
-            } catch(e) {
-
+            } catch (e) {
+                console.log(e);
             }
         });
         return true;

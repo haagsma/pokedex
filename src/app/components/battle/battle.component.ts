@@ -193,10 +193,10 @@ export class BattleComponent {
 
     effectsDownHpAfterAttack(pokemon) {
         if (pokemon.poisoned || pokemon.burned) {
-            if ((pokemon.hp - (pokemon.maxHp * 0.1)) <= 0) {
+            if ((pokemon.hp - Math.round(pokemon.maxHp * 0.1)) <= 0) {
                 pokemon.hp = 0;
             } else {
-                pokemon.hp -= (pokemon.maxHp * 0.1);
+                pokemon.hp -= Math.round(pokemon.maxHp * 0.1);
             }
         }
     }
@@ -258,7 +258,7 @@ export class BattleComponent {
         if (move.accuracy > ((Math.random() * 100) + 1)) {
             let damage = (this.challenger.pokemon.attack * (move.power / 100));
             damage = damage - (damage * (this.oponent.pokemon.defense / 300));
-            damage = damage * this.battleService.elementalAdvantage(move, this.oponent.pokemon.pokemon.types);
+            damage = Math.round(damage * this.battleService.elementalAdvantage(move, this.oponent.pokemon.pokemon.types));
             if ((this.oponent.pokemon.hp - Math.round(damage)) < 0) {
                 this.oponent.pokemon.hp = 0;
             } else {
@@ -293,7 +293,7 @@ export class BattleComponent {
             this.msg.add({severity: 'info', summary: this.oponent.pokemon.pokemon.name, detail: 'used ' + moveToAttack.name});
             let damage = (this.oponent.pokemon.attack * (moveToAttack.power / 100));
             damage = damage - (damage * (this.challenger.pokemon.defense / 300));
-            damage = damage * this.battleService.elementalAdvantage(moveToAttack, this.challenger.pokemon.pokemon.types);
+            damage = Math.round(damage * this.battleService.elementalAdvantage(moveToAttack, this.challenger.pokemon.pokemon.types));
             if ((this.challenger.pokemon.hp - Math.round(damage)) < 0) {
                 this.challenger.pokemon.hp = 0;
             } else {
