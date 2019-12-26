@@ -1,7 +1,7 @@
 <div class="panel-treinador">
     <div class="ui-g">
         <div class="ui-g-4 no-pm">
-            <a (click)="op.toggle($event)"><img class="avatar" src="/assets/icon/ash-avatar.png"></a>
+            <a (click)="op.toggle($event)"><img class="avatar" src="/assets/avatars/icon/{{treinador.avatar}}.png"></a>
         </div>
         <div class="ui-g-8 ">
             <p class="no-pm name">{{treinador.nick}}</p>
@@ -21,17 +21,17 @@
 </div>
 <p-overlayPanel #op>
     <div class="ui-g">
-        <div class="ui-g-6">
-            <a><img style="height: 100px" src="/assets/avatars/ash.png"></a>
+        <div class="ui-g-5">
+            <a><img style="height: 100px" src="/assets/avatars/{{treinador.avatar}}.png"></a>
         </div>
-        <div class="ui-g-6">
+        <div class="ui-g-7">
             <p class="bold">{{treinador.nick}}</p>
             <p class="bold">Level: {{treinador.level}}</p>
             <p class="bold">Exp: {{level()}}%</p>
             <p class="bold">$ {{treinador.amount}}</p>
         </div>
     </div>
-    <div class="center">
+    <div *ngIf="treinador.getBadges().length > 0" class="center">
         <p class="bold">Insígnias</p>
     </div>
     <div *ngIf="treinador.getBadges().length > 0" class="ui-g center">

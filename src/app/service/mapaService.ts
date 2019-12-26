@@ -2,6 +2,7 @@ import {Injectable, ViewChild} from '@angular/core';
 import {Geolocation} from "@ionic-native/geolocation/ngx";
 import {HttpService} from './httpService';
 import {getRandomString} from 'selenium-webdriver/safari';
+import {TreinadorService} from './treinadorService';
 
 declare const google: any;
 declare const Math: any;
@@ -24,7 +25,7 @@ export class MapaService {
         maximumAge: 0
     };
 
-    constructor(private geolocation: Geolocation, private http: HttpService) {}
+    constructor(private geolocation: Geolocation, private http: HttpService, private treinador: TreinadorService) {}
 
     async showMap(battle) {
         try {
@@ -65,8 +66,8 @@ export class MapaService {
                 this.inCenter = false;
             });
             const icon = {
-                url: '/assets/avatars/ash.png', // url
-                scaledSize: new google.maps.Size(60, 70), // scaled size
+                url: '/assets/avatars/' + this.treinador.avatar + '.png', // url
+                scaledSize: new google.maps.Size(50, 110), // scaled size
             };
             this.trainer = new google.maps.Marker({id: 1, position: {lat: (this.currentPosition.coords.latitude), lng: this.currentPosition.coords.longitude}, map: this.map, icon: icon});
             this.getPokemonsToMap();

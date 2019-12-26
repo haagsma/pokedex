@@ -1,23 +1,62 @@
-<p-sidebar [showCloseIcon]="false"  [style]="{paddingTop: '30px'}" [(visible)]="chatPanel" [fullScreen]="true" class="battle-panel" [baseZIndex]="800">
-    <div class="center chat-container w-100">
-        <div *ngFor="let msg of socket.messages">
-            <div *ngIf="msg.sender != treinador.nick" class="left message">
-                <p><strong>{{msg?.sender}}</strong></p>
-                <p>{{msg?.message}}</p>
-            </div>
-            <div *ngIf="msg.sender === treinador.nick" class="right message">
-                <p><strong>{{msg?.sender}}</strong></p>
-                <p>{{msg?.message}}</p>
+<p-sidebar [showCloseIcon]="false"  [style]="{paddingTop: '30px'}" [(visible)]="chatPanel" [fullScreen]="true" class="pokedex battle-panel" [baseZIndex]="800">
+    <div class="container">
+        <h5>Chat</h5>
+        <hr>
+        <div class="center chat-container w-100">
+            <div *ngFor="let msg of socket.messages">
+                <div *ngIf="msg.sender != treinador.nick" class="left">
+                    <div class="ui-g">
+                        <div class="ui-g-2 p-0">
+                            <a (click)="getTeam(msg.treinador)"><img class="img-treinador" src="/assets/avatars/icon/{{msg?.avatar}}.png" /></a>
+                        </div>
+                        <div class="ui-g-10 p-0">
+                            <div class="message">
+                                <p><strong>{{msg?.sender}}</strong></p>
+                                <p class="chat-text">{{msg?.message}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="msg.sender === treinador.nick" class="right">
+                    <div class="ui-g">
+                        <div class="ui-g-10 p-0">
+                            <div class="message">
+                                <p><strong>{{msg?.sender}}</strong></p>
+                                <p class="chat-text">{{msg?.message}}</p>
+                            </div>
+                        </div>
+                        <div class="ui-g-2 p-0">
+                            <img class="img-treinador" src="/assets/avatars/icon/{{treinador.avatar}}.png" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="center w-100">
-        <div class="w-100">
-            <input  class="field-chat" [(ngModel)]="message" />
-            <button (click)="send()" class="btn-send ui-button ui-button-info"><i class="pi pi-step-forward"></i></button>
+        <hr>
+        <div class="center w-100">
+            <div class="w-100">
+                <form #fMsg="ngForm" (ngSubmit)="send()">
+                    <input  class="field-chat" name="message" [(ngModel)]="message" />
+                    <button type="submit" class="btn-send ui-button ui-button-info"><i class="pi pi-step-forward"></i></button>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="center w-100">
-        <button (click)="chatPanel = false" pButton class="ui-button-warning ui-button-rounded" label="Sair"></button>
+        <div class="center w-100">
+            <button (click)="chatPanel = false" pButton class="ui-button-warning ui-button-rounded" label="Sair"></button>
+        </div>
     </div>
 </p-sidebar>
+<p-dialog [(visible)]="pokemonPanel" [baseZIndex]="900" [closeIcon]="false">
+    <div class="ui-g">
+        <div *ngFor="let p of team" class="ui-g-4 choose center">
+            <a>
+                <img class="pokemon-pokedex" src="/assets/pokemons/{{p.pokemon.num || 001}}.png" />
+            </a>
+            <p class="captalize">{{p.pokemon.name}}</p>
+            <small>Level: {{p.level}}</small><br>
+        </div>
+    </div>
+    <div class="center">
+        <button (click)="pokemonPanel = false" pButton class="ui-button-warning ui-button-rounded" label="Sair"></button>
+    </div>
+</p-dialog>

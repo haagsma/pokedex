@@ -51,6 +51,7 @@ export class LoginPage implements OnInit {
               const treinador = res;
               this.treinador.logged = true;
               this.treinador.id = treinador.id;
+              this.treinador.avatar = treinador.avatar;
               this.treinador.nick = treinador.nick;
               this.treinador.level = treinador.level;
               this.treinador.exp = treinador.exp;
@@ -76,7 +77,7 @@ export class LoginPage implements OnInit {
   async checkVersion() {
       try {
           const version: any = await this.http.get('/version').toPromise();
-          if (version.id !== 4) {
+          if (version.id !== 5) {
               this.confirm.confirm({
                   message: 'Temos uma nova atualização, deseja baixar agora?',
                   accept: () => {

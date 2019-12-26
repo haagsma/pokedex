@@ -10,6 +10,7 @@ export class TreinadorService {
     nick: string;
     level;
     exp;
+    avatar;
     status: any;
     team: any[] = [];
     pokemons: any[] = [];
@@ -147,6 +148,9 @@ export class TreinadorService {
             this.setBadges(badges);
             localStorage.setItem(badge, new Date().getTime().toString());
         }
+    }
+    getTeam(id) {
+        return this.http.get('/treinador/team/' + id);
     }
 
 }

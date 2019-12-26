@@ -84,6 +84,9 @@ p-sidebar.battle-panel div.ui-sidebar-full {
 .p-b {
     padding-bottom: 20px;
 }
+.p-0 {
+    padding: 0;
+}
 button.ui-button-gray.ui-button {
     background-color: gray !important;
     border-color: gray;

@@ -44,6 +44,7 @@ export class PokemonInicialPage implements OnInit {
         this.block.activeBlock();
         let treinador: any = {
             nick: this.treinador.nick,
+            avatar: this.treinador.avatar,
             amount: 0,
             exp: 0,
             level: 1

@@ -6,7 +6,8 @@ import {TreinadorService} from "./treinadorService";
 @Injectable()
 export class SocketService {
 
-    url = 'http://localhost:8080/websocket';
+    // url = 'http://localhost:8080/websocket';
+    url = 'http://haagsma.com.br:8080/websocket';
     chat = '/chat/global';
     stompClient: any;
     messages = [];
@@ -20,6 +21,9 @@ export class SocketService {
         this.stompClient.connect({}, (frame) => {
             this.stompClient.subscribe(this.chat, (event) => {
                 this.messages.push(JSON.parse(event.body));
+                setTimeout(() => {
+                    document.getElementsByClassName('chat-container')[0].scrollTop = 999999999;
+                }, 500);
             });
         }, (e) => {
             setTimeout(() => this.connect(), 5000);
@@ -28,7 +32,6 @@ export class SocketService {
     }
 
     sendMessage(msg) {
-        console.log('Enviando mensagem');
-        this.stompClient.send('/send/global', {}, JSON.stringify({sender: this.treinador.nick, message: msg}));
+        this.stompClient.send('/send/global', {}, JSON.stringify({sender: this.treinador.nick, message: msg, avatar: this.treinador.avatar, treinador: this.treinador.id}));
     }
 }

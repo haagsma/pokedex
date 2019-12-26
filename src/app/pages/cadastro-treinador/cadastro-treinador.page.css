@@ -34,6 +34,10 @@ input {
     width: 80px;
     height: 80px;
 }
+.avatar {
+    width: 80px;
+    height: 170px;
+}
 .ui-g-4 p {
     font-size: 0.8em;
 }

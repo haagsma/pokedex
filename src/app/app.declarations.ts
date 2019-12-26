@@ -16,6 +16,7 @@ import {EvolveComponent} from './components/evolve/evolve.component';
 import {TestePage} from './pages/teste/teste.page';
 import {BtnAtaqueComponent} from './components/btn-ataque/btn-ataque.component';
 import {ChatGlobalComponent} from "./components/chat/chat-global.component";
+import {AvatarPage} from './pages/cadastro-treinador/avatar/avatar.page';
 
 
 export const APP_DECLARATIONS = [
@@ -36,5 +37,6 @@ export const APP_DECLARATIONS = [
     EvolveComponent,
     TestePage,
     BtnAtaqueComponent,
-    ChatGlobalComponent
+    ChatGlobalComponent,
+    AvatarPage
 ];

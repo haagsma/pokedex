@@ -1,0 +1,21 @@
+<div class="laboratorio">
+    <div class="container">
+        <div class="informacao">
+            <p>Escolha seu avatar!</p>
+        </div>
+        <form>
+            <div>
+                <p-scrollPanel class="scroll" [style]="{width: '100%', height: '400px'}">
+                    <div class="ui-g">
+                        <div *ngFor="let avatar of avatares" class="ui-g-4">
+                            <a (click)="continuar(avatar)"><img class="avatar" src="/assets/avatars/{{avatar}}.png" /></a>
+                        </div>
+                    </div>
+                </p-scrollPanel>
+            </div>
+            <!--<div>-->
+                <!--<button (click)="continuar()" pButton class="ui-button-warning ui-button-rounded" label="Voltar"></button>-->
+            <!--</div>-->
+        </form>
+    </div>
+</div>

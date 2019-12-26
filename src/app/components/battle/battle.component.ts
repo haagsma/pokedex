@@ -243,7 +243,7 @@ export class BattleComponent {
         }
         if (move.burn && !pokemonTarget.affected) {
             const n = ((Math.random() * 100) + 1);
-            if (n < 15) {
+            if (n < 10) {
                 pokemonTarget.burned = true;
                 pokemonTarget.affected = true;
                 pokemonTarget.effectSteps = 0;

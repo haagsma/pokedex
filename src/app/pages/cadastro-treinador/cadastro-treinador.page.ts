@@ -28,7 +28,7 @@ export class CadastroTreinadorPage {
                     this.msg.add({severity: 'error', detail: 'Nome já existente!', summary: 'Falha'});
                 } else {
                     this.treinador.nick = form.value.nick;
-                    this.router.navigateByUrl('/pokemon-inicial');
+                    this.router.navigateByUrl('/avatar');
                 }
             } catch (e) {
                 this.router.navigateByUrl('/');

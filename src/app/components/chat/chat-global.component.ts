@@ -12,6 +12,8 @@ export class ChatGlobalComponent implements OnInit{
 
     chatPanel: boolean;
     message: string;
+    pokemonPanel;
+    team: any[];
 
     constructor(public treinador: TreinadorService, private socket: SocketService) {
     }
@@ -29,5 +31,12 @@ export class ChatGlobalComponent implements OnInit{
             this.socket.sendMessage(this.message);
             this.message = null;
         }
+    }
+
+    getTeam(id) {
+        this.treinador.getTeam(id).subscribe((res: any) => {
+            this.team = res;
+            this.pokemonPanel = true;
+        }, error1 => console.log(error1));
     }
 }
